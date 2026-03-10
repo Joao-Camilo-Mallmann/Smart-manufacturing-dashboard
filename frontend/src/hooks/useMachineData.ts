@@ -3,15 +3,11 @@
 // Encapsula toda a lógica de comunicação com o backend.
 // ============================================================
 
-import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  fetchAlerts,
-  fetchCurrentMetrics,
-  fetchHistory,
-} from "@/services/api";
+import { fetchAlerts, fetchCurrentMetrics, fetchHistory } from "@/services/api";
 import type { Alert, MachineStatus, MetricHistory } from "@/types";
+import { useCallback, useEffect, useRef, useState } from "react";
 
-const POLLING_INTERVAL = Number(import.meta.env.VITE_POLLING_INTERVAL);
+const POLLING_INTERVAL = Number(import.meta.env.VITE_POLLING_INTERVAL) || 3000;
 
 interface MachineData {
   status: MachineStatus | null;
