@@ -106,3 +106,20 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 - Trocar polling por WebSocket altera apenas 1 arquivo (`useMachineData.ts`).
 - Cada componente pode ser testado isoladamente com dados mock.
 - A arquitetura suporta futuras features (múltiplas máquinas) sem refatoração pesada.
+
+---
+
+## 9. Deploy no Render (gratuito e centralizado)
+
+**Escolha: Render no plano free para frontend + backend**
+
+- Sem custo para demonstração do projeto (foco no MVP e banca técnica).
+- Frontend e backend ficam centralizados na mesma plataforma, simplificando operação e troubleshooting.
+- Deploy integrado com GitHub, com atualização automática a cada push.
+
+**Avisos importantes do plano gratuito:**
+
+- O serviço pode entrar em modo de suspensão por inatividade (cold start no primeiro acesso).
+- Pode ocorrer indisponibilidade temporária ou reinício da instância a qualquer momento.
+- Como o backend usa SQLite local, reinícios/redeploy podem causar perda de dados persistidos no ambiente free.
+

@@ -11,21 +11,28 @@
 
 > 🚀 Solução full stack para monitoramento em tempo real de máquina industrial, com simulação contínua de dados, histórico persistente em SQLite, alertas inteligentes com priorização por severidade, e métricas de eficiência (OEE).
 
+## 🌐 Deploy em Produção
+
+- 🖥️ **Frontend**: https://smart-dashboard-frontend.onrender.com/
+- 🔌 **Backend**: https://smart-dashboard-backend.onrender.com/
+- 💚 **Health check**: https://smart-dashboard-backend.onrender.com/api/health
+
 ---
 
 ## 📚 Sumário
 
 1. [Visão Geral](#-visão-geral)
 2. [Quick Start](#-quick-start)
-3. [Stack Tecnológica](#-stack-tecnológica)
-4. [Estrutura do Projeto](#-estrutura-do-projeto)
-5. [Funcionalidades](#-funcionalidades)
-6. [Regras de Negócio](#-regras-de-negócio)
-7. [API REST](#-api-rest)
-8. [Componentes React](#-componentes-react)
-9. [Decisões de Arquitetura](#-decisões-de-arquitetura)
-10. [Testes](#-testes)
-11. [Documentação Complementar](#-documentação-complementar)
+3. [Deploy em Produção](#-deploy-em-produção)
+4. [Stack Tecnológica](#-stack-tecnológica)
+5. [Estrutura do Projeto](#-estrutura-do-projeto)
+6. [Funcionalidades](#-funcionalidades)
+7. [Regras de Negócio](#-regras-de-negócio)
+8. [API REST](#-api-rest)
+9. [Componentes React](#-componentes-react)
+10. [Decisões de Arquitetura](#-decisões-de-arquitetura)
+11. [Testes](#-testes)
+12. [Documentação Complementar](#-documentação-complementar)
 
 ---
 
@@ -97,65 +104,96 @@ cd frontend && npm run dev
 
 ## 🧰 Stack Tecnológica
 
-| Camada      | Tecnologia                              |
-| ----------- | --------------------------------------- |
-| Frontend    | React 18+, TypeScript, Tailwind CSS v4  |
-| Gráficos    | Chart.js + react-chartjs-2              |
-| Backend     | Node.js, Express, TypeScript            |
-| Banco       | SQLite (better-sqlite3, driver nativo)  |
-| Testes      | Jest + React Testing Library            |
-| Arquitetura | Monorepo simples (frontend/ + backend/) |
+| Camada      | Tecnologia                             | Versão      |
+| ----------- | -------------------------------------- | ----------- |
+| Frontend    | React + TypeScript                     | 19.x / ~5.9 |
+| Estilização | Tailwind CSS                           | 4.x         |
+| Gráficos    | Chart.js + react-chartjs-2             | 4.x / 5.x   |
+| Ícones      | Lucide React                           | latest      |
+| HTTP Client | Axios                                  | latest      |
+| Backend     | Node.js + Express + TypeScript         | —           |
+| Banco       | SQLite (better-sqlite3, driver nativo) | —           |
+| Runner      | tsx (dev)                              | latest      |
+| Testes      | Jest + React Testing Library           | —           |
+| Monorepo    | Scripts `concurrently`                 | ^8.2        |
 
 ---
 
 ## 🗂️ Estrutura do Projeto
 
 ```text
-FULLSTACK_CHALLENGER/
+projeto/
 ├── backend/
 │   ├── src/
-│   │   ├── index.ts              # Ponto de entrada (Express + Simulador)
-│   │   ├── database.ts           # Conexão e criação de tabelas SQLite
-│   │   ├── simulator.ts          # Motor de simulação (Random Walk)
-│   │   ├── state-machine.ts      # Máquina de estados da máquina
-│   │   ├── thresholds.ts         # Regras de threshold e alertas
-│   │   ├── oee.ts                # Cálculo de OEE
-│   │   ├── types.ts              # Interfaces TypeScript
-│   │   └── routes/
-│   │       ├── metrics.ts        # GET /api/metrics/current e /history
-│   │       ├── alerts.ts         # GET /api/alerts, PATCH /acknowledge
-│   │       └── health.ts         # GET /api/health
-│   ├── data/                     # SQLite gerado em runtime
+│   │   ├── index.ts                # Bootstrapping: DB → Express → Simulador
+│   │   ├── config/
+│   │   │   └── types.ts            # ★ Interfaces, enums, DTOs (única fonte de verdade)
+│   │   ├── core/                   # ★ Lógica pura — NUNCA importa infra
+│   │   │   ├── oee-calculator.ts   # Cálculo OEE = Disp × Perf × Qual
+│   │   │   ├── rules-engine.ts     # Motor de regras (thresholds → alertas)
+│   │   │   └── state-policy.ts     # Máquina de estados (transições válidas)
+│   │   ├── controllers/            # Rotas Express (parse req → service)
+│   │   │   ├── metrics.ts          # GET /current, GET /history
+│   │   │   ├── alerts.ts           # GET /, PATCH /:id/acknowledge
+│   │   │   └── health.ts           # GET /health
+│   │   ├── database/
+│   │   │   └── connection.ts       # Conexão SQLite + criação de tabelas
+│   │   ├── middleware/
+│   │   │   └── error-handler.ts    # Handler centralizado de erros
+│   │   ├── repositories/
+│   │   │   └── metrics-repository.ts  # Queries SQL isoladas
+│   │   ├── routes/
+│   │   │   └── index.ts            # Mapeamento centralizado de rotas
+│   │   ├── services/
+│   │   │   ├── simulator.ts        # ★ Motor de simulação (Random Walk)
+│   │   │   ├── metrics-service.ts  # Montagem de MetricResponse + trends
+│   │   │   └── alerts-service.ts   # Consulta e acknowledge de alertas
+│   │   └── data/                   # SQLite gerado em runtime (gitignored)
 │   ├── package.json
 │   └── tsconfig.json
 ├── frontend/
 │   ├── src/
-│   │   ├── App.tsx               # Layout principal do dashboard
-│   │   ├── types.ts              # Interfaces TypeScript (espelho back)
-│   │   ├── hooks/
-│   │   │   └── useMachineData.ts # Custom hook de polling
+│   │   ├── App.tsx                 # Orquestrador do layout (grid principal)
+│   │   ├── main.tsx                # Ponto de entrada do React
+│   │   ├── assets/
+│   │   │   ├── index.css           # ★ Design system tokens (@theme + .dark)
+│   │   │   └── logo.svg            # Logo STW
 │   │   ├── components/
-│   │   │   ├── HeaderBar.tsx        # Cabeçalho com status e controles
-│   │   │   ├── StatusBadge.tsx      # Badge de estado da máquina
-│   │   │   ├── ConnectionIndicator.tsx  # Indicador de conexão
-│   │   │   ├── MetricCard.tsx       # Card de métrica com tendência
-│   │   │   ├── MetricsChart.tsx     # Gráfico Chart.js (temp + RPM)
-│   │   │   ├── AlertsPanel.tsx      # Painel de alertas por severidade
-│   │   │   ├── EfficiencyPanel.tsx  # Painel OEE com barras
-│   │   │   └── ThemeToggle.tsx      # Toggle dark/light
+│   │   │   ├── common/             # Componentes reutilizáveis (sem lógica de API)
+│   │   │   │   ├── ConnectionIndicator.tsx
+│   │   │   │   ├── StatusBadge.tsx
+│   │   │   │   └── ThemeToggle.tsx
+│   │   │   ├── dashboard/          # Painéis especializados do dashboard
+│   │   │   │   ├── MetricCard.tsx
+│   │   │   │   ├── MetricsChart.tsx
+│   │   │   │   ├── AlertsPanel.tsx
+│   │   │   │   └── EfficiencyPanel.tsx
+│   │   │   └── layout/
+│   │   │       └── HeaderBar.tsx
+│   │   ├── hooks/
+│   │   │   └── useMachineData.ts   # ★ Hook de polling (Smart Layer)
+│   │   ├── plugins/
+│   │   │   └── axios.ts            # Configuração base do HTTP client
+│   │   ├── services/               # Camada de fetch/API
+│   │   │   └── api.ts
+│   │   ├── types/                  # Interfaces TypeScript (espelho back)
+│   │   │   └── index.ts
 │   │   └── utils/
-│   │       └── api.ts            # Funções fetch centralizadas
+│   │       ├── calculations.ts     # Funções de cálculo
+│   │       └── formatters.ts       # Formatação (RPM, Temp, Uptime, %)
 │   ├── index.html
 │   ├── package.json
-│   ├── tailwind.config.js
 │   └── vite.config.ts
 ├── docs/
-│   ├── PLANO_COMPLETO.md         # Plano macro de todas as fases
-│   ├── DECISOES_TECNICAS.md      # Justificativas arquiteturais
-│   └── plain.md                  # Plano resumido de execução
-├── package.json                  # Scripts de orquestração raiz
-├── README.md
-└── logo.svg
+│   ├── PROJECT_BLUEPRINT.md        # Blueprint completo do projeto
+│   ├── DECISOES_TECNICAS.md        # Justificativas arquiteturais
+│   └── rules/
+│       ├── agents_front.md         # Regras IA para frontend
+│       └── agents_back.md          # Regras IA para backend
+├── agents.md                       # Ponto de entrada para os agents
+├── render.yaml                     # Blueprint de deploy no Render
+├── package.json                    # Scripts raiz (concurrently)
+└── README.md
 ```
 
 ---
@@ -208,6 +246,20 @@ quality      = peças_boas / peças_totais
 OEE          = availability × performance × quality
 ```
 
+### Simulador — Comportamento por Estado
+
+| Estado      | Temperatura                | RPM                    | Comportamento Especial             |
+| ----------- | -------------------------- | ---------------------- | ---------------------------------- |
+| RUNNING     | 60-90°C, variação ±2/ciclo | 800-1500, variação ±50 | Operação normal                    |
+| STOPPED     | Desce para ~25°C           | Tende a 0              | Máquina parada, sem alertas de RPM |
+| MAINTENANCE | Estável ~30°C              | 0 fixo                 | Gera alertas INFO de manutenção    |
+| ERROR       | Pico até 95°C              | Queda abrupta          | Risco operacional máximo           |
+
+- **Ciclo**: `setInterval` de 3 segundos
+- **Motor**: Random Walk com limites físicos
+- **Pruning**: a cada 10 ciclos (~30s) limpa registros antigos do banco
+- **Cooldown de alertas**: 60 segundos entre alertas com mesma chave
+
 ---
 
 ## 🌐 API REST
@@ -247,6 +299,28 @@ As decisões técnicas estão documentadas em detalhes no arquivo [docs/DECISOES
 4. **Chart.js** para gráficos (leve, integrado com React)
 5. **Tailwind CSS v4 puro** (sem biblioteca de componentes)
 6. **Random Walk** para simulação realista de sensores
+7. **Deploy no Render** — plano gratuito, front + back centralizados
+
+### Arquitetura Backend — Padrão em Camadas
+
+| Camada          | Responsabilidade                              | Regra de Importação                             |
+| --------------- | --------------------------------------------- | ----------------------------------------------- |
+| `config/`       | Tipos, interfaces, constantes                 | Pode ser importado por qualquer camada          |
+| `core/`         | Lógica pura de negócio (OEE, regras, estados) | **NUNCA** importa infra (express, sqlite, etc.) |
+| `database/`     | Conexão SQLite, criação de schema             | Importa apenas `better-sqlite3` e `config/`     |
+| `repositories/` | Queries SQL isoladas (único lugar com SQL)    | Importa `database/` e `config/`                 |
+| `services/`     | Orquestração: une core com repositories       | Importa `core/`, `repositories/`, `config/`     |
+| `controllers/`  | Parse de request + delegação para services    | Importa `services/` e `config/`                 |
+
+```
+Request → routes/ → Controller → Service → { Core (regras) + Repository (dados) } → Response
+```
+
+### Arquitetura Frontend — Smart vs. Dumb
+
+- **Componentes** (`components/`): recebem dados via props e apenas exibem ("burros").
+- **Hook** (`useMachineData`): encapsula toda a lógica de polling, estado e reconexão.
+- **Separação**: `hooks/` para lógica, `components/` para UI, `services/` para API, `utils/` para formatação.
 
 ---
 
@@ -267,25 +341,36 @@ cd frontend && npm test
 
 ## 📎 Documentação Complementar
 
-| Documento                                              | Conteúdo                                    |
-| ------------------------------------------------------ | ------------------------------------------- |
-| [docs/PLANO_COMPLETO.md](docs/PLANO_COMPLETO.md)       | Plano macro com todas as fases e regras     |
-| [docs/DECISOES_TECNICAS.md](docs/DECISOES_TECNICAS.md) | Justificativas de cada escolha arquitetural |
-| [docs/plain.md](docs/plain.md)                         | Plano resumido de execução                  |
+| Documento                                                | Conteúdo                                    |
+| -------------------------------------------------------- | ------------------------------------------- |
+| [docs/PROJECT_BLUEPRINT.md](docs/PROJECT_BLUEPRINT.md)   | Blueprint completo do projeto               |
+| [docs/DECISOES_TECNICAS.md](docs/DECISOES_TECNICAS.md)   | Justificativas de cada escolha arquitetural |
+| [docs/rules/agents_back.md](docs/rules/agents_back.md)   | Regras de arquitetura do backend            |
+| [docs/rules/agents_front.md](docs/rules/agents_front.md) | Regras de design system e componentes       |
 
 ---
 
 ## 🎨 Paleta de Cores (STW)
 
-| Cor           | Hex       | Uso                             |
-| ------------- | --------- | ------------------------------- |
-| 🔵 Principal  | `#1485C8` | Elementos de destaque, gráficos |
-| 🔷 Escuro     | `#081653` | Header, gradientes              |
-| 🟢 Running    | `#22C55E` | Estado ligada, conexão OK       |
-| 🔴 Error      | `#EF4444` | Estado erro, alertas críticos   |
-| 🟡 Warning    | `#EAB308` | Manutenção, alertas warning     |
-| ⚪ Background | `#F6F6F6` | Fundo light mode                |
-| ⚫ Dark BG    | `#0F172A` | Fundo dark mode                 |
+### Cores Primárias STW
+
+| Token                   | Hex       | Uso                                  |
+| ----------------------- | --------- | ------------------------------------ |
+| `--color-stw-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras |
+| `--color-stw-dark`      | `#00334E` | Navy — headings (light mode)         |
+| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias    |
+| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas |
+| `--color-stw-light`     | `#0085C8` | Azul claro — hovers, destaques       |
+| `--color-stw-navy`      | `#001A2E` | Navy profundo — fundo dark mode      |
+
+### Cores de Estado
+
+| Estado         | Hex       | Uso                           |
+| -------------- | --------- | ----------------------------- |
+| 🟢 Running     | `#22C55E` | Estado ligada, conexão OK     |
+| ⚪ Stopped     | `#94A3B8` | Estado parada                 |
+| 🟡 Maintenance | `#F59E0B` | Manutenção, alertas warning   |
+| 🔴 Error       | `#EF4444` | Estado erro, alertas críticos |
 
 ---
 
@@ -301,5 +386,6 @@ Este projeto demonstra domínio técnico em:
 Recomendo começar a análise por:
 
 1. [docs/DECISOES_TECNICAS.md](docs/DECISOES_TECNICAS.md) — entenda as escolhas
-2. [backend/src/simulator.ts](backend/src/simulator.ts) — o coração do sistema
-3. [frontend/src/hooks/useMachineData.ts](frontend/src/hooks/useMachineData.ts) — a ponte front-back
+2. [docs/PROJECT_BLUEPRINT.md](docs/PROJECT_BLUEPRINT.md) — blueprint completo
+3. [backend/src/services/simulator.ts](backend/src/services/simulator.ts) — o coração do sistema
+4. [frontend/src/hooks/useMachineData.ts](frontend/src/hooks/useMachineData.ts) — a ponte front-back
