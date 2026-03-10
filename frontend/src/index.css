@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
 
 /* ============================================================
    Design System — Dashboard Industrial STW
@@ -105,8 +106,6 @@
    Estilos base — Tipografia STW (Montserrat / Inter)
    ============================================================ */
 
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap");
-
 body {
   margin: 0;
   font-family:
@@ -134,10 +133,6 @@ body {
 /* ============================================================
    Header gradient — estilo STW
    ============================================================ */
-
-.bg-gradient-header {
-  background: linear-gradient(135deg, #002137 0%, #00508a 50%, #1485c8 100%);
-}
 .dark .bg-gradient-header {
   background: linear-gradient(135deg, #001020 0%, #002137 50%, #00508a 100%);
 }

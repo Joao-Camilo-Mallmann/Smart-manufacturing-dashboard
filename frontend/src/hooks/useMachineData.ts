@@ -11,7 +11,7 @@ import {
 } from "../services/api";
 import type { Alert, MachineStatus, MetricHistory } from "../types";
 
-const POLLING_INTERVAL = 3000; // 3 segundos
+const POLLING_INTERVAL = Number(import.meta.env.VITE_POLLING_INTERVAL);
 
 interface MachineData {
   status: MachineStatus | null;

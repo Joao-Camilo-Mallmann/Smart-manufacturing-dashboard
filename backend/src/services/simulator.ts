@@ -8,11 +8,11 @@ import { calculateOEE } from "../core/oee-calculator";
 import { getNextState } from "../core/state-policy";
 import { evaluateThresholds } from "../core/rules-engine";
 import { insertMetric } from "../repositories/metrics-repository";
-import { SIMULATOR_CONFIG, SimulatorState } from "../config/types";
+import { SIMULATOR_CONFIG, SimulatorState, MachineState } from "../config/types";
 
 /** Estado interno do simulador (em memória) */
 let state: SimulatorState = {
-  currentState: "RUNNING",
+  currentState: MachineState.RUNNING,
   temperature: 70, // temperatura inicial (°C)
   rpm: 1200, // RPM inicial
   uptime: 0, // horas acumuladas
@@ -51,7 +51,7 @@ function simulateCycle(): void {
 
   // 2. Simular métricas conforme estado atual
   switch (state.currentState) {
-    case "RUNNING":
+    case MachineState.RUNNING:
       // Operação normal: temperatura 60-90°C, RPM 800-1500
       state.temperature = randomWalk(state.temperature, 2, 55, 92);
       state.rpm = randomWalk(state.rpm, 50, 750, 1550);
@@ -74,7 +74,7 @@ function simulateCycle(): void {
       else state.lastRpmZeroCycles++;
       break;
 
-    case "STOPPED":
+    case MachineState.STOPPED:
       // Máquina parada: temperatura desce, RPM tende a 0
       state.temperature = randomWalk(
         state.temperature,
@@ -86,14 +86,14 @@ function simulateCycle(): void {
       state.efficiency = Math.max(0, state.efficiency - 1);
       break;
 
-    case "MAINTENANCE":
+    case MachineState.MAINTENANCE:
       // Manutenção: RPM 0, temperatura estável ~30°C
       state.rpm = 0;
       state.temperature = randomWalk(state.temperature, 0.5, 28, 35);
       state.efficiency = randomWalk(state.efficiency, 1, 80, 95);
       break;
 
-    case "ERROR":
+    case MachineState.ERROR:
       // Erro: queda abrupta de RPM, possível pico térmico
       state.rpm = Math.max(0, state.rpm * 0.3); // queda abrupta
       state.temperature = randomWalk(

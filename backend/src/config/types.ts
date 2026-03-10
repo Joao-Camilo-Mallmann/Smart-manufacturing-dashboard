@@ -1,13 +1,17 @@
-// ============================================================
-// types.ts — Interfaces TypeScript compartilhadas (Backend)
-// Define o contrato de dados entre backend, banco de dados e API.
-// ============================================================
-
 /** Estados válidos da máquina industrial */
-export type MachineState = "RUNNING" | "STOPPED" | "MAINTENANCE" | "ERROR";
+export enum MachineState {
+  RUNNING = "RUNNING",
+  STOPPED = "STOPPED",
+  MAINTENANCE = "MAINTENANCE",
+  ERROR = "ERROR",
+}
 
 /** Níveis de severidade de alertas */
-export type AlertLevel = "INFO" | "WARNING" | "CRITICAL";
+export enum AlertLevel {
+  INFO = "INFO",
+  WARNING = "WARNING",
+  CRITICAL = "CRITICAL",
+}
 
 /** Métricas de eficiência (OEE) */
 export interface OEEMetrics {
@@ -66,10 +70,10 @@ export interface SimulatorState {
 
 /** Transições válidas da máquina de estados */
 export const VALID_TRANSITIONS: Record<MachineState, MachineState[]> = {
-  STOPPED: ["RUNNING"],
-  RUNNING: ["STOPPED", "ERROR"],
-  ERROR: ["MAINTENANCE"],
-  MAINTENANCE: ["STOPPED", "RUNNING"],
+  [MachineState.STOPPED]: [MachineState.RUNNING],
+  [MachineState.RUNNING]: [MachineState.STOPPED, MachineState.ERROR],
+  [MachineState.ERROR]: [MachineState.MAINTENANCE],
+  [MachineState.MAINTENANCE]: [MachineState.STOPPED, MachineState.RUNNING],
 };
 
 /** Probabilidades de transição por estado (soma deve ser ~1.0) */
@@ -77,26 +81,26 @@ export const TRANSITION_PROBABILITIES: Record<
   MachineState,
   { stay: number; transitions: { to: MachineState; prob: number }[] }
 > = {
-  RUNNING: {
+  [MachineState.RUNNING]: {
     stay: 0.93,
     transitions: [
-      { to: "STOPPED", prob: 0.04 },
-      { to: "ERROR", prob: 0.03 },
+      { to: MachineState.STOPPED, prob: 0.04 },
+      { to: MachineState.ERROR, prob: 0.03 },
     ],
   },
-  STOPPED: {
+  [MachineState.STOPPED]: {
     stay: 0.85,
-    transitions: [{ to: "RUNNING", prob: 0.15 }],
+    transitions: [{ to: MachineState.RUNNING, prob: 0.15 }],
   },
-  ERROR: {
+  [MachineState.ERROR]: {
     stay: 0.7,
-    transitions: [{ to: "MAINTENANCE", prob: 0.3 }],
+    transitions: [{ to: MachineState.MAINTENANCE, prob: 0.3 }],
   },
-  MAINTENANCE: {
+  [MachineState.MAINTENANCE]: {
     stay: 0.75,
     transitions: [
-      { to: "STOPPED", prob: 0.1 },
-      { to: "RUNNING", prob: 0.15 },
+      { to: MachineState.STOPPED, prob: 0.1 },
+      { to: MachineState.RUNNING, prob: 0.15 },
     ],
   },
 };
