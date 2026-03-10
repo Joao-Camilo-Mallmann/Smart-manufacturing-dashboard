@@ -33,41 +33,6 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 2. Por que `better-sqlite3` e não um ORM?
-
-**Escolha: better-sqlite3 (driver nativo síncrono)**
-
-- **Controle total** sobre queries SQL — sem abstrações que escondem o que acontece.
-- **Zero overhead** de abstração — não existe mapeamento objeto-relacional para 2 tabelas simples.
-- **Schema simples** (2 tabelas: `metric_history` e `alerts`) não justifica Prisma, Sequelize ou TypeORM.
-- **Driver síncrono** = código mais previsível no simulador. Cada ciclo `INSERT` é atômico e finaliza antes do próximo.
-- **WAL mode** habilitado para melhor performance de escrita concorrente.
-
-**Em produção:**
-
-- Migraria para **PostgreSQL** ou **TimescaleDB** (otimizado para time-series).
-- Usaria um ORM leve como Prisma para migrations e type-safety.
-- Separaria o simulador em um microserviço dedicado.
-
----
-
-## 3. Por que Monorepo simples e não Turborepo?
-
-**Escolha: Pastas `frontend/` e `backend/` com `concurrently`**
-
-- Escopo do projeto são **2 pacotes** — a complexidade de Turborepo/Nx não se justifica.
-- Scripts `concurrently` resolvem a orquestração (`dev`, `build`, `test`) de forma transparente.
-- Avaliador pode rodar `npm run dev` na raiz e ter ambos os servidores rodando.
-- Menor curva de aprendizado e menor configuração inicial.
-
-**Quando usar Turborepo:**
-
-- Quando existem pacotes compartilhados (ex.: `@app/shared-types`).
-- Quando o build pipeline precisa de cache distribuído.
-- Quando há mais de 3-4 pacotes no monorepo.
-
----
-
 ## 4. Por que Chart.js e não D3 ou Recharts?
 
 **Escolha: Chart.js + react-chartjs-2**

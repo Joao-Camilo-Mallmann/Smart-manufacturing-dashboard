@@ -5,14 +5,13 @@
 // 3. Inicia Express na porta 3001 com CORS habilitado
 // ============================================================
 
+import { initDatabase } from "@/database/connection";
+import { errorHandler } from "@/middleware/error-handler";
+import routes from "@/routes";
+import { startSimulator } from "@/services/simulator";
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import alertsRouter from "@/controllers/alerts";
-import healthRouter from "@/controllers/health";
-import metricsRouter from "@/controllers/metrics";
-import { initDatabase } from "@/database/connection";
-import { startSimulator } from "@/services/simulator";
 
 // Carrega as variáveis de ambiente do .env
 dotenv.config();
@@ -34,9 +33,7 @@ app.use(
 app.use(express.json());
 
 // 3. Registrar rotas
-app.use("/api/metrics", metricsRouter);
-app.use("/api/alerts", alertsRouter);
-app.use("/api/health", healthRouter);
+app.use("/api", routes);
 
 // Rota raiz informativa
 app.get("/", (_req, res) => {
@@ -52,6 +49,9 @@ app.get("/", (_req, res) => {
     ],
   });
 });
+
+// 4. Middleware de erro (deve ser o último)
+app.use(errorHandler);
 
 // 4. Iniciar servidor + simulador em paralelo
 app.listen(PORT, () => {

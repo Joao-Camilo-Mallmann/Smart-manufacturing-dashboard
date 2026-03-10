@@ -53,6 +53,43 @@ export interface MetricHistory {
   efficiency: number;
 }
 
+/** Evento de alerta gerado pelo rules-engine (dados puros, sem persistência) */
+export interface AlertEvent {
+  level: AlertLevel;
+  message: string;
+  component: string;
+}
+
+/** Resposta da rota /api/metrics/current */
+export interface MetricResponse {
+  id: string;
+  timestamp: string;
+  state: MachineState;
+  metrics: {
+    temperature: number;
+    rpm: number;
+    uptime: number;
+    efficiency: number;
+  };
+  oee: OEEMetrics;
+  trends: {
+    temperature: string;
+    rpm: string;
+    efficiency: string;
+    oee: string;
+  };
+}
+
+/** Resposta da rota /api/alerts */
+export interface AlertResponse {
+  id: number;
+  timestamp: string;
+  level: string;
+  message: string;
+  component: string;
+  acknowledged: number;
+}
+
 /** Estado interno do simulador */
 export interface SimulatorState {
   currentState: MachineState;

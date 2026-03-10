@@ -1,13 +1,10 @@
 // ============================================================
 // controllers/alerts.ts — Controller de alertas operacionais
-// Interface REST: delega para o repositório de dados.
+// Interface REST: delega para o serviço de alertas.
 // ============================================================
 
 import { THRESHOLDS } from "@/config/types";
-import {
-  acknowledgeAlert as ackAlert,
-  getAlerts,
-} from "@/repositories/metrics-repository";
+import { acknowledgeAlert, listAlerts } from "@/services/alerts-service";
 import { Request, Response, Router } from "express";
 
 const router = Router();
@@ -24,8 +21,7 @@ router.get("/", (_req: Request, res: Response) => {
       100,
     );
 
-    const rows = getAlerts(limit);
-    res.json(rows);
+    res.json(listAlerts(limit));
   } catch (error) {
     console.error("❌ Erro ao buscar alertas:", error);
     res.status(500).json({ error: "Erro interno ao buscar alertas" });
@@ -39,9 +35,9 @@ router.get("/", (_req: Request, res: Response) => {
 router.patch("/:id/acknowledge", (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = ackAlert(Number(id));
+    const found = acknowledgeAlert(Number(id));
 
-    if (result.changes === 0) {
+    if (!found) {
       res.status(404).json({ error: "Alerta não encontrado" });
       return;
     }
