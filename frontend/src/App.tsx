@@ -43,7 +43,7 @@ function App() {
       <div className="min-h-screen flex items-center justify-center bg-surface-primary">
         <div className="text-center">
           <div className="animate-spin w-14 h-14 border-4 border-stw-primary border-t-transparent rounded-full mx-auto mb-5" />
-          <p className="text-lg font-bold text-stw-dark tracking-tight">
+          <p className="text-lg font-bold text-content tracking-tight">
             Carregando dashboard...
           </p>
           <p className="text-sm text-content-muted mt-1">
