@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Minus, TrendingDown, TrendingUp } from "lucide-react";
-import { Trend } from "../../types";
+import { Trend } from "@/types";
 
 interface Props {
   id: string;

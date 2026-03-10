@@ -8,11 +8,11 @@
 import cors from "cors";
 import dotenv from "dotenv";
 import express from "express";
-import alertsRouter from "./controllers/alerts";
-import healthRouter from "./controllers/health";
-import metricsRouter from "./controllers/metrics";
-import { initDatabase } from "./database/connection";
-import { startSimulator } from "./services/simulator";
+import alertsRouter from "@/controllers/alerts";
+import healthRouter from "@/controllers/health";
+import metricsRouter from "@/controllers/metrics";
+import { initDatabase } from "@/database/connection";
+import { startSimulator } from "@/services/simulator";
 
 // Carrega as variáveis de ambiente do .env
 dotenv.config();

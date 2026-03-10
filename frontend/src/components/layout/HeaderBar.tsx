@@ -4,10 +4,10 @@
 // ============================================================
 
 import logoSvg from "@/assets/logo.svg";
-import type { MachineState } from "../../types";
-import ConnectionIndicator from "../common/ConnectionIndicator";
-import StatusBadge from "../common/StatusBadge";
-import ThemeToggle from "../common/ThemeToggle";
+import type { MachineState } from "@/types";
+import ConnectionIndicator from "@/components/common/ConnectionIndicator";
+import StatusBadge from "@/components/common/StatusBadge";
+import ThemeToggle from "@/components/common/ThemeToggle";
 
 interface Props {
   machineState: MachineState;

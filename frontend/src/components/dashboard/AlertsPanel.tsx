@@ -4,7 +4,7 @@
 // ============================================================
 
 import { AlertCircle, AlertTriangle, CheckCircle, Info } from "lucide-react";
-import type { Alert, AlertLevel } from "../../types";
+import type { Alert, AlertLevel } from "@/types";
 
 interface Props {
   alerts: Alert[];

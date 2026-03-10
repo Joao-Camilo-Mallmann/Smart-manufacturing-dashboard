@@ -7,7 +7,7 @@ import {
   MachineState,
   TRANSITION_PROBABILITIES,
   VALID_TRANSITIONS,
-} from "../config/types";
+} from "@/config/types";
 
 /**
  * Verifica se uma transição de estado é válida.

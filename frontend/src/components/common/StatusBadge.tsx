@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Activity, AlertTriangle, Power, Wrench } from "lucide-react";
-import type { MachineState } from "../../types";
+import type { MachineState } from "@/types";
 
 interface Props {
   state: MachineState;

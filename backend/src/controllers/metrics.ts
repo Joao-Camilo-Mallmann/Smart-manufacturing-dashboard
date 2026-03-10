@@ -4,12 +4,12 @@
 // ============================================================
 
 import { Request, Response, Router } from "express";
-import { getTrend } from "../core/oee-calculator";
-import { getCurrentState } from "../services/simulator";
+import { getTrend } from "@/core/oee-calculator";
+import { getCurrentState } from "@/services/simulator";
 import {
   getPreviousMetric,
   getMetricHistory,
-} from "../repositories/metrics-repository";
+} from "@/repositories/metrics-repository";
 
 const router = Router();
 

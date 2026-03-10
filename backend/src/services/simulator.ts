@@ -4,11 +4,11 @@
 // Roda a cada 3 segundos via setInterval.
 // ============================================================
 
-import { calculateOEE } from "../core/oee-calculator";
-import { getNextState } from "../core/state-policy";
-import { evaluateThresholds } from "../core/rules-engine";
-import { insertMetric } from "../repositories/metrics-repository";
-import { SIMULATOR_CONFIG, SimulatorState, MachineState } from "../config/types";
+import { calculateOEE } from "@/core/oee-calculator";
+import { getNextState } from "@/core/state-policy";
+import { evaluateThresholds } from "@/core/rules-engine";
+import { insertMetric } from "@/repositories/metrics-repository";
+import { SIMULATOR_CONFIG, SimulatorState, MachineState } from "@/config/types";
 
 /** Estado interno do simulador (em memória) */
 let state: SimulatorState = {

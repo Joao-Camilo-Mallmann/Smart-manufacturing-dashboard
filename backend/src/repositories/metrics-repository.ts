@@ -3,7 +3,7 @@
 // Queries SQL isoladas para métricas e alertas.
 // ============================================================
 
-import { getDatabase } from "../database/connection";
+import { getDatabase } from "@/database/connection";
 
 /**
  * Insere uma leitura de métrica no banco de dados.

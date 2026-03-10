@@ -4,7 +4,7 @@
 // Independente de infraestrutura — totalmente testável.
 // ============================================================
 
-import { OEEMetrics, SIMULATOR_CONFIG } from "../config/types";
+import { OEEMetrics, SIMULATOR_CONFIG } from "@/config/types";
 
 /**
  * Clamp de valor entre 0 e 100 (percentual).
