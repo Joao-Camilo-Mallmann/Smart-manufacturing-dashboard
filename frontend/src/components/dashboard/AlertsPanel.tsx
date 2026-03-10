@@ -3,8 +3,11 @@
 // Card com cantos super arredondados e hierarquia visual limpa
 // ============================================================
 
-import { AlertCircle, AlertTriangle, CheckCircle, Info } from "lucide-react";
+import beepSoundUrl from "@/assets/beep-warning.mp3";
 import type { Alert, AlertLevel } from "@/types";
+import { timeAgo } from "@/utils/formatters";
+import { AlertCircle, AlertTriangle, CheckCircle, Info } from "lucide-react";
+import { useEffect, useRef } from "react";
 
 interface Props {
   alerts: Alert[];
@@ -52,20 +55,30 @@ function formatTimestamp(ts: string): string {
   }
 }
 
-function timeAgo(ts: string): string {
-  try {
-    const date = new Date(ts);
-    if (isNaN(date.getTime())) return "";
-    const diff = Math.floor((Date.now() - date.getTime()) / 1000);
-    if (diff < 60) return `${diff}s atrás`;
-    if (diff < 3600) return `${Math.floor(diff / 60)}min atrás`;
-    return `${Math.floor(diff / 3600)}h atrás`;
-  } catch {
-    return "";
-  }
-}
-
 export default function AlertsPanel({ alerts }: Props) {
+  const lastCriticalIdRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const highestCriticalId = alerts
+      .filter((a) => a.level === "CRITICAL" && !a.acknowledged)
+      .reduce((max, a) => Math.max(max, a.id), 0);
+
+    if (lastCriticalIdRef.current === null) {
+      // Setup initial load
+      lastCriticalIdRef.current = highestCriticalId;
+    } else if (highestCriticalId > lastCriticalIdRef.current) {
+      // Play audio on new critical alert
+      try {
+        const audio = new Audio(beepSoundUrl);
+        audio.play().catch((err) => {
+          console.warn("Autoplay bloqueado pelo navegador:", err);
+        });
+      } catch (e) {
+        console.error("Erro ao tocar áudio:", e);
+      }
+      lastCriticalIdRef.current = highestCriticalId;
+    }
+  }, [alerts]);
   return (
     <div
       id="alerts-panel"

@@ -3,8 +3,8 @@
 // Exibe RUNNING/STOPPED/MAINTENANCE/ERROR com cores e animação
 // ============================================================
 
-import { Activity, AlertTriangle, Power, Wrench } from "lucide-react";
 import type { MachineState } from "@/types";
+import { Activity, AlertTriangle, Power, Wrench } from "lucide-react";
 
 interface Props {
   state: MachineState;
@@ -22,28 +22,28 @@ const stateConfig: Record<
 > = {
   RUNNING: {
     label: "Ligada",
-    bgClass: "bg-state-running/15",
+    bgClass: "bg-state-running/35",
     textClass: "text-state-running",
     icon: <Activity size={18} />,
     animate: "animate-pulse-slow",
   },
   STOPPED: {
     label: "Desligada",
-    bgClass: "bg-state-stopped/15",
+    bgClass: "bg-state-stopped/35",
     textClass: "text-state-stopped",
     icon: <Power size={18} />,
     animate: "",
   },
   MAINTENANCE: {
     label: "Manutenção",
-    bgClass: "bg-state-maintenance/15",
+    bgClass: "bg-state-maintenance/35",
     textClass: "text-state-maintenance",
     icon: <Wrench size={18} />,
     animate: "",
   },
   ERROR: {
     label: "Erro",
-    bgClass: "bg-state-error/15",
+    bgClass: "bg-state-error/35",
     textClass: "text-state-error",
     icon: <AlertTriangle size={18} />,
     animate: "animate-pulse",
