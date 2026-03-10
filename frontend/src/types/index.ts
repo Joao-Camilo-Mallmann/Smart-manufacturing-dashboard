@@ -1,8 +1,3 @@
-// ============================================================
-// types.ts — Interfaces TypeScript compartilhadas (Frontend)
-// Espelha os contratos do backend para tipagem forte.
-// ============================================================
-
 export enum MachineState {
   RUNNING = "RUNNING",
   STOPPED = "STOPPED",
