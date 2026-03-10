@@ -3,12 +3,12 @@
 // Interface REST: delega para o repositório de dados.
 // ============================================================
 
-import { Request, Response, Router } from "express";
-import { THRESHOLDS } from "../config/types";
+import { THRESHOLDS } from "@/config/types";
 import {
-  getAlerts,
   acknowledgeAlert as ackAlert,
-} from "../repositories/metrics-repository";
+  getAlerts,
+} from "@/repositories/metrics-repository";
+import { Request, Response, Router } from "express";
 
 const router = Router();
 

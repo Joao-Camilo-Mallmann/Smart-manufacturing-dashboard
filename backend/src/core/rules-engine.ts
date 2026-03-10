@@ -4,8 +4,8 @@
 // Isolado da infraestrutura — testável independentemente.
 // ============================================================
 
-import { AlertLevel, MachineState, THRESHOLDS } from "../config/types";
-import { getDatabase } from "../database/connection";
+import { AlertLevel, MachineState, THRESHOLDS } from "@/config/types";
+import { getDatabase } from "@/database/connection";
 
 /** Mapa de cooldown: chave do evento → timestamp do último disparo */
 const alertCooldowns: Map<string, number> = new Map();

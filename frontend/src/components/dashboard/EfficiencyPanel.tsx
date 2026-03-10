@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Gauge } from "lucide-react";
-import type { OEEMetrics } from "../../types";
+import type { OEEMetrics } from "@/types";
 
 interface Props {
   oee: OEEMetrics;

@@ -8,8 +8,8 @@ import {
   fetchAlerts,
   fetchCurrentMetrics,
   fetchHistory,
-} from "../services/api";
-import type { Alert, MachineStatus, MetricHistory } from "../types";
+} from "@/services/api";
+import type { Alert, MachineStatus, MetricHistory } from "@/types";
 
 const POLLING_INTERVAL = Number(import.meta.env.VITE_POLLING_INTERVAL);
 

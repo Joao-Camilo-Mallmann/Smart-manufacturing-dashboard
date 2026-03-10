@@ -3,7 +3,7 @@
 // Funções puras para tendências e cores por threshold.
 // ============================================================
 
-import { Trend } from "../types";
+import { Trend } from "@/types";
 
 /**
  * Retorna classe CSS para cor do valor baseado em thresholds.
