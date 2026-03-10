@@ -120,9 +120,12 @@ export const THRESHOLDS = {
   maxVisibleAlerts: 20,
 } as const;
 
+import dotenv from "dotenv";
+dotenv.config();
+
 /** Constantes do simulador */
 export const SIMULATOR_CONFIG = {
-  intervalMs: 3000, // ciclo de 3 segundos
-  rpmTheoretical: 1500, // RPM teórico máximo
-  ambientTemperature: 25, // temperatura ambiente (°C)
+  intervalMs: Number(process.env.SIMULATOR_INTERVAL_MS),
+  rpmTheoretical: Number(process.env.SIMULATOR_RPM_THEORETICAL),
+  ambientTemperature: Number(process.env.SIMULATOR_AMBIENT_TEMP),
 } as const;
