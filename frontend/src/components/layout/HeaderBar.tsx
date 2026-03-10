@@ -1,6 +1,6 @@
 // ============================================================
-// HeaderBar.tsx — Barra de cabeçalho do dashboard
-// Logo, título, toggle de tema, indicador de conexão
+// HeaderBar.tsx — Barra de cabeçalho do dashboard (estilo STW)
+// Header com gradiente navy, logo STW e controles
 // ============================================================
 
 import logoSvg from "@/assets/logo.svg";
@@ -20,21 +20,20 @@ export default function HeaderBar({ machineState, isConnected }: Props) {
       id="header-bar"
       className="sticky top-0 z-50 w-full bg-gradient-header"
     >
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
+      <div className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-4 flex items-center justify-between gap-4 flex-wrap">
         {/* Logo e Título */}
-        <div className="flex items-center gap-3">
-          <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm flex items-center justify-center">
-            <img
-              src={logoSvg}
-              alt="Logo"
-              className="h-6 w-auto brightness-0 invert drop-shadow-sm"
-            />
-          </div>
+        <div className="flex items-center gap-4">
+          <img
+            src={logoSvg}
+            alt="STW Logo"
+            className="h-7 sm:h-8 w-auto brightness-0 invert drop-shadow-md"
+          />
+          <div className="hidden sm:block h-8 w-px bg-white/20" />
           <div>
-            <h1 className="text-white font-bold text-lg sm:text-xl leading-tight">
+            <h1 className="text-white font-bold text-base sm:text-lg tracking-tight leading-tight">
               Dashboard de Monitoramento
             </h1>
-            <p className="text-white/70 text-xs sm:text-sm">
+            <p className="text-white/60 text-[0.65rem] uppercase tracking-widest font-medium">
               Linha de Produção Industrial
             </p>
           </div>
@@ -50,8 +49,8 @@ export default function HeaderBar({ machineState, isConnected }: Props) {
 
       {/* Banner de desconexão */}
       {!isConnected && (
-        <div className="animate-slide-up w-full py-2 px-4 text-center text-sm font-medium text-white bg-state-error/90">
-          ⚠️ Conexão perdida com o servidor. Dados congelados. Tentando
+        <div className="animate-slide-up w-full py-2.5 px-4 text-center text-sm font-semibold text-white bg-state-error/90 backdrop-blur-sm">
+          ⚠️ Conexão perdida com o servidor — Dados congelados — Tentando
           reconectar...
         </div>
       )}
