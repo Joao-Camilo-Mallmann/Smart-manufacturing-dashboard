@@ -3,7 +3,7 @@
 // Logo, título, toggle de tema, indicador de conexão
 // ============================================================
 
-import { Factory } from "lucide-react";
+import logoSvg from "@/assets/logo.svg";
 import type { MachineState } from "../../types";
 import ConnectionIndicator from "../common/ConnectionIndicator";
 import StatusBadge from "../common/StatusBadge";
@@ -18,14 +18,17 @@ export default function HeaderBar({ machineState, isConnected }: Props) {
   return (
     <header
       id="header-bar"
-      className="sticky top-0 z-50 w-full"
-      style={{ background: "var(--gradient-header)" }}
+      className="sticky top-0 z-50 w-full bg-gradient-header"
     >
       <div className="max-w-screen-2xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4 flex-wrap">
         {/* Logo e Título */}
         <div className="flex items-center gap-3">
-          <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm">
-            <Factory size={24} className="text-white" />
+          <div className="p-2 bg-white/10 rounded-lg backdrop-blur-sm flex items-center justify-center">
+            <img
+              src={logoSvg}
+              alt="Logo"
+              className="h-6 w-auto brightness-0 invert drop-shadow-sm"
+            />
           </div>
           <div>
             <h1 className="text-white font-bold text-lg sm:text-xl leading-tight">
@@ -47,10 +50,7 @@ export default function HeaderBar({ machineState, isConnected }: Props) {
 
       {/* Banner de desconexão */}
       {!isConnected && (
-        <div
-          className="animate-slide-up w-full py-2 px-4 text-center text-sm font-medium text-white"
-          style={{ background: "rgba(239, 68, 68, 0.9)" }}
-        >
+        <div className="animate-slide-up w-full py-2 px-4 text-center text-sm font-medium text-white bg-state-error/90">
           ⚠️ Conexão perdida com o servidor. Dados congelados. Tentando
           reconectar...
         </div>

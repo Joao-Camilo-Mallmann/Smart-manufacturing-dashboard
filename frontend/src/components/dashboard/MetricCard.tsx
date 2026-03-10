@@ -4,7 +4,7 @@
 // ============================================================
 
 import { Minus, TrendingDown, TrendingUp } from "lucide-react";
-import type { Trend } from "../../types";
+import { Trend } from "../../types";
 
 interface Props {
   id: string;
@@ -20,12 +20,12 @@ interface Props {
 
 function getTrendIcon(trend: Trend) {
   switch (trend) {
-    case "up":
+    case Trend.UP:
       return <TrendingUp size={16} className="text-state-running" />;
-    case "down":
+    case Trend.DOWN:
       return <TrendingDown size={16} className="text-state-error" />;
     default:
-      return <Minus size={16} style={{ color: "var(--text-muted)" }} />;
+      return <Minus size={16} className="text-content-muted" />;
   }
 }
 
@@ -37,6 +37,26 @@ function getValueColor(
   if (critical && value > critical) return "text-state-error";
   if (warning && value > warning) return "text-state-maintenance";
   return "text-stw-primary";
+}
+
+function getBorderColor(
+  value: number,
+  warning?: number,
+  critical?: number,
+): string {
+  if (critical && value > critical) return "border-l-state-error";
+  if (warning && value > warning) return "border-l-state-maintenance";
+  return "border-l-stw-primary";
+}
+
+function getBarColor(
+  value: number,
+  warning?: number,
+  critical?: number,
+): string {
+  if (critical && value > critical) return "bg-state-error";
+  if (warning && value > warning) return "bg-state-maintenance";
+  return "bg-stw-primary";
 }
 
 export default function MetricCard({
@@ -56,6 +76,12 @@ export default function MetricCard({
     thresholdWarning,
     thresholdCritical,
   );
+  const borderClass = getBorderColor(
+    numValue,
+    thresholdWarning,
+    thresholdCritical,
+  );
+  const barClass = getBarColor(numValue, thresholdWarning, thresholdCritical);
   const progressPercent = maxValue
     ? Math.min((numValue / maxValue) * 100, 100)
     : undefined;
@@ -63,18 +89,7 @@ export default function MetricCard({
   return (
     <div
       id={id}
-      className="animate-fade-in rounded-xl p-4 sm:p-5 transition-all duration-300 hover:scale-[1.02]"
-      style={{
-        background: "var(--bg-card)",
-        boxShadow: "var(--shadow-card)",
-        borderLeft: "4px solid",
-        borderLeftColor:
-          thresholdCritical && numValue > thresholdCritical
-            ? "#EF4444"
-            : thresholdWarning && numValue > thresholdWarning
-              ? "#EAB308"
-              : "#1485C8",
-      }}
+      className={`animate-fade-in rounded-xl p-4 sm:p-5 transition-all duration-300 hover:scale-[1.02] bg-surface shadow-card border-l-4 ${borderClass}`}
     >
       {/* Header: ícone + título */}
       <div className="flex items-center justify-between mb-3">
@@ -82,10 +97,7 @@ export default function MetricCard({
           <div className="p-1.5 rounded-lg bg-stw-primary/10 text-stw-primary">
             {icon}
           </div>
-          <span
-            className="text-sm font-medium"
-            style={{ color: "var(--text-secondary)" }}
-          >
+          <span className="text-sm font-medium text-content-secondary">
             {title}
           </span>
         </div>
@@ -95,38 +107,24 @@ export default function MetricCard({
       {/* Valor principal */}
       <div className={`text-2xl sm:text-3xl font-bold ${colorClass} mb-1`}>
         {typeof value === "number" ? value.toFixed(1) : value}
-        <span
-          className="text-sm font-normal ml-1"
-          style={{ color: "var(--text-muted)" }}
-        >
+        <span className="text-sm font-normal ml-1 text-content-muted">
           {unit}
         </span>
       </div>
 
       {/* Barra de progresso (se maxValue definido) */}
       {progressPercent !== undefined && (
-        <div
-          className="mt-3 h-1.5 rounded-full overflow-hidden"
-          style={{ background: "var(--bg-hover)" }}
-        >
+        <div className="mt-3 h-1.5 rounded-full overflow-hidden bg-surface-hover">
           <div
-            className="h-full rounded-full transition-all duration-500 ease-out"
-            style={{
-              width: `${progressPercent}%`,
-              background:
-                thresholdCritical && numValue > thresholdCritical
-                  ? "#EF4444"
-                  : thresholdWarning && numValue > thresholdWarning
-                    ? "#EAB308"
-                    : "#1485C8",
-            }}
+            className={`h-full rounded-full transition-all duration-500 ease-out ${barClass}`}
+            style={{ width: `${progressPercent}%` }}
           />
         </div>
       )}
 
       {/* Máximo (se definido) */}
       {maxValue && (
-        <p className="text-xs mt-1" style={{ color: "var(--text-muted)" }}>
+        <p className="text-xs mt-1 text-content-muted">
           Máx: {maxValue} {unit}
         </p>
       )}

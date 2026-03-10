@@ -3,7 +3,7 @@
 // Funções puras para tendências e cores por threshold.
 // ============================================================
 
-import type { Trend } from "../types";
+import { Trend } from "../types";
 
 /**
  * Retorna classe CSS para cor do valor baseado em thresholds.
@@ -53,9 +53,9 @@ export function getProgressColor(
  */
 export function getTrendLabel(trend: Trend): string {
   switch (trend) {
-    case "up":
+    case Trend.UP:
       return "↑";
-    case "down":
+    case Trend.DOWN:
       return "↓";
     default:
       return "→";

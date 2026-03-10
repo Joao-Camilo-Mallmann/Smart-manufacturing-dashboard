@@ -22,8 +22,7 @@ export default function ThemeToggle() {
     <button
       id="theme-toggle"
       onClick={() => setDark((d) => !d)}
-      className="relative p-2 rounded-lg transition-all duration-300 hover:scale-110"
-      style={{ background: "var(--bg-hover)", color: "var(--text-primary)" }}
+      className="relative p-2 rounded-lg transition-all duration-300 hover:scale-110 bg-surface-hover text-content"
       aria-label={dark ? "Mudar para tema claro" : "Mudar para tema escuro"}
       title={dark ? "Tema claro" : "Tema escuro"}
     >

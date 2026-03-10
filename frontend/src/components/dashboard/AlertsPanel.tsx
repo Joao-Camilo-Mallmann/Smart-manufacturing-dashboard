@@ -10,31 +10,30 @@ interface Props {
   alerts: Alert[];
 }
 
-const alertConfig: Record<
-  AlertLevel,
-  {
-    icon: React.ReactNode;
-    bgClass: string;
-    borderColor: string;
-    textClass: string;
-  }
-> = {
+interface AlertConfig {
+  icon: React.ReactNode;
+  bgClass: string;
+  borderClass: string;
+  textClass: string;
+}
+
+const alertConfig: Record<AlertLevel, AlertConfig> = {
   CRITICAL: {
     icon: <AlertTriangle size={16} />,
     bgClass: "bg-alert-critical/10",
-    borderColor: "#DC2626",
+    borderClass: "border-l-alert-critical",
     textClass: "text-alert-critical",
   },
   WARNING: {
     icon: <AlertCircle size={16} />,
     bgClass: "bg-alert-warning/10",
-    borderColor: "#F59E0B",
+    borderClass: "border-l-alert-warning",
     textClass: "text-alert-warning",
   },
   INFO: {
     icon: <Info size={16} />,
     bgClass: "bg-alert-info/10",
-    borderColor: "#3B82F6",
+    borderClass: "border-l-alert-info",
     textClass: "text-alert-info",
   },
 };
@@ -70,27 +69,17 @@ export default function AlertsPanel({ alerts }: Props) {
   return (
     <div
       id="alerts-panel"
-      className="animate-fade-in rounded-xl p-4 sm:p-5 flex flex-col"
-      style={{ background: "var(--bg-card)", boxShadow: "var(--shadow-card)" }}
+      className="animate-fade-in rounded-xl p-4 sm:p-5 flex flex-col bg-surface shadow-card"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2">
           <AlertTriangle size={20} className="text-alert-warning" />
-          <h2
-            className="font-semibold text-base"
-            style={{ color: "var(--text-primary)" }}
-          >
+          <h2 className="font-semibold text-base text-content">
             Alertas Recentes
           </h2>
         </div>
-        <span
-          className="text-xs px-2 py-1 rounded-full font-medium"
-          style={{
-            background: "var(--bg-hover)",
-            color: "var(--text-secondary)",
-          }}
-        >
+        <span className="text-xs px-2 py-1 rounded-full font-medium bg-surface-hover text-content-secondary">
           {alerts.length}
         </span>
       </div>
@@ -100,9 +89,7 @@ export default function AlertsPanel({ alerts }: Props) {
         {alerts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-8">
             <CheckCircle size={32} className="text-state-running mb-2" />
-            <p className="text-sm" style={{ color: "var(--text-muted)" }}>
-              Nenhum alerta recente
-            </p>
+            <p className="text-sm text-content-muted">Nenhum alerta recente</p>
           </div>
         ) : (
           alerts.map((alert) => {
@@ -110,10 +97,9 @@ export default function AlertsPanel({ alerts }: Props) {
             return (
               <div
                 key={alert.id}
-                className={`animate-slide-up flex items-start gap-3 p-3 rounded-lg transition-all duration-200 ${config.bgClass} ${
+                className={`animate-slide-up flex items-start gap-3 p-3 rounded-lg transition-all duration-200 border-l-3 ${config.bgClass} ${config.borderClass} ${
                   alert.acknowledged ? "opacity-60" : ""
                 }`}
-                style={{ borderLeft: `3px solid ${config.borderColor}` }}
               >
                 <div className={`mt-0.5 shrink-0 ${config.textClass}`}>
                   {config.icon}
@@ -125,23 +111,14 @@ export default function AlertsPanel({ alerts }: Props) {
                     >
                       {alert.level}
                     </span>
-                    <span
-                      className="text-xs"
-                      style={{ color: "var(--text-muted)" }}
-                    >
+                    <span className="text-xs text-content-muted">
                       {formatTimestamp(alert.timestamp)}
                     </span>
                   </div>
-                  <p
-                    className="text-sm leading-snug"
-                    style={{ color: "var(--text-primary)" }}
-                  >
+                  <p className="text-sm leading-snug text-content">
                     {alert.message}
                   </p>
-                  <p
-                    className="text-xs mt-1"
-                    style={{ color: "var(--text-muted)" }}
-                  >
+                  <p className="text-xs mt-1 text-content-muted">
                     {alert.component} • {timeAgo(alert.timestamp)}
                   </p>
                 </div>
