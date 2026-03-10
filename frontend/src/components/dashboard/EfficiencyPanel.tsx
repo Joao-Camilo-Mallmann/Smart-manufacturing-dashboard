@@ -20,20 +20,14 @@ function MetricBar({ label, value, color }: MetricBarProps) {
   return (
     <div className="space-y-1.5">
       <div className="flex items-center justify-between">
-        <span
-          className="text-sm font-medium"
-          style={{ color: "var(--text-secondary)" }}
-        >
+        <span className="text-sm font-medium text-content-secondary">
           {label}
         </span>
         <span className="text-sm font-bold" style={{ color }}>
           {value.toFixed(1)}%
         </span>
       </div>
-      <div
-        className="h-2.5 rounded-full overflow-hidden"
-        style={{ background: "var(--bg-hover)" }}
-      >
+      <div className="h-2.5 rounded-full overflow-hidden bg-surface-hover">
         <div
           className="h-full rounded-full transition-all duration-700 ease-out"
           style={{
@@ -59,16 +53,12 @@ export default function EfficiencyPanel({ oee }: Props) {
   return (
     <div
       id="efficiency-panel"
-      className="animate-fade-in rounded-xl p-4 sm:p-5"
-      style={{ background: "var(--bg-card)", boxShadow: "var(--shadow-card)" }}
+      className="animate-fade-in rounded-xl p-4 sm:p-5 bg-surface shadow-card"
     >
       {/* Header */}
       <div className="flex items-center gap-2 mb-5">
         <Gauge size={20} className="text-stw-primary" />
-        <h2
-          className="font-semibold text-base"
-          style={{ color: "var(--text-primary)" }}
-        >
+        <h2 className="font-semibold text-base text-content">
           Métricas de Eficiência
         </h2>
       </div>
@@ -81,10 +71,7 @@ export default function EfficiencyPanel({ oee }: Props) {
           border: `2px solid ${overallColor}33`,
         }}
       >
-        <p
-          className="text-xs font-medium uppercase tracking-wider mb-1"
-          style={{ color: "var(--text-muted)" }}
-        >
+        <p className="text-xs font-medium uppercase tracking-wider mb-1 text-content-muted">
           OEE Geral
         </p>
         <p className="text-4xl font-bold" style={{ color: overallColor }}>

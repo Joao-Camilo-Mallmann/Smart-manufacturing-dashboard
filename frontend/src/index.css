@@ -24,12 +24,51 @@
   --color-alert-warning: #f59e0b;
   --color-alert-critical: #dc2626;
 
+  /* ── Cores semânticas de superfície (tema light por padrão) ── */
+  --color-surface: #ffffff;
+  --color-surface-primary: #f6f6f6;
+  --color-surface-hover: #f1f1f1;
+  --color-surface-secondary: #ffffff;
+
+  /* ── Cores semânticas de texto ── */
+  --color-content: #222222;
+  --color-content-secondary: #6b7280;
+  --color-content-muted: #9ca3af;
+
+  /* ── Borda ── */
+  --color-border-default: #d9d9d9;
+
+  /* ── Sombras ── */
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+
   /* Animações customizadas */
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-slide-up: slide-up 0.3s ease-out forwards;
   --animate-pulse-slow: pulse 3s ease-in-out infinite;
   --animate-ping-critical: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
 }
+
+/* ── Dark mode: sobrescreve tokens semânticos ── */
+.dark {
+  --color-surface: #1e293b;
+  --color-surface-primary: #0f172a;
+  --color-surface-hover: #334155;
+  --color-surface-secondary: #1e293b;
+
+  --color-content: #f1f5f9;
+  --color-content-secondary: #94a3b8;
+  --color-content-muted: #64748b;
+
+  --color-border-default: #334155;
+
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   Keyframes
+   ============================================================ */
 
 @keyframes fade-in {
   from {
@@ -52,38 +91,6 @@
 }
 
 /* ============================================================
-   CSS Variables para tema Light / Dark
-   ============================================================ */
-
-:root {
-  --bg-primary: #f6f6f6;
-  --bg-secondary: #ffffff;
-  --bg-card: #ffffff;
-  --bg-hover: #f1f1f1;
-  --text-primary: #222222;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
-  --border-color: #d9d9d9;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
-  --gradient-header: linear-gradient(135deg, #005a87, #081653);
-}
-
-.dark {
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-card: #1e293b;
-  --bg-hover: #334155;
-  --text-primary: #f1f5f9;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --border-color: #334155;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --gradient-header: linear-gradient(135deg, #033047, #081653);
-}
-
-/* ============================================================
    Estilos base
    ============================================================ */
 
@@ -95,8 +102,8 @@ body {
     system-ui,
     -apple-system,
     sans-serif;
-  background: var(--bg-primary);
-  color: var(--text-primary);
+  background: var(--color-surface-primary);
+  color: var(--color-content);
   transition:
     background-color 0.3s ease,
     color 0.3s ease;
@@ -108,15 +115,23 @@ body {
   box-sizing: border-box;
 }
 
+/* Header gradient — precisa de classe utilitária */
+.bg-gradient-header {
+  background: linear-gradient(135deg, #005a87, #081653);
+}
+.dark .bg-gradient-header {
+  background: linear-gradient(135deg, #033047, #081653);
+}
+
 /* Scrollbar estilizada */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-secondary);
+  background: var(--color-surface-secondary);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--border-color);
+  background: var(--color-border-default);
   border-radius: 3px;
 }
 

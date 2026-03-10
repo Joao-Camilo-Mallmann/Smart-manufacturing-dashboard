@@ -163,19 +163,15 @@ export default function MetricsChart({ history }: Props) {
   return (
     <div
       id="metrics-chart"
-      className="animate-fade-in rounded-xl p-4 sm:p-6"
-      style={{ background: "var(--bg-card)", boxShadow: "var(--shadow-card)" }}
+      className="animate-fade-in rounded-xl p-4 sm:p-6 bg-surface shadow-card"
     >
       <div className="flex items-center gap-2 mb-4">
         <BarChart3 size={20} className="text-stw-primary" />
-        <h2
-          className="font-semibold text-base"
-          style={{ color: "var(--text-primary)" }}
-        >
+        <h2 className="font-semibold text-base text-content">
           Gráfico de Métricas
         </h2>
       </div>
-      <div style={{ height: "300px" }}>
+      <div className="h-75">
         <Line ref={chartRef} data={data} options={options} />
       </div>
     </div>

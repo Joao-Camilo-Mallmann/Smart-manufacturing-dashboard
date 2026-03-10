@@ -3,9 +3,24 @@
 // Espelha os contratos do backend para tipagem forte.
 // ============================================================
 
-export type MachineState = "RUNNING" | "STOPPED" | "MAINTENANCE" | "ERROR";
-export type AlertLevel = "INFO" | "WARNING" | "CRITICAL";
-export type Trend = "up" | "down" | "stable";
+export enum MachineState {
+  RUNNING = "RUNNING",
+  STOPPED = "STOPPED",
+  MAINTENANCE = "MAINTENANCE",
+  ERROR = "ERROR",
+}
+
+export enum AlertLevel {
+  INFO = "INFO",
+  WARNING = "WARNING",
+  CRITICAL = "CRITICAL",
+}
+
+export enum Trend {
+  UP = "up",
+  DOWN = "down",
+  STABLE = "stable",
+}
 
 export interface OEEMetrics {
   overall: number;
@@ -14,23 +29,27 @@ export interface OEEMetrics {
   quality: number;
 }
 
+export interface MachineMetrics {
+  temperature: number;
+  rpm: number;
+  uptime: number;
+  efficiency: number;
+}
+
+export interface MetricTrends {
+  temperature: Trend;
+  rpm: Trend;
+  efficiency: Trend;
+  oee: Trend;
+}
+
 export interface MachineStatus {
   id: string;
   timestamp: string;
   state: MachineState;
-  metrics: {
-    temperature: number;
-    rpm: number;
-    uptime: number;
-    efficiency: number;
-  };
+  metrics: MachineMetrics;
   oee: OEEMetrics;
-  trends: {
-    temperature: Trend;
-    rpm: Trend;
-    efficiency: Trend;
-    oee: Trend;
-  };
+  trends: MetricTrends;
 }
 
 export interface Alert {
