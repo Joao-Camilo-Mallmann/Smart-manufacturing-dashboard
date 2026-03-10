@@ -1,130 +1,210 @@
-# Smart Manufacturing Dashboard — Project Rules
+# Frontend Agent Rules — Dashboard de Monitoramento Industrial
 
-## Project Overview
-Dashboard de monitoramento industrial em tempo real, inspirado no design visual da **STW** ([stw.com.br](https://stw.com.br/)). Monitora métricas de máquinas (temperatura, RPM, uptime, eficiência) via WebSocket, com cálculo de OEE e sistema de alertas.
+## Escopo
 
-## Tech Stack
-| Layer | Technology | Version |
-|-------|-----------|---------|
-| Framework | React | 19.x |
-| Build | Vite | 7.x |
-| Styling | Tailwind CSS | 4.x (`@theme` syntax) |
-| Charts | Chart.js + react-chartjs-2 | 4.x / 5.x |
-| Icons | Lucide React | latest |
-| Language | TypeScript | ~5.9 |
-| Backend | Node.js + Express + WebSocket | — |
+Este arquivo guia agentes IA ao trabalhar no diretório `frontend/`. Todas as regras abaixo devem ser seguidas sem exceção.
 
-## Project Structure
+---
+
+## Estrutura de Pastas
+
 ```
-frontend/
-├── src/
-│   ├── App.tsx                    # Root component (dashboard layout)
-│   ├── main.tsx                   # Entry point
-│   ├── assets/
-│   │   ├── index.css              # ⭐ Design system tokens (@theme)
-│   │   └── logo.svg               # STW logo
-│   ├── components/
-│   │   ├── common/                # Reusable components
-│   │   │   ├── ConnectionIndicator.tsx
-│   │   │   ├── StatusBadge.tsx
-│   │   │   └── ThemeToggle.tsx
-│   │   ├── dashboard/             # Dashboard-specific panels
-│   │   │   ├── AlertsPanel.tsx
-│   │   │   ├── EfficiencyPanel.tsx
-│   │   │   ├── MetricCard.tsx
-│   │   │   └── MetricsChart.tsx
-│   │   └── layout/
-│   │       └── HeaderBar.tsx
-│   ├── hooks/
-│   │   └── useMachineData.ts      # WebSocket hook
-│   ├── plugins/
-│   │   └── axios.ts
-│   ├── services/                  # API service layer
-│   ├── types/                     # TypeScript interfaces
-│   └── utils/
-│       └── formatters.ts
-backend/
-├── src/
-│   └── server.ts                  # Express + WebSocket server
+frontend/src/
+├── App.tsx                    # Orquestrador do layout (grid principal)
+├── main.tsx                   # Ponto de entrada
+├── assets/
+│   ├── index.css              # ⭐ Design system tokens (@theme + .dark)
+│   └── logo.svg               # Logo STW
+├── components/
+│   ├── common/                # Componentes reutilizáveis (sem lógica de API)
+│   │   ├── ConnectionIndicator.tsx
+│   │   ├── StatusBadge.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── dashboard/             # Painéis do dashboard
+│   │   ├── AlertsPanel.tsx
+│   │   ├── EfficiencyPanel.tsx
+│   │   ├── MetricCard.tsx
+│   │   └── MetricsChart.tsx
+│   └── layout/
+│       └── HeaderBar.tsx
+├── hooks/
+│   └── useMachineData.ts      # Hook de polling/WebSocket
+├── plugins/
+│   └── axios.ts
+├── services/                  # Camada de fetch/API
+├── types/                     # Interfaces TypeScript (espelho do backend)
+└── utils/
+    └── formatters.ts          # Formatação de valores
 ```
 
-## Design System Rules
+---
 
-### Color Palette (STW Brand)
-All color tokens live in `frontend/src/assets/index.css` inside the `@theme` block.
+## Regras de Arquitetura
 
-| Token | Hex | Usage |
-|-------|-----|-------|
-| `stw-primary` | `#00AEEF` | Accent blue — icons, badges, progress bars, links |
-| `stw-dark` | `#00334E` | Deep navy — headings, text emphasis |
-| `stw-secondary` | `#005A87` | Mid-blue — secondary interactive elements |
-| `stw-corporate` | `#004C74` | Corporate blue — header gradient mid-point |
-| `stw-light` | `#0085C8` | Light blue — hover states, highlights |
-| `stw-navy` | `#001A2E` | Deepest navy — dark mode backgrounds |
+### Smart vs. Dumb (OBRIGATÓRIO)
 
-### Machine State Colors
-| State | Hex | Class |
-|-------|-----|-------|
-| Running | `#22c55e` | `state-running` |
-| Stopped | `#94a3b8` | `state-stopped` |
-| Maintenance | `#f59e0b` | `state-maintenance` |
-| Error | `#ef4444` | `state-error` |
+| Diretório | O QUE pode ter | O QUE NÃO pode ter |
+|-----------|----------------|---------------------|
+| `components/` | JSX, Tailwind, props, eventos | fetch, useEffect com API, useState de dados remotos |
+| `hooks/` | useEffect, useState, chamadas à API, lógica de polling | JSX, renderização |
+| `services/` | Configuração de fetch/axios, base URL | Lógica de negócio |
+| `utils/` | Funções puras de formatação/cálculo | Chamadas de API, side effects |
+| `types/` | Interfaces e type aliases | Implementação |
 
-### Typography
-- **Font**: Montserrat (primary), Inter (fallback)
-- **Labels**: `.label-stw` — uppercase, `letter-spacing: 0.1em`, `font-size: 0.7rem`, `font-weight: 600`
-- **Headings**: `font-bold` or `font-extrabold`, `tracking-tight`
+### Princípio Central
 
-### Card Pattern
-Use the `.card-stw` CSS class for all dashboard panels:
-- Border: `1px solid var(--color-border-card)`
-- Border-radius: `var(--radius-card)` = `1.5rem`
-- Shadow: Subtle on rest, deeper on hover
-- Hover: `translateY(-2px)` with smooth transition
+Componentes são **"burros"** — recebem dados via props e apenas exibem. Toda a inteligência (polling, tratamento de erro, transformação) fica em `hooks/`.
 
-### Header
-- Sticky, full-width
-- Uses `.bg-gradient-header` (auto light/dark)
-- STW logo + title on left, status/controls on right
+---
 
-## Coding Conventions
+## Design System
+
+### Tokens de Cor (em `index.css`, bloco `@theme`)
+
+**Todas as cores do projeto vivem em `index.css`.** Nunca hardcodar hex em componentes, exceto valores dinâmicos de Chart.js.
+
+#### Paleta STW
+
+| Token | Hex | Uso |
+|-------|-----|-----|
+| `--color-stw-primary` | `#00AEEF` | Accent blue — ícones, badges, barras, links |
+| `--color-stw-dark` | `#00334E` | Navy profundo — headings (light mode) |
+| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias |
+| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas dark |
+| `--color-stw-light` | `#0085C8` | Azul claro — hovers, destaques |
+| `--color-stw-navy` | `#001A2E` | Navy profundo — fundo dark mode |
+
+#### Tokens Semânticos (Light Mode)
+
+| Token | Uso |
+|-------|-----|
+| `--color-surface-primary` | Fundo da página |
+| `--color-surface` | Fundo dos cards |
+| `--color-surface-hover` | Hover de elementos |
+| `--color-content` | Texto principal |
+| `--color-content-secondary` | Subtítulos |
+| `--color-content-muted` | Texto terciário / labels |
+| `--color-border-card` | Borda dos cards |
+
+#### Dark Mode (`.dark {}` sobrescreve os tokens)
+
+| Token | Valor Dark |
+|-------|-----------|
+| `surface-primary` | `var(--color-stw-navy)` (#001A2E) |
+| `surface` | `#00263E` |
+| `surface-hover` | `var(--color-stw-dark)` (#00334E) |
+| `content` | `#FFFFFF` |
+| `content-secondary` | `#BBD2E8` |
+| `content-muted` | `#8AAAC9` |
+| `border-card` | `var(--color-stw-corporate)` (#004C74) |
+
+#### Cores de Estado
+
+| Estado | Hex | Classe Tailwind |
+|--------|-----|----------------|
+| Running | `#22c55e` | `text-state-running`, `bg-state-running` |
+| Stopped | `#94a3b8` | `text-state-stopped`, `bg-state-stopped` |
+| Maintenance | `#f59e0b` | `text-state-maintenance`, `bg-state-maintenance` |
+| Error | `#ef4444` | `text-state-error`, `bg-state-error` |
+
+---
+
+## Classes CSS Customizadas
+
+Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o estilo:
+
+| Classe | Propósito |
+|--------|-----------|
+| `.card-stw` | Card completo (borda, sombra, raio, hover com translateY) |
+| `.label-stw` | Label uppercase com tracking e tamanho padronizado |
+| `.bg-gradient-header` | Gradiente STW para o header (adapta light/dark) |
+
+---
+
+## Componentes — Responsabilidades
+
+| Componente | Responsabilidade |
+|-----------|-----------------|
+| `HeaderBar` | Logo STW, título, toggle dark/light, indicador de conexão |
+| `StatusBadge` | Estado (RUNNING/STOPPED/MAINTENANCE/ERROR) com cor e animação |
+| `ConnectionIndicator` | Bolinha verde/vermelha + banner de conexão |
+| `MetricCard` | Card com valor, tendência (↑↓→), cor por threshold |
+| `MetricsChart` | Gráfico Chart.js com linhas de temperatura e RPM |
+| `AlertsPanel` | Lista de alertas por severidade, com cores e timestamp |
+| `EfficiencyPanel` | Barras de OEE, disponibilidade, performance, qualidade |
+| `ThemeToggle` | Botão sol/lua com persistência em localStorage |
+
+---
+
+## Convenções de Código
 
 ### Imports
-- Always use `@/` path aliases (configured in `tsconfig.app.json` and `vite.config.ts`)
-- Example: `import MetricCard from "@/components/dashboard/MetricCard"`
+- **SEMPRE** usar alias `@/` (configurado em `tsconfig.app.json` e `vite.config.ts`)
+- Exemplo: `import MetricCard from "@/components/dashboard/MetricCard"`
 
-### Components
-- One component per file
-- File name matches component name (PascalCase)
-- Use `interface Props` for prop types
-- Export as `export default function ComponentName`
+### Componentes
+- Um componente por arquivo
+- Nome do arquivo = nome do componente (PascalCase)
+- Props tipadas com `interface Props`
+- Export: `export default function ComponentName`
 
-### Styling
-- Use Tailwind utility classes in JSX
-- Custom CSS classes go in `index.css` with `.card-stw`, `.label-stw` naming
-- Dark mode: use `.dark` class toggled on `<html>`
-- No inline styles except for dynamic values (e.g., Chart.js colors, percentage widths)
+### Estilização
+- Usar classes utilitárias Tailwind no JSX
+- Classes CSS customizadas vão em `index.css` com prefixo STW
+- `dark:` prefix do Tailwind NÃO é usado — usamos `.dark {}` no CSS
+- Inline styles APENAS para valores dinâmicos (cores Chart.js, larguras %)
 
-### Language
-- UI text is in **Portuguese (pt-BR)**
-- Code comments in Portuguese
-- Variable/function names in English
-
-### State Management
-- No global state library — local state with React hooks
-- WebSocket data via custom `useMachineData` hook
+### Textos e Valores
+- UI text em **português (pt-BR)**
+- Comentários de código em **português**
+- Nomes de variáveis/funções em **inglês**
+- Formatar RPM como inteiro (ex: 1.200)
+- Formatar temperatura com 1 decimal + °C (ex: 56.4 °C)
+- Formatar uptime como horas e minutos (ex: 2h 35m)
+- Formatar OEE com 1 decimal + % (ex: 73.4%)
 
 ### Dark Mode
-- Toggled via `ThemeToggle` component
-- Persisted in `localStorage` key `"theme"`
-- Applied by toggling `dark` class on `document.documentElement`
-- CSS tokens in `.dark {}` block override light mode defaults
+- Toggle via `ThemeToggle` component
+- Persistido em `localStorage("theme")`
+- Classe `dark` aplicada no `<html>`
+- Tokens em `.dark {}` sobrescrevem os light defaults
+- Textos principais: usar `text-content` (adapta automaticamente)
 
-## Dev Commands
+### Estado
+- Sem biblioteca de state management
+- Custom hook `useMachineData` gerencia todo o estado de polling
+- Reconexão automática ao voltar online
+
+---
+
+## Layout Responsivo
+
+- **Desktop (≥1024px)**: Grid de 4 colunas para cards + painéis lado a lado
+- **Tablet (768-1023px)**: Grid de 2 colunas + painéis empilhados
+- **Mobile (<768px)**: Coluna única
+
+---
+
+## Animações
+
+| Nome | Uso | Regra |
+|------|-----|-------|
+| `animate-fade-in` | Entrada de cards | Suave, 0.3s |
+| `animate-pulse-slow` | Indicador de atividade | 3s, infinite |
+| `animate-ping-critical` | Alerta CRITICAL | Chama atenção visual |
+| `animate-slide-up` | Banners | Entrada de baixo |
+
+**Regras gerais:**
+- Durações curtas (150-400ms)
+- Respeitar `prefers-reduced-motion`
+- Não animar áreas de leitura crítica de dados
+
+---
+
+## Comandos
+
 ```bash
-# frontend only
-cd frontend && npm run dev
-
-# full stack (from root)
-npm run dev
+cd frontend && npm run dev    # dev server (Vite HMR)
+cd frontend && npm test       # testes com Jest
+cd frontend && npm run build  # build de produção
 ```
