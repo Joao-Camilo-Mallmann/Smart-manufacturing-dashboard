@@ -1,6 +1,6 @@
 // ============================================================
-// App.tsx — Componente principal do Dashboard Industrial
-// Organiza o layout do dashboard com grid responsivo.
+// App.tsx — Dashboard Industrial (estilo STW)
+// Layout clean, espaçoso, com tipografia Montserrat
 // ============================================================
 
 import AlertsPanel from "@/components/dashboard/AlertsPanel";
@@ -42,11 +42,11 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-primary">
         <div className="text-center">
-          <div className="animate-spin w-12 h-12 border-4 border-stw-primary border-t-transparent rounded-full mx-auto mb-4" />
-          <p className="text-lg font-medium text-content">
+          <div className="animate-spin w-14 h-14 border-4 border-stw-primary border-t-transparent rounded-full mx-auto mb-5" />
+          <p className="text-lg font-bold text-stw-dark tracking-tight">
             Carregando dashboard...
           </p>
-          <p className="text-sm text-content-muted">
+          <p className="text-sm text-content-muted mt-1">
             Conectando ao servidor de monitoramento
           </p>
         </div>
@@ -65,9 +65,9 @@ function App() {
       <HeaderBar machineState={machineState} isConnected={isConnected} />
 
       {/* Conteúdo principal */}
-      <main className="max-w-screen-2xl mx-24 px-4 sm:px-6 py-4 sm:py-6 space-y-4 sm:space-y-6">
-        {/* Metric Cards — Grid responsivo: 1 col mobile, 2 col tablet, 4 col desktop */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <main className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        {/* Metric Cards — Grid responsivo */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           <MetricCard
             id="card-temperature"
             title="Temperatura"
@@ -107,19 +107,19 @@ function App() {
           />
         </div>
 
-        {/* Gráfico de Métricas — Full width */}
+        {/* Gráfico de Métricas */}
         <MetricsChart history={history} />
 
-        {/* Alertas + Eficiência — Side by side em desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
+        {/* Alertas + Eficiência */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
           <AlertsPanel alerts={alerts} />
           <EfficiencyPanel oee={oee} />
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="text-center py-4 text-xs text-content-muted">
-        Dashboard de Monitoramento Industrial • Atualização a cada 3 segundos
+      <footer className="text-center py-6 text-xs text-content-muted font-medium tracking-wide">
+        Dashboard de Monitoramento Industrial — Atualização a cada 3 segundos
       </footer>
     </div>
   );

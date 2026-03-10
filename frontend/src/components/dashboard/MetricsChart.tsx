@@ -1,6 +1,6 @@
 // ============================================================
-// MetricsChart.tsx — Gráfico histórico com Chart.js
-// Exibe linhas de temperatura e RPM em tempo real.
+// MetricsChart.tsx — Gráfico histórico Chart.js (estilo STW)
+// Card super arredondado com gráfico de temperatura e RPM
 // ============================================================
 
 import {
@@ -64,32 +64,36 @@ export default function MetricsChart({ history }: Props) {
         label: "Temperatura (°C)",
         data: history.map((h) => h.temperature),
         borderColor: "#EF4444",
-        backgroundColor: "rgba(239, 68, 68, 0.08)",
+        backgroundColor: "rgba(239, 68, 68, 0.06)",
         fill: true,
         tension: 0.4,
         pointRadius: 0,
-        pointHoverRadius: 5,
-        borderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: "#EF4444",
+        borderWidth: 2.5,
         yAxisID: "y",
       },
       {
         label: "RPM",
         data: history.map((h) => h.rpm),
         borderColor: "#1485C8",
-        backgroundColor: "rgba(20, 133, 200, 0.08)",
+        backgroundColor: "rgba(20, 133, 200, 0.06)",
         fill: true,
         tension: 0.4,
         pointRadius: 0,
-        pointHoverRadius: 5,
-        borderWidth: 2,
+        pointHoverRadius: 6,
+        pointHoverBackgroundColor: "#1485C8",
+        borderWidth: 2.5,
         yAxisID: "y1",
       },
     ],
   };
 
   const isDark = document.documentElement.classList.contains("dark");
-  const gridColor = isDark ? "rgba(148, 163, 184, 0.1)" : "rgba(0, 0, 0, 0.06)";
-  const textColor = isDark ? "#94A3B8" : "#6B7280";
+  const gridColor = isDark
+    ? "rgba(148, 163, 184, 0.08)"
+    : "rgba(0, 80, 138, 0.06)";
+  const textColor = isDark ? "#94A3B8" : "#4A5568";
 
   const options = {
     responsive: true,
@@ -105,24 +109,26 @@ export default function MetricsChart({ history }: Props) {
           color: textColor,
           usePointStyle: true,
           pointStyle: "circle",
-          padding: 20,
-          font: { size: 12 },
+          padding: 24,
+          font: { size: 12, family: "Montserrat", weight: 600 as const },
         },
       },
       tooltip: {
-        backgroundColor: isDark ? "#1E293B" : "#FFFFFF",
-        titleColor: isDark ? "#F1F5F9" : "#222222",
-        bodyColor: isDark ? "#94A3B8" : "#6B7280",
-        borderColor: isDark ? "#334155" : "#D9D9D9",
+        backgroundColor: isDark ? "#0f1a2e" : "#FFFFFF",
+        titleColor: isDark ? "#E2E8F0" : "#1A202C",
+        bodyColor: isDark ? "#94A3B8" : "#4A5568",
+        borderColor: isDark ? "#1e3a5f" : "#BCD4E6",
         borderWidth: 1,
-        cornerRadius: 8,
-        padding: 12,
+        cornerRadius: 12,
+        padding: 14,
+        titleFont: { family: "Montserrat", weight: 600 as const },
+        bodyFont: { family: "Montserrat" },
       },
     },
     scales: {
       x: {
         grid: { color: gridColor },
-        ticks: { color: textColor, font: { size: 10 } },
+        ticks: { color: textColor, font: { size: 10, family: "Montserrat" } },
       },
       y: {
         type: "linear" as const,
@@ -132,10 +138,10 @@ export default function MetricsChart({ history }: Props) {
           display: true,
           text: "Temperatura (°C)",
           color: "#EF4444",
-          font: { size: 11 },
+          font: { size: 11, family: "Montserrat", weight: 600 as const },
         },
         grid: { color: gridColor },
-        ticks: { color: textColor, font: { size: 10 } },
+        ticks: { color: textColor, font: { size: 10, family: "Montserrat" } },
         min: 0,
         max: 100,
       },
@@ -147,27 +153,26 @@ export default function MetricsChart({ history }: Props) {
           display: true,
           text: "RPM",
           color: "#1485C8",
-          font: { size: 11 },
+          font: { size: 11, family: "Montserrat", weight: 600 as const },
         },
         grid: { drawOnChartArea: false },
-        ticks: { color: textColor, font: { size: 10 } },
+        ticks: { color: textColor, font: { size: 10, family: "Montserrat" } },
         min: 0,
         max: 2000,
       },
     },
     animation: {
-      duration: 400,
+      duration: 500,
     },
   };
 
   return (
-    <div
-      id="metrics-chart"
-      className="animate-fade-in rounded-xl p-4 sm:p-6 bg-surface shadow-card"
-    >
-      <div className="flex items-center gap-2 mb-4">
-        <BarChart3 size={20} className="text-stw-primary" />
-        <h2 className="font-semibold text-base text-content">
+    <div id="metrics-chart" className="card-stw animate-fade-in p-5 sm:p-6">
+      <div className="flex items-center gap-2.5 mb-5">
+        <div className="p-2 rounded-xl bg-stw-primary/8 text-stw-primary">
+          <BarChart3 size={18} />
+        </div>
+        <h2 className="font-bold text-base text-content tracking-tight">
           Gráfico de Métricas
         </h2>
       </div>

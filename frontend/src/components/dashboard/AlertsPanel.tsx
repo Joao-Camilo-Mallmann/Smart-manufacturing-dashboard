@@ -1,6 +1,6 @@
 // ============================================================
-// AlertsPanel.tsx — Painel de alertas recentes
-// Ordenado por severidade (CRITICAL > WARNING > INFO)
+// AlertsPanel.tsx — Painel de alertas recentes (estilo STW)
+// Card com cantos super arredondados e hierarquia visual limpa
 // ============================================================
 
 import { AlertCircle, AlertTriangle, CheckCircle, Info } from "lucide-react";
@@ -20,19 +20,19 @@ interface AlertConfig {
 const alertConfig: Record<AlertLevel, AlertConfig> = {
   CRITICAL: {
     icon: <AlertTriangle size={16} />,
-    bgClass: "bg-alert-critical/10",
+    bgClass: "bg-alert-critical/8",
     borderClass: "border-l-alert-critical",
     textClass: "text-alert-critical",
   },
   WARNING: {
     icon: <AlertCircle size={16} />,
-    bgClass: "bg-alert-warning/10",
+    bgClass: "bg-alert-warning/8",
     borderClass: "border-l-alert-warning",
     textClass: "text-alert-warning",
   },
   INFO: {
     icon: <Info size={16} />,
-    bgClass: "bg-alert-info/10",
+    bgClass: "bg-alert-info/8",
     borderClass: "border-l-alert-info",
     textClass: "text-alert-info",
   },
@@ -69,27 +69,31 @@ export default function AlertsPanel({ alerts }: Props) {
   return (
     <div
       id="alerts-panel"
-      className="animate-fade-in rounded-xl p-4 sm:p-5 flex flex-col bg-surface shadow-card"
+      className="card-stw animate-fade-in p-5 sm:p-6 flex flex-col"
     >
       {/* Header */}
-      <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-2">
-          <AlertTriangle size={20} className="text-alert-warning" />
-          <h2 className="font-semibold text-base text-content">
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-alert-warning/10 text-alert-warning">
+            <AlertTriangle size={18} />
+          </div>
+          <h2 className="font-bold text-base text-content tracking-tight">
             Alertas Recentes
           </h2>
         </div>
-        <span className="text-xs px-2 py-1 rounded-full font-medium bg-surface-hover text-content-secondary">
+        <span className="text-xs px-3 py-1.5 rounded-full font-semibold bg-surface-hover text-content-secondary">
           {alerts.length}
         </span>
       </div>
 
       {/* Lista de alertas */}
-      <div className="flex-1 overflow-y-auto space-y-2 max-h-80 pr-1">
+      <div className="flex-1 overflow-y-auto space-y-2.5 max-h-80 pr-1">
         {alerts.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-8">
-            <CheckCircle size={32} className="text-state-running mb-2" />
-            <p className="text-sm text-content-muted">Nenhum alerta recente</p>
+          <div className="flex flex-col items-center justify-center py-10">
+            <CheckCircle size={36} className="text-state-running mb-3" />
+            <p className="text-sm text-content-muted font-medium">
+              Nenhum alerta recente
+            </p>
           </div>
         ) : (
           alerts.map((alert) => {
@@ -97,8 +101,8 @@ export default function AlertsPanel({ alerts }: Props) {
             return (
               <div
                 key={alert.id}
-                className={`animate-slide-up flex items-start gap-3 p-3 rounded-lg transition-all duration-200 border-l-3 ${config.bgClass} ${config.borderClass} ${
-                  alert.acknowledged ? "opacity-60" : ""
+                className={`animate-slide-up flex items-start gap-3 p-3.5 rounded-2xl transition-all duration-200 border-l-3 ${config.bgClass} ${config.borderClass} ${
+                  alert.acknowledged ? "opacity-50" : ""
                 }`}
               >
                 <div className={`mt-0.5 shrink-0 ${config.textClass}`}>
@@ -107,15 +111,15 @@ export default function AlertsPanel({ alerts }: Props) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-0.5">
                     <span
-                      className={`text-xs font-bold uppercase ${config.textClass}`}
+                      className={`text-[0.65rem] font-bold uppercase tracking-wider ${config.textClass}`}
                     >
                       {alert.level}
                     </span>
-                    <span className="text-xs text-content-muted">
+                    <span className="text-[0.65rem] text-content-muted">
                       {formatTimestamp(alert.timestamp)}
                     </span>
                   </div>
-                  <p className="text-sm leading-snug text-content">
+                  <p className="text-sm leading-snug text-content font-medium">
                     {alert.message}
                   </p>
                   <p className="text-xs mt-1 text-content-muted">

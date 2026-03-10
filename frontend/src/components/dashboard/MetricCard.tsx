@@ -1,6 +1,6 @@
 // ============================================================
-// MetricCard.tsx — Card de métrica com valor, tendência e cor
-// Exibe temperatura, RPM, uptime ou eficiência.
+// MetricCard.tsx — Card de métrica estilo STW
+// Cantos super arredondados, borda azulada, hierarquia limpa
 // ============================================================
 
 import { Minus, TrendingDown, TrendingUp } from "lucide-react";
@@ -36,17 +36,7 @@ function getValueColor(
 ): string {
   if (critical && value > critical) return "text-state-error";
   if (warning && value > warning) return "text-state-maintenance";
-  return "text-stw-primary";
-}
-
-function getBorderColor(
-  value: number,
-  warning?: number,
-  critical?: number,
-): string {
-  if (critical && value > critical) return "border-l-state-error";
-  if (warning && value > warning) return "border-l-state-maintenance";
-  return "border-l-stw-primary";
+  return "text-stw-dark";
 }
 
 function getBarColor(
@@ -76,55 +66,49 @@ export default function MetricCard({
     thresholdWarning,
     thresholdCritical,
   );
-  const borderClass = getBorderColor(
-    numValue,
-    thresholdWarning,
-    thresholdCritical,
-  );
   const barClass = getBarColor(numValue, thresholdWarning, thresholdCritical);
   const progressPercent = maxValue
     ? Math.min((numValue / maxValue) * 100, 100)
     : undefined;
 
   return (
-    <div
-      id={id}
-      className={`animate-fade-in rounded-xl p-4 sm:p-5 transition-all duration-300 hover:scale-[1.02] bg-surface shadow-card border-l-4 ${borderClass}`}
-    >
-      {/* Header: ícone + título */}
-      <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-stw-primary/10 text-stw-primary">
+    <div id={id} className="card-stw animate-fade-in p-5 sm:p-6">
+      {/* Label estilo STW */}
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2.5">
+          <div className="p-2 rounded-xl bg-stw-primary/8 text-stw-primary">
             {icon}
           </div>
-          <span className="text-sm font-medium text-content-secondary">
-            {title}
-          </span>
+          <span className="label-stw">{title}</span>
         </div>
-        {getTrendIcon(trend)}
+        <div className="p-1 rounded-full bg-surface-hover">
+          {getTrendIcon(trend)}
+        </div>
       </div>
 
       {/* Valor principal */}
-      <div className={`text-2xl sm:text-3xl font-bold ${colorClass} mb-1`}>
+      <div
+        className={`text-3xl sm:text-4xl font-extrabold tracking-tight ${colorClass}`}
+      >
         {typeof value === "number" ? value.toFixed(1) : value}
-        <span className="text-sm font-normal ml-1 text-content-muted">
+        <span className="text-base font-medium ml-1.5 text-content-muted">
           {unit}
         </span>
       </div>
 
-      {/* Barra de progresso (se maxValue definido) */}
+      {/* Barra de progresso */}
       {progressPercent !== undefined && (
-        <div className="mt-3 h-1.5 rounded-full overflow-hidden bg-surface-hover">
+        <div className="mt-4 h-2 rounded-full overflow-hidden bg-surface-hover">
           <div
-            className={`h-full rounded-full transition-all duration-500 ease-out ${barClass}`}
+            className={`h-full rounded-full transition-all duration-700 ease-out ${barClass}`}
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       )}
 
-      {/* Máximo (se definido) */}
+      {/* Máximo */}
       {maxValue && (
-        <p className="text-xs mt-1 text-content-muted">
+        <p className="text-xs mt-2 text-content-muted font-medium">
           Máx: {maxValue} {unit}
         </p>
       )}
