@@ -5,7 +5,8 @@
 
 ## Referência do Projeto
 
-- **Blueprint completo**: [PROJECT_BLUEPRINT.md](./docs/PROJECT_BLUEPRINT.md) — Todas as regras, estrutura e decisões consolidadas
+- **Blueprint completo**: [PROJECT_BLUEPRINT.md](./docs/PROJECT_BLUEPRINT.md) — Todas as regras, estrutura e objetivos consolidados
+- **Decisões Técnicas**: [DECISOES_TECNICAS.md](./docs/DECISOES_TECNICAS.md) — Justificativas arquiteturais para a banca
 
 ## Regras por Camada
 
@@ -21,5 +22,4 @@
 - Todas as cores vivem em `frontend/src/assets/index.css` (bloco `@theme`)
 - Nunca hardcodar hex em componentes (exceto valores dinâmicos de Chart.js)
 - Dark mode via classe `.dark` no `<html>`, tokens em `.dark {}` no CSS
-- Componentes são "burros" — lógica de dados fica em hooks
-- Core do backend é puro — nunca importa dependências de infra
+
