@@ -16,7 +16,7 @@ import express from "express";
 // Carrega as variáveis de ambiente do .env
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = Number(process.env.PORT) || 3001;
 const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // 1. Inicializar banco de dados

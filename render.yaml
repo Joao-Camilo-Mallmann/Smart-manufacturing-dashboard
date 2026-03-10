@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: smart-dashboard-backend
+    env: node
+    plan: free
+    rootDir: backend
+    buildCommand: npm install --include=dev
+    startCommand: npm run start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: FRONTEND_URL
+        sync: false
+        value: https://smart-dashboard-frontend.onrender.com
+      - key: SIMULATOR_INTERVAL_MS
+        value: "3000"
+      - key: SIMULATOR_RPM_THEORETICAL
+        value: "1500"
+      - key: SIMULATOR_AMBIENT_TEMP
+        value: "25"
+
+  - type: static
+    name: smart-dashboard-frontend
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    staticPublishPath: dist
+    autoDeploy: true
+    envVars:
+      - key: VITE_API_URL
+        sync: false
+        value: https://smart-dashboard-backend.onrender.com/api
+      - key: VITE_POLLING_INTERVAL
+        value: "3000"
