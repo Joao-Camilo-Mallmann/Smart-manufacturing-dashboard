@@ -39,7 +39,7 @@ router.get("/", (_req: Request, res: Response) => {
 router.patch("/:id/acknowledge", (req: Request, res: Response) => {
   try {
     const { id } = req.params;
-    const result = ackAlert(id);
+    const result = ackAlert(Number(id));
 
     if (result.changes === 0) {
       res.status(404).json({ error: "Alerta não encontrado" });

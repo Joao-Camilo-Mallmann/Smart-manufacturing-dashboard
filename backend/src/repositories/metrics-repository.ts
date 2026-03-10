@@ -125,7 +125,7 @@ export function getAlerts(limit: number) {
 /**
  * Marca um alerta como reconhecido.
  */
-export function acknowledgeAlert(id: string) {
+export function acknowledgeAlert(id: number) {
   const db = getDatabase();
   return db
     .prepare(
