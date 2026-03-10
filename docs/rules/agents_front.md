@@ -154,14 +154,18 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 - `dark:` prefix do Tailwind NÃO é usado — usamos `.dark {}` no CSS
 - Inline styles APENAS para valores dinâmicos (cores Chart.js, larguras %)
 
-### Textos e Valores
+### Textos, Valores e Formatadores (`utils/formatters.ts`)
 - UI text em **português (pt-BR)**
 - Comentários de código em **português**
 - Nomes de variáveis/funções em **inglês**
-- Formatar RPM como inteiro (ex: 1.200)
-- Formatar temperatura com 1 decimal + °C (ex: 56.4 °C)
-- Formatar uptime como horas e minutos (ex: 2h 35m)
-- Formatar OEE com 1 decimal + % (ex: 73.4%)
+- **Sempre utilize os formatadores puros de `frontend/src/utils/formatters.ts`** para exibição de variáveis na UI:
+  - `formatUptime(hours: number)`: Formata horas decimais em "Xh Ym" (ex: "5h 23m").
+  - `formatTimestamp(ts: string)`: Converte data/hora ISO para o horário local brasileiro (ex: "21:35:33").
+  - `timeAgo(ts: string)`: Retorna string de tempo relativo (ex: "5s atrás", "5min atrás", "5h atrás").
+  - `formatMetric(value: number, decimals = 1)`: Retorna o número em string com casas decimais fixas.
+- Formatar RPM como inteiro.
+- Formatar temperatura com 1 decimal + °C (ex: 56.4 °C).
+- Formatar OEE com 1 decimal + % (ex: 73.4%).
 
 ### Dark Mode
 - Toggle via `ThemeToggle` component
