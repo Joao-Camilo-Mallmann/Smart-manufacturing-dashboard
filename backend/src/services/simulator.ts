@@ -4,11 +4,15 @@
 // Roda a cada 3 segundos via setInterval.
 // ============================================================
 
+import { MachineState, SIMULATOR_CONFIG, SimulatorState } from "@/config/types";
 import { calculateOEE } from "@/core/oee-calculator";
-import { getNextState } from "@/core/state-policy";
 import { evaluateThresholds } from "@/core/rules-engine";
-import { insertMetric } from "@/repositories/metrics-repository";
-import { SIMULATOR_CONFIG, SimulatorState, MachineState } from "@/config/types";
+import { getNextState } from "@/core/state-policy";
+import {
+  insertAlert,
+  insertMetric,
+  pruneOldRecords,
+} from "@/repositories/metrics-repository";
 
 /** Estado interno do simulador (em memória) */
 let state: SimulatorState = {
@@ -37,6 +41,9 @@ function randomWalk(
   const change = (Math.random() - 0.5) * 2 * delta;
   return Math.max(min, Math.min(max, current + change));
 }
+
+/** Contador de ciclos para executar pruning periodicamente */
+let cycleCount = 0;
 
 /**
  * Simula um ciclo de leitura da máquina.
@@ -115,13 +122,16 @@ function simulateCycle(): void {
     state.totalParts,
   );
 
-  // 4. Avaliar thresholds e gerar alertas
-  evaluateThresholds(
+  // 4. Avaliar thresholds e persistir alertas via repository
+  const alerts = evaluateThresholds(
     state.currentState,
     state.temperature,
     state.rpm,
     previousState,
   );
+  for (const alert of alerts) {
+    insertAlert(alert.level, alert.message, alert.component);
+  }
 
   // 5. Persistir leitura via Repository
   insertMetric(
@@ -135,6 +145,12 @@ function simulateCycle(): void {
     state.oee.performance,
     state.oee.quality,
   );
+
+  // 6. Pruning periódico do banco (a cada 10 ciclos ≈ 30s)
+  cycleCount++;
+  if (cycleCount % 10 === 0) {
+    pruneOldRecords();
+  }
 }
 
 /**

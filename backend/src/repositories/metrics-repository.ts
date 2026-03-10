@@ -135,3 +135,40 @@ export function acknowledgeAlert(id: number) {
     )
     .run(id);
 }
+
+/**
+ * Remove registros antigos para evitar crescimento infinito do banco.
+ * metric_history: quando > 1000, mantém os últimos 500.
+ * alerts: quando > 200, mantém os últimos 100.
+ */
+export function pruneOldRecords(): void {
+  const db = getDatabase();
+
+  const metricCount = (
+    db.prepare("SELECT COUNT(*) AS count FROM metric_history").get() as {
+      count: number;
+    }
+  ).count;
+
+  if (metricCount > 1000) {
+    db.prepare(
+      `DELETE FROM metric_history WHERE id NOT IN (
+        SELECT id FROM metric_history ORDER BY id DESC LIMIT 500
+      )`,
+    ).run();
+  }
+
+  const alertCount = (
+    db.prepare("SELECT COUNT(*) AS count FROM alerts").get() as {
+      count: number;
+    }
+  ).count;
+
+  if (alertCount > 200) {
+    db.prepare(
+      `DELETE FROM alerts WHERE id NOT IN (
+        SELECT id FROM alerts ORDER BY id DESC LIMIT 100
+      )`,
+    ).run();
+  }
+}
