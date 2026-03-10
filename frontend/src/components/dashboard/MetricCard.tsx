@@ -3,8 +3,8 @@
 // Cantos super arredondados, borda azulada, hierarquia limpa
 // ============================================================
 
-import { Minus, TrendingDown, TrendingUp } from "lucide-react";
 import { Trend } from "@/types";
+import { Minus, TrendingDown, TrendingUp } from "lucide-react";
 
 interface Props {
   id: string;
@@ -36,7 +36,7 @@ function getValueColor(
 ): string {
   if (critical && value > critical) return "text-state-error";
   if (warning && value > warning) return "text-state-maintenance";
-  return "text-stw-dark";
+  return "text-content"; /* Adaptive to dark mode white */
 }
 
 function getBarColor(

@@ -54,7 +54,7 @@ const crosshairPlugin = {
     ctx.lineWidth = 1;
     ctx.strokeStyle = document.documentElement.classList.contains("dark")
       ? "rgba(148, 163, 184, 0.25)"
-      : "rgba(0, 80, 138, 0.15)";
+      : "rgba(0, 51, 78, 0.15)";
     ctx.setLineDash([4, 4]);
     ctx.stroke();
     ctx.restore();
@@ -99,8 +99,8 @@ const gradientPlugin = {
       chart.data.datasets[1].backgroundColor = createGradient(
         ctx,
         chartArea,
-        isDark ? "rgba(20, 133, 200, 0.20)" : "rgba(20, 133, 200, 0.15)",
-        isDark ? "rgba(20, 133, 200, 0.00)" : "rgba(20, 133, 200, 0.01)",
+        isDark ? "rgba(0, 174, 239, 0.20)" : "rgba(0, 174, 239, 0.15)",
+        isDark ? "rgba(0, 174, 239, 0.00)" : "rgba(0, 174, 239, 0.01)",
       );
     }
   },
@@ -164,14 +164,14 @@ export default function MetricsChart({ history }: Props) {
       {
         label: "RPM",
         data: history.map((h) => h.rpm),
-        borderColor: "#1485C8",
-        backgroundColor: "rgba(20, 133, 200, 0.10)",
+        borderColor: "#00AEEF",
+        backgroundColor: "rgba(0, 174, 239, 0.10)",
         fill: true,
         tension: 0.35,
         pointRadius: 0,
         pointHoverRadius: 7,
         pointHoverBackgroundColor: "#FFFFFF",
-        pointHoverBorderColor: "#1485C8",
+        pointHoverBorderColor: "#00AEEF",
         pointHoverBorderWidth: 3,
         borderWidth: 2.5,
         yAxisID: "y1",
@@ -181,11 +181,11 @@ export default function MetricsChart({ history }: Props) {
 
   const gridColor = isDark
     ? "rgba(148, 163, 184, 0.06)"
-    : "rgba(0, 80, 138, 0.05)";
+    : "rgba(0, 51, 78, 0.05)";
   const textColor = isDark ? "#94A3B8" : "#718096";
   const axisLineColor = isDark
     ? "rgba(148, 163, 184, 0.12)"
-    : "rgba(0, 80, 138, 0.08)";
+    : "rgba(0, 51, 78, 0.08)";
 
   const options = {
     responsive: true,
@@ -291,7 +291,7 @@ export default function MetricsChart({ history }: Props) {
         title: {
           display: true,
           text: "RPM",
-          color: "#1485C8",
+          color: "#00AEEF",
           font: { size: 11, family: "Montserrat", weight: 600 as const },
           padding: { bottom: 8 },
         },

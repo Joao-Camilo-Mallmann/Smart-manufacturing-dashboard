@@ -42,7 +42,7 @@ function MetricBar({ label, value, color }: MetricBarProps) {
 
 function getOEEColor(value: number): string {
   if (value >= 85) return "#22C55E";
-  if (value >= 70) return "#1485C8";
+  if (value >= 70) return "#00AEEF";
   if (value >= 50) return "#F59E0B";
   return "#EF4444";
 }
@@ -90,7 +90,7 @@ export default function EfficiencyPanel({ oee }: Props) {
         <MetricBar
           label="Performance"
           value={oee.performance}
-          color="#1485C8"
+          color="#00AEEF"
         />
         <MetricBar label="Qualidade" value={oee.quality} color="#8B5CF6" />
       </div>
