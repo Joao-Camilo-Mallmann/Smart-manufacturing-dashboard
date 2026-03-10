@@ -4,8 +4,8 @@
 // Isolado da infraestrutura — testável independentemente.
 // ============================================================
 
-import { getDatabase } from "../database/connection";
 import { AlertLevel, MachineState, THRESHOLDS } from "../config/types";
+import { getDatabase } from "../database/connection";
 
 /** Mapa de cooldown: chave do evento → timestamp do último disparo */
 const alertCooldowns: Map<string, number> = new Map();
@@ -61,55 +61,62 @@ export function evaluateThresholds(
   // --- Regras de Temperatura ---
   if (temperature > THRESHOLDS.temperature.warning) {
     insertAlert(
-      "CRITICAL",
+      AlertLevel.CRITICAL,
       `Temperatura crítica: ${temperature.toFixed(1)}°C`,
       "sensor_temperatura",
     );
   } else if (temperature > THRESHOLDS.temperature.normal) {
     insertAlert(
-      "WARNING",
+      AlertLevel.WARNING,
       `Temperatura elevada: ${temperature.toFixed(1)}°C`,
       "sensor_temperatura",
     );
   } else if (temperature < THRESHOLDS.temperature.coldAnomaly) {
     insertAlert(
-      "INFO",
+      AlertLevel.INFO,
       `Anomalia de temperatura fria: ${temperature.toFixed(1)}°C`,
       "sensor_temperatura",
     );
   }
 
   // --- Regras de RPM (somente quando RUNNING) ---
-  if (state === "RUNNING") {
+  if (state === MachineState.RUNNING) {
     if (rpm > THRESHOLDS.rpm.max) {
       insertAlert(
-        "CRITICAL",
+        AlertLevel.CRITICAL,
         `RPM acima do limite: ${rpm.toFixed(0)}`,
         "sensor_rpm",
       );
     } else if (rpm < THRESHOLDS.rpm.min && rpm > 0) {
       insertAlert(
-        "WARNING",
+        AlertLevel.WARNING,
         `RPM abaixo do normal: ${rpm.toFixed(0)}`,
         "sensor_rpm",
       );
     } else if (rpm === 0) {
-      insertAlert("CRITICAL", "RPM zerado em operação", "sensor_rpm");
+      insertAlert(AlertLevel.CRITICAL, "RPM zerado em operação", "sensor_rpm");
     }
   }
 
   // --- Regra de transição para ERROR ---
-  if (state === "ERROR" && previousState !== "ERROR") {
+  if (state === MachineState.ERROR && previousState !== MachineState.ERROR) {
     insertAlert(
-      "CRITICAL",
+      AlertLevel.CRITICAL,
       "Máquina entrou em estado de ERRO",
       "estado_maquina",
     );
   }
 
   // --- Regra de entrada em MAINTENANCE ---
-  if (state === "MAINTENANCE" && previousState !== "MAINTENANCE") {
-    insertAlert("INFO", "Manutenção iniciada na máquina", "estado_maquina");
+  if (
+    state === MachineState.MAINTENANCE &&
+    previousState !== MachineState.MAINTENANCE
+  ) {
+    insertAlert(
+      AlertLevel.INFO,
+      "Manutenção iniciada na máquina",
+      "estado_maquina",
+    );
   }
 }
 

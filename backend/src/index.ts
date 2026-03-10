@@ -6,21 +6,31 @@
 // ============================================================
 
 import cors from "cors";
+import dotenv from "dotenv";
 import express from "express";
-import { initDatabase } from "./database/connection";
 import alertsRouter from "./controllers/alerts";
 import healthRouter from "./controllers/health";
 import metricsRouter from "./controllers/metrics";
+import { initDatabase } from "./database/connection";
 import { startSimulator } from "./services/simulator";
 
-const PORT = process.env.PORT || 3001;
+// Carrega as variáveis de ambiente do .env
+dotenv.config();
+
+const PORT = process.env.PORT;
+const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // 1. Inicializar banco de dados
 initDatabase();
 
 // 2. Configurar Express
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: FRONTEND_URL,
+    credentials: true,
+  }),
+);
 app.use(express.json());
 
 // 3. Registrar rotas
