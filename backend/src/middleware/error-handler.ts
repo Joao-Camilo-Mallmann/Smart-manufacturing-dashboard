@@ -16,5 +16,5 @@ export function errorHandler(
   _next: NextFunction,
 ): void {
   console.error("❌ Erro não tratado:", err.message);
-  res.status(500).json({ error: "Erro interno do servidor" });
+  res.status(500).json({ error: err.message ?? "Erro interno do servidor" });
 }
