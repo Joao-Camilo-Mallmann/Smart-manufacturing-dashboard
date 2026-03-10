@@ -10,7 +10,7 @@ import MetricCard from "./components/dashboard/MetricCard";
 import MetricsChart from "./components/dashboard/MetricsChart";
 import HeaderBar from "./components/layout/HeaderBar";
 import { useMachineData } from "./hooks/useMachineData";
-import { formatUptime } from "@/utils/formatters";
+import { formatUptime } from "./utils/formatters";
 
 function App() {
   const { status, history, alerts, isConnected, isLoading } = useMachineData();

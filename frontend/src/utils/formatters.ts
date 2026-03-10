@@ -51,3 +51,10 @@ export function timeAgo(ts: string): string {
 export function formatMetric(value: number, decimals = 1): string {
   return value.toFixed(decimals);
 }
+
+export function formaftUptime(hours: number): string {
+  if (!hours) return "0h 0m";
+  const h = Math.floor(hours);
+  const m = Math.floor((hours % 1) * 60);
+  return `${h}h ${m}m`;
+}
