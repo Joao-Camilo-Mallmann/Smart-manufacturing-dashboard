@@ -17,7 +17,6 @@ import express from "express";
 dotenv.config();
 
 const PORT = Number(process.env.PORT) || 3001;
-const FRONTEND_URL = process.env.FRONTEND_URL;
 
 // 1. Inicializar banco de dados
 initDatabase();
@@ -26,8 +25,8 @@ initDatabase();
 const app = express();
 app.use(
   cors({
-    origin: FRONTEND_URL,
-    credentials: true,
+    origin: "*",
+    credentials: false,
   }),
 );
 app.use(express.json());

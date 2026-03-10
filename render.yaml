@@ -10,7 +10,6 @@ services:
     autoDeploy: true
     envVars:
       - key: FRONTEND_URL
-        sync: false
         value: https://smart-dashboard-frontend.onrender.com
       - key: SIMULATOR_INTERVAL_MS
         value: "3000"
@@ -28,7 +27,6 @@ services:
     autoDeploy: true
     envVars:
       - key: VITE_API_URL
-        sync: false
         value: https://smart-dashboard-backend.onrender.com/api
       - key: VITE_POLLING_INTERVAL
         value: "3000"
