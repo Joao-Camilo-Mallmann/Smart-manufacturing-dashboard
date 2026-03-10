@@ -19,7 +19,7 @@ services:
       - key: SIMULATOR_AMBIENT_TEMP
         value: "25"
 
-  - type: static
+  - type: static_site
     name: smart-dashboard-frontend
     rootDir: frontend
     buildCommand: npm install && npm run build
