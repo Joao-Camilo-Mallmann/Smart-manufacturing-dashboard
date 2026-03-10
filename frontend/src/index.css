@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Design System — Dashboard Industrial STW
+   Tailwind CSS v4: configuração via @theme
+   ============================================================ */
+
+@theme {
+  /* Cores principais STW */
+  --color-stw-primary: #1485c8;
+  --color-stw-dark: #081653;
+  --color-stw-secondary: #0c24a8;
+  --color-stw-corporate: #005a87;
+  --color-stw-light: #0085c8;
+
+  /* Cores de estado da máquina */
+  --color-state-running: #22c55e;
+  --color-state-stopped: #6b7280;
+  --color-state-maintenance: #eab308;
+  --color-state-error: #ef4444;
+
+  /* Cores de alertas */
+  --color-alert-info: #3b82f6;
+  --color-alert-warning: #f59e0b;
+  --color-alert-critical: #dc2626;
+
+  /* Animações customizadas */
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-slide-up: slide-up 0.3s ease-out forwards;
+  --animate-pulse-slow: pulse 3s ease-in-out infinite;
+  --animate-ping-critical: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================================
+   CSS Variables para tema Light / Dark
+   ============================================================ */
+
+:root {
+  --bg-primary: #f6f6f6;
+  --bg-secondary: #ffffff;
+  --bg-card: #ffffff;
+  --bg-hover: #f1f1f1;
+  --text-primary: #222222;
+  --text-secondary: #6b7280;
+  --text-muted: #9ca3af;
+  --border-color: #d9d9d9;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --gradient-header: linear-gradient(135deg, #005a87, #081653);
+}
+
+.dark {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-card: #1e293b;
+  --bg-hover: #334155;
+  --text-primary: #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --border-color: #334155;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --gradient-header: linear-gradient(135deg, #033047, #081653);
+}
+
+/* ============================================================
+   Estilos base
+   ============================================================ */
+
+body {
+  margin: 0;
+  font-family:
+    "Inter",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+/* Acessibilidade: respeitar prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
