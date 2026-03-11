@@ -9,7 +9,10 @@
   <img src="https://img.shields.io/badge/Charts-Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="charts" />
 </p>
 
-> 🚀 Solução full stack para monitoramento em tempo real de máquina industrial, com simulação contínua de dados, histórico persistente em SQLite, alertas inteligentes com priorização por severidade, e métricas de eficiência (OEE).
+<div align="center">
+  <img src="docs/img/SiteMode.jpeg" alt="Dashboard Preview" style="width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+</div>
+
 
 ## 🌐 Deploy em Produção
 
