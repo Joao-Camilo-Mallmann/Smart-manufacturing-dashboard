@@ -24,3 +24,5 @@
 - Dark mode via classe `.dark` no `<html>`, tokens em `.dark {}` no CSS
 - Sempre ler os dois guias de camada (`docs/rules/agents_front.md` e `docs/rules/agents_back.md`) antes de implementar mudanças
 - Sempre manter `agents.md`, `docs/rules/agents_front.md` e `docs/rules/agents_back.md` atualizados com novas regras, padrões e decisões técnicas do projeto
+- Escrever regras claras, específicas e acionáveis para orientar o desenvolvimento e garantir consistência em toda a base de código
+- Documentar alterações nos arquivos caso necessário para manter a equipe alinhada
