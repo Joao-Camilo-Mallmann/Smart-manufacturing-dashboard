@@ -22,4 +22,5 @@
 - Todas as cores vivem em `frontend/src/assets/index.css` (bloco `@theme`)
 - Nunca hardcodar hex em componentes (exceto valores dinâmicos de Chart.js)
 - Dark mode via classe `.dark` no `<html>`, tokens em `.dark {}` no CSS
-
+- Sempre ler os dois guias de camada (`docs/rules/agents_front.md` e `docs/rules/agents_back.md`) antes de implementar mudanças
+- Sempre manter `agents.md`, `docs/rules/agents_front.md` e `docs/rules/agents_back.md` atualizados com novas regras, padrões e decisões técnicas do projeto

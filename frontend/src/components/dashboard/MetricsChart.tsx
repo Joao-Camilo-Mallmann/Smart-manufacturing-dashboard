@@ -4,8 +4,9 @@
 // Eixo X com timestamps reais (HH:mm:ss) — JS nativo
 // ============================================================
 
-import { formatTimestamp } from "@/utils/formatters";
 import type { MetricHistory } from "@/types/index";
+import { formatTimestamp } from "@/utils/formatters";
+import type { ChartArea, TooltipItem } from "chart.js";
 import {
   CategoryScale,
   Chart as ChartJS,
@@ -17,8 +18,6 @@ import {
   Title,
   Tooltip,
 } from "chart.js";
-import type { TooltipItem } from "chart.js";
-import type { ChartArea } from "chart.js";
 import { Activity, BarChart3 } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
 import { Line } from "react-chartjs-2";
@@ -141,8 +140,6 @@ export default function MetricsChart({ history }: Props) {
     [history],
   );
 
-
-
   const data = {
     labels,
     datasets: [
@@ -214,7 +211,9 @@ export default function MetricsChart({ history }: Props) {
           : "rgba(255, 255, 255, 0.97)",
         titleColor: isDark ? "#E2E8F0" : "#1A202C",
         bodyColor: isDark ? "#CBD5E1" : "#4A5568",
-        borderColor: isDark ? "rgba(30, 58, 95, 0.6)" : "rgba(188, 212, 230, 0.8)",
+        borderColor: isDark
+          ? "rgba(30, 58, 95, 0.6)"
+          : "rgba(188, 212, 230, 0.8)",
         borderWidth: 1,
         cornerRadius: 14,
         padding: { top: 12, bottom: 12, left: 16, right: 16 },
@@ -346,10 +345,13 @@ export default function MetricsChart({ history }: Props) {
       </div>
 
       {/* Gráfico */}
-      <div className="h-80 sm:h-96">
+      <div
+        className="h-80 sm:h-96"
+        role="img"
+        aria-label={`Gráfico de histórico com ${history.length} pontos de temperatura e RPM${timeRange ? `, período ${timeRange}` : ""}`}
+      >
         <Line ref={chartRef} data={data} options={options} />
       </div>
     </div>
   );
 }
-

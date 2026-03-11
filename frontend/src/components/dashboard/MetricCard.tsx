@@ -98,7 +98,14 @@ export default function MetricCard({
 
       {/* Barra de progresso */}
       {progressPercent !== undefined && (
-        <div className="mt-4 h-2 rounded-full overflow-hidden bg-surface-hover">
+        <div
+          role="progressbar"
+          aria-valuenow={Math.round(numValue)}
+          aria-valuemin={0}
+          aria-valuemax={maxValue}
+          aria-label={`${title}: ${Math.round(numValue)} de ${maxValue} ${unit}`}
+          className="mt-4 h-2 rounded-full overflow-hidden bg-surface-hover"
+        >
           <div
             className={`h-full rounded-full transition-all duration-700 ease-out ${barClass}`}
             style={{ width: `${progressPercent}%` }}

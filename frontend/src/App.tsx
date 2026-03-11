@@ -69,11 +69,20 @@ function App() {
 
   return (
     <div className="min-h-screen bg-surface-primary">
+      {/* Skip link — acessibilidade por teclado */}
+      <a href="#main-content" className="skip-link">
+        Pular para o conteúdo principal
+      </a>
+
       {/* Header */}
       <HeaderBar isConnected={isConnected} />
 
       {/* Conteúdo principal */}
-      <main className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8">
+      <main
+        id="main-content"
+        className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8"
+        aria-label="Painel de monitoramento industrial"
+      >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-1 h-6 rounded-full bg-stw-primary" />

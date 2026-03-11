@@ -56,6 +56,9 @@ export default function StatusBadge({ state }: Props) {
   return (
     <div
       id="status-badge"
+      role="status"
+      aria-live="polite"
+      aria-label={`Estado da máquina: ${config.label}`}
       className={`inline-flex items-center gap-2 px-4 py-2 rounded-full font-semibold text-sm ${config.bgClass} ${config.textClass} ${config.animate} transition-all duration-300`}
     >
       {config.icon}

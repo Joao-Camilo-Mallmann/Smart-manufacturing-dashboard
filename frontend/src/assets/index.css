@@ -9,12 +9,12 @@
 
 @theme {
   /* ── Cores STW (extraídas do site stw.com.br) ── */
-  --color-stw-primary: #00AEEF;
-  --color-stw-dark: #00334E;
-  --color-stw-secondary: #005A87;
-  --color-stw-corporate: #004C74;
-  --color-stw-light: #0085C8;
-  --color-stw-navy: #001A2E;
+  --color-stw-primary: #00aeef;
+  --color-stw-dark: #00334e;
+  --color-stw-secondary: #005a87;
+  --color-stw-corporate: #004c74;
+  --color-stw-light: #0085c8;
+  --color-stw-navy: #001a2e;
 
   /* ── Cores de estado da máquina ── */
   --color-state-running: #22c55e;
@@ -29,9 +29,9 @@
 
   /* ── Superfícies (light mode padrão — estilo STW) ── */
   --color-surface: #ffffff;
-  --color-surface-primary: #F0F4F8;
-  --color-surface-hover: #E2E8F0;
-  --color-surface-secondary: #F7FAFC;
+  --color-surface-primary: #f0f4f8;
+  --color-surface-hover: #e2e8f0;
+  --color-surface-secondary: #f7fafc;
 
   /* ── Cores de texto ── */
   --color-content: #1a202c;
@@ -40,12 +40,12 @@
 
   /* ── Bordas ── */
   --color-border-default: #cbd5e0;
-  --color-border-card: #B8D4E8;
+  --color-border-card: #b8d4e8;
 
   /* ── Sombras ── */
   --shadow-card:
     0 1px 3px rgba(0, 51, 78, 0.05), 0 1px 2px rgba(0, 51, 78, 0.03);
-  --shadow-card-hover: 0 8px 24px rgba(0, 51, 78, 0.10);
+  --shadow-card-hover: 0 8px 24px rgba(0, 51, 78, 0.1);
 
   /* ── Raios de borda (estilo STW = super arredondado) ── */
   --radius-card: 1.5rem;
@@ -62,14 +62,14 @@
 .dark {
   /* Fundo principal e base dos cards STW Premium */
   --color-surface-primary: var(--color-stw-navy); /* Fundo da página */
-  --color-surface: #00263E;                       /* Fundo dos cards (um tom acima do navy) */
-  --color-surface-hover: var(--color-stw-dark);   /* Fundo no hover */
-  --color-surface-secondary: #001020;             /* Fundo mais profundo */
+  --color-surface: #00263e; /* Fundo dos cards (um tom acima do navy) */
+  --color-surface-hover: var(--color-stw-dark); /* Fundo no hover */
+  --color-surface-secondary: #001020; /* Fundo mais profundo */
 
   /* Textos nítidos em azul pálido/gelo */
-  --color-content: #FFFFFF;                       /* Para dar bastante ênfase */
-  --color-content-secondary: #BBD2E8;             /* Azul bem claro para subtítulos */
-  --color-content-muted: #8AAAC9;                 /* Azul para texto secundário e labels */
+  --color-content: #ffffff; /* Para dar bastante ênfase */
+  --color-content-secondary: #bbd2e8; /* Azul bem claro para subtítulos */
+  --color-content-muted: #8aaac9; /* Azul para texto secundário e labels */
 
   /* Bordas em azul corporativo sutil */
   --color-border-default: var(--color-stw-corporate);
@@ -138,10 +138,10 @@ body {
    Header gradient — estilo STW
    ============================================================ */
 .bg-gradient-header {
-  background: linear-gradient(135deg, #00334E 0%, #004C74 50%, #005A87 100%);
+  background: linear-gradient(135deg, #00334e 0%, #004c74 50%, #005a87 100%);
 }
 .dark .bg-gradient-header {
-  background: linear-gradient(135deg, #001020 0%, #001A2E 50%, #00334E 100%);
+  background: linear-gradient(135deg, #001020 0%, #001a2e 50%, #00334e 100%);
 }
 
 /* ============================================================
@@ -197,6 +197,46 @@ body {
 /* ============================================================
    Acessibilidade
    ============================================================ */
+
+/* Foco visível global — anel azul STW em qualquer elemento interativo */
+:focus-visible {
+  outline: 2px solid var(--color-stw-primary);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Classe utilitária para conteúdo só para leitores de tela */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Skip link — Aparece apenas com foco via teclado */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.75rem 1.5rem;
+  background: var(--color-stw-primary);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border-radius: 0 0 0.75rem 0.75rem;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
 
 @media (prefers-reduced-motion: reduce) {
   *,

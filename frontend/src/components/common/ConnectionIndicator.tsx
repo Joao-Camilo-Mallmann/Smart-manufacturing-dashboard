@@ -13,6 +13,11 @@ export default function ConnectionIndicator({ isConnected }: Props) {
   return (
     <div
       id="connection-indicator"
+      role="status"
+      aria-live="assertive"
+      aria-label={
+        isConnected ? "Conectado ao servidor" : "Sem conexão com o servidor"
+      }
       className="flex items-center gap-2"
       title={
         isConnected ? "Conectado ao servidor" : "Sem conexão com o servidor"
