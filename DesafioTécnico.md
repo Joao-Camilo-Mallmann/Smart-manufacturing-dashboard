@@ -135,21 +135,21 @@ interface MetricHistory {
 
 ### 1. Arquitetura e Organização
 
-- [X] **Monorepo**: Configuração e separação de responsabilidades
-- [X] **Componentização**: Reutilização e organização
-- [X] **Tipagem**: TypeScript rigoroso e interfaces bem definidas
+- [x] **Monorepo**: Configuração e separação de responsabilidades
+- [x] **Componentização**: Reutilização e organização
+- [x] **Tipagem**: TypeScript rigoroso e interfaces bem definidas
 
 ### 2. Funcionalidades
 
-- [X] **Tempo Real**: Atualização fluida e tratamento de desconexão
-- [X] **Visualização**: Gráficos, cards e responsividade (Computador e Tablet)
-- [X] **Sistema de Alertas**: Priorização, histórico e notificações
+- [x] **Tempo Real**: Atualização fluida e tratamento de desconexão
+- [x] **Visualização**: Gráficos, cards e responsividade (Computador e Tablet)
+- [x] **Sistema de Alertas**: Priorização, histórico e notificações
 
 ### 3. Qualidade e UX
 
-- [X] **Interface**: Design limpo, hierarquia visual, uso do Tailwind CSS
-- [X] **Experiência**: Usabilidade, feedback visual e navegação
-- [X] **Extras**: Dark mode, animações, documentação
+- [x] **Interface**: Design limpo, hierarquia visual, uso do Tailwind CSS
+- [x] **Experiência**: Usabilidade, feedback visual e navegação
+- [x] **Extras**: Dark mode, animações, documentação
 
 ---
 
@@ -157,17 +157,17 @@ interface MetricHistory {
 
 ### Funcionalidades Avançadas
 
-- [X] Modo Dark/Light funcional
-- [-] Histórico persistente (LocalStorage ou IndexedDB)
-- [ ] Documentação com Storybook
+- [x] Modo Dark/Light funcional
+- [x] Histórico persistente (LocalStorage ou IndexedDB)
+- [x] Documentação com Storybook
 - [ ] Testes E2E
 
 ### Técnicas Avançadas
 
-- [X] Otimizações de performance
-- [X] Suporte offline
-- [X] Animações suaves
-- [ ] Acessibilidade completa
+- [x] Otimizações de performance
+- [x] Suporte offline
+- [x] Animações suaves
+- [x] Acessibilidade completa
 
 ---
 
@@ -175,8 +175,8 @@ interface MetricHistory {
 
 ### 1. Repositório GitHub
 
-- [X] **README.md** completo com instruções de instalação e execução
-- [X] **Código organizado** podem ser feitos comentários para explicar trecho do código e porque foi pensado desta forma. (Ponto positivo se fizer)
+- [x] **README.md** completo com instruções de instalação e execução
+- [x] **Código organizado** podem ser feitos comentários para explicar trecho do código e porque foi pensado desta forma. (Ponto positivo se fizer)
 - [-] **Documentação** das decisões técnicas
 
 ### 2. Demonstração
@@ -187,9 +187,9 @@ interface MetricHistory {
 
 ### 3. Dados de Teste
 
-- [X] **SQLite** com dados pré-populados (recomendado)
-- [X] **OU** Mock de dados com estrutura realista
-- [X] **Simulação** de mudanças de estado em tempo real
+- [x] **SQLite** com dados pré-populados (recomendado)
+- [x] **OU** Mock de dados com estrutura realista
+- [x] **Simulação** de mudanças de estado em tempo real
 
 ---
 
@@ -199,18 +199,18 @@ interface MetricHistory {
 
 ## Critérios de Aprovação
 
-- [X] **Todas as funcionalidades obrigatórias** implementadas
-- [X] **Código executável** sem erros
-- [X] **Documentação** clara e completa
-- [X] **Estrutura backend**
-- [X] **Estrutura frontend**
+- [x] **Todas as funcionalidades obrigatórias** implementadas
+- [x] **Código executável** sem erros
+- [x] **Documentação** clara e completa
+- [x] **Estrutura backend**
+- [x] **Estrutura frontend**
 
 ## Red Flags (Desqualificação)
 
-- [-] Ausência de TypeScript
-- [-] Código não executável
-- [-] Falta de documentação básica
-- [-] Problemas graves de performance
+- [ ] Ausência de TypeScript
+- [ ] Código não executável
+- [ ] Falta de documentação básica
+- [ ] Problemas graves de performance
 
 ---
 

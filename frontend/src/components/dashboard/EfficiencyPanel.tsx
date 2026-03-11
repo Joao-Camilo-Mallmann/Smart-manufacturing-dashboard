@@ -3,8 +3,8 @@
 // Card super arredondado com barras de eficiência
 // ============================================================
 
-import { Gauge } from "lucide-react";
 import type { OEEMetrics } from "@/types";
+import { Gauge } from "lucide-react";
 
 interface Props {
   oee: OEEMetrics;
@@ -27,7 +27,14 @@ function MetricBar({ label, value, color }: MetricBarProps) {
           {value.toFixed(1)}%
         </span>
       </div>
-      <div className="h-3 rounded-full overflow-hidden bg-surface-hover">
+      <div
+        role="progressbar"
+        aria-valuenow={Math.round(value)}
+        aria-valuemin={0}
+        aria-valuemax={100}
+        aria-label={`${label}: ${value.toFixed(1)}%`}
+        className="h-3 rounded-full overflow-hidden bg-surface-hover"
+      >
         <div
           className="h-full rounded-full transition-all duration-700 ease-out"
           style={{

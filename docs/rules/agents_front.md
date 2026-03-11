@@ -43,13 +43,13 @@ frontend/src/
 
 ### Smart vs. Dumb (OBRIGATÓRIO)
 
-| Diretório | O QUE pode ter | O QUE NÃO pode ter |
-|-----------|----------------|---------------------|
-| `components/` | JSX, Tailwind, props, eventos | fetch, useEffect com API, useState de dados remotos |
-| `hooks/` | useEffect, useState, chamadas à API, lógica de polling | JSX, renderização |
-| `services/` | Configuração de fetch/axios, base URL | Lógica de negócio |
-| `utils/` | Funções puras de formatação/cálculo | Chamadas de API, side effects |
-| `types/` | Interfaces e type aliases | Implementação |
+| Diretório     | O QUE pode ter                                         | O QUE NÃO pode ter                                  |
+| ------------- | ------------------------------------------------------ | --------------------------------------------------- |
+| `components/` | JSX, Tailwind, props, eventos                          | fetch, useEffect com API, useState de dados remotos |
+| `hooks/`      | useEffect, useState, chamadas à API, lógica de polling | JSX, renderização                                   |
+| `services/`   | Configuração de fetch/axios, base URL                  | Lógica de negócio                                   |
+| `utils/`      | Funções puras de formatação/cálculo                    | Chamadas de API, side effects                       |
+| `types/`      | Interfaces e type aliases                              | Implementação                                       |
 
 ### Princípio Central
 
@@ -65,47 +65,47 @@ Componentes são **"burros"** — recebem dados via props e apenas exibem. Toda 
 
 #### Paleta STW
 
-| Token | Hex | Uso |
-|-------|-----|-----|
-| `--color-stw-primary` | `#00AEEF` | Accent blue — ícones, badges, barras, links |
-| `--color-stw-dark` | `#00334E` | Navy profundo — headings (light mode) |
-| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias |
-| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas dark |
-| `--color-stw-light` | `#0085C8` | Azul claro — hovers, destaques |
-| `--color-stw-navy` | `#001A2E` | Navy profundo — fundo dark mode |
+| Token                   | Hex       | Uso                                         |
+| ----------------------- | --------- | ------------------------------------------- |
+| `--color-stw-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras, links |
+| `--color-stw-dark`      | `#00334E` | Navy profundo — headings (light mode)       |
+| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias           |
+| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas dark   |
+| `--color-stw-light`     | `#0085C8` | Azul claro — hovers, destaques              |
+| `--color-stw-navy`      | `#001A2E` | Navy profundo — fundo dark mode             |
 
 #### Tokens Semânticos (Light Mode)
 
-| Token | Uso |
-|-------|-----|
-| `--color-surface-primary` | Fundo da página |
-| `--color-surface` | Fundo dos cards |
-| `--color-surface-hover` | Hover de elementos |
-| `--color-content` | Texto principal |
-| `--color-content-secondary` | Subtítulos |
-| `--color-content-muted` | Texto terciário / labels |
-| `--color-border-card` | Borda dos cards |
+| Token                       | Uso                      |
+| --------------------------- | ------------------------ |
+| `--color-surface-primary`   | Fundo da página          |
+| `--color-surface`           | Fundo dos cards          |
+| `--color-surface-hover`     | Hover de elementos       |
+| `--color-content`           | Texto principal          |
+| `--color-content-secondary` | Subtítulos               |
+| `--color-content-muted`     | Texto terciário / labels |
+| `--color-border-card`       | Borda dos cards          |
 
 #### Dark Mode (`.dark {}` sobrescreve os tokens)
 
-| Token | Valor Dark |
-|-------|-----------|
-| `surface-primary` | `var(--color-stw-navy)` (#001A2E) |
-| `surface` | `#00263E` |
-| `surface-hover` | `var(--color-stw-dark)` (#00334E) |
-| `content` | `#FFFFFF` |
-| `content-secondary` | `#BBD2E8` |
-| `content-muted` | `#8AAAC9` |
-| `border-card` | `var(--color-stw-corporate)` (#004C74) |
+| Token               | Valor Dark                             |
+| ------------------- | -------------------------------------- |
+| `surface-primary`   | `var(--color-stw-navy)` (#001A2E)      |
+| `surface`           | `#00263E`                              |
+| `surface-hover`     | `var(--color-stw-dark)` (#00334E)      |
+| `content`           | `#FFFFFF`                              |
+| `content-secondary` | `#BBD2E8`                              |
+| `content-muted`     | `#8AAAC9`                              |
+| `border-card`       | `var(--color-stw-corporate)` (#004C74) |
 
 #### Cores de Estado
 
-| Estado | Hex | Classe Tailwind |
-|--------|-----|----------------|
-| Running | `#22c55e` | `text-state-running`, `bg-state-running` |
-| Stopped | `#94a3b8` | `text-state-stopped`, `bg-state-stopped` |
+| Estado      | Hex       | Classe Tailwind                                  |
+| ----------- | --------- | ------------------------------------------------ |
+| Running     | `#22c55e` | `text-state-running`, `bg-state-running`         |
+| Stopped     | `#94a3b8` | `text-state-stopped`, `bg-state-stopped`         |
 | Maintenance | `#f59e0b` | `text-state-maintenance`, `bg-state-maintenance` |
-| Error | `#ef4444` | `text-state-error`, `bg-state-error` |
+| Error       | `#ef4444` | `text-state-error`, `bg-state-error`             |
 
 ---
 
@@ -113,48 +113,52 @@ Componentes são **"burros"** — recebem dados via props e apenas exibem. Toda 
 
 Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o estilo:
 
-| Classe | Propósito |
-|--------|-----------|
-| `.card-stw` | Card completo (borda, sombra, raio, hover com translateY) |
-| `.label-stw` | Label uppercase com tracking e tamanho padronizado |
-| `.bg-gradient-header` | Gradiente STW para o header (adapta light/dark) |
+| Classe                | Propósito                                                 |
+| --------------------- | --------------------------------------------------------- |
+| `.card-stw`           | Card completo (borda, sombra, raio, hover com translateY) |
+| `.label-stw`          | Label uppercase com tracking e tamanho padronizado        |
+| `.bg-gradient-header` | Gradiente STW para o header (adapta light/dark)           |
 
 ---
 
 ## Componentes — Responsabilidades
 
-| Componente | Responsabilidade |
-|-----------|-----------------|
-| `HeaderBar` | Logo STW, título, toggle dark/light, indicador de conexão |
-| `StatusBadge` | Estado (RUNNING/STOPPED/MAINTENANCE/ERROR) com cor e animação |
-| `ConnectionIndicator` | Bolinha verde/vermelha + banner de conexão |
-| `MetricCard` | Card com valor, tendência (↑↓→), cor por threshold |
-| `MetricsChart` | Gráfico Chart.js com linhas de temperatura e RPM |
-| `AlertsPanel` | Lista de alertas por severidade, com cores e timestamp |
-| `EfficiencyPanel` | Barras de OEE, disponibilidade, performance, qualidade |
-| `ThemeToggle` | Botão sol/lua com persistência em localStorage |
+| Componente            | Responsabilidade                                              |
+| --------------------- | ------------------------------------------------------------- |
+| `HeaderBar`           | Logo STW, título, toggle dark/light, indicador de conexão     |
+| `StatusBadge`         | Estado (RUNNING/STOPPED/MAINTENANCE/ERROR) com cor e animação |
+| `ConnectionIndicator` | Bolinha verde/vermelha + banner de conexão                    |
+| `MetricCard`          | Card com valor, tendência (↑↓→), cor por threshold            |
+| `MetricsChart`        | Gráfico Chart.js com linhas de temperatura e RPM              |
+| `AlertsPanel`         | Lista de alertas por severidade, com cores e timestamp        |
+| `EfficiencyPanel`     | Barras de OEE, disponibilidade, performance, qualidade        |
+| `ThemeToggle`         | Botão sol/lua com persistência em localStorage                |
 
 ---
 
 ## Convenções de Código
 
 ### Imports
+
 - **SEMPRE** usar alias `@/` (configurado em `tsconfig.app.json` e `vite.config.ts`)
 - Exemplo: `import MetricCard from "@/components/dashboard/MetricCard"`
 
 ### Componentes
+
 - Um componente por arquivo
 - Nome do arquivo = nome do componente (PascalCase)
 - Props tipadas com `interface Props`
 - Export: `export default function ComponentName`
 
 ### Estilização
+
 - Usar classes utilitárias Tailwind no JSX
 - Classes CSS customizadas vão em `index.css` com prefixo STW
 - `dark:` prefix do Tailwind NÃO é usado — usamos `.dark {}` no CSS
 - Inline styles APENAS para valores dinâmicos (cores Chart.js, larguras %)
 
 ### Textos, Valores e Formatadores (`utils/formatters.ts`)
+
 - UI text em **português (pt-BR)**
 - Comentários de código em **português**
 - Nomes de variáveis/funções em **inglês**
@@ -168,6 +172,7 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 - Formatar OEE com 1 decimal + % (ex: 73.4%).
 
 ### Dark Mode
+
 - Toggle via `ThemeToggle` component
 - Persistido em `localStorage("theme")`
 - Classe `dark` aplicada no `<html>`
@@ -175,6 +180,7 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 - Textos principais: usar `text-content` (adapta automaticamente)
 
 ### Estado
+
 - Sem biblioteca de state management
 - Custom hook `useMachineData` gerencia todo o estado de polling
 - Reconexão automática ao voltar online
@@ -191,24 +197,85 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 
 ## Animações
 
-| Nome | Uso | Regra |
-|------|-----|-------|
-| `animate-fade-in` | Entrada de cards | Suave, 0.3s |
-| `animate-pulse-slow` | Indicador de atividade | 3s, infinite |
-| `animate-ping-critical` | Alerta CRITICAL | Chama atenção visual |
-| `animate-slide-up` | Banners | Entrada de baixo |
+| Nome                    | Uso                    | Regra                |
+| ----------------------- | ---------------------- | -------------------- |
+| `animate-fade-in`       | Entrada de cards       | Suave, 0.3s          |
+| `animate-pulse-slow`    | Indicador de atividade | 3s, infinite         |
+| `animate-ping-critical` | Alerta CRITICAL        | Chama atenção visual |
+| `animate-slide-up`      | Banners                | Entrada de baixo     |
 
 **Regras gerais:**
+
 - Durações curtas (150-400ms)
 - Respeitar `prefers-reduced-motion`
 - Não animar áreas de leitura crítica de dados
 
 ---
 
+## Storybook (OBRIGATÓRIO)
+
+### Objetivo
+
+Storybook é a fonte de documentação visual dos componentes de `frontend/src/components/`.
+Sempre que um componente novo for criado (ou alterado de forma relevante), sua story deve ser criada/atualizada no mesmo PR.
+
+### Estrutura e Descoberta de Stories
+
+- As stories vivem em `frontend/src/stories/`
+- Organização por domínio (espelhando `components/`):
+  - `stories/common/`
+  - `stories/dashboard/`
+  - `stories/layout/`
+- Nome de arquivo obrigatório: `ComponentName.stories.tsx`
+- O Storybook carrega stories via `frontend/.storybook/main.ts` com o glob:
+  - `../src/stories/**/*.stories.@(ts|tsx)`
+
+### Regras de Implementação das Stories
+
+- Não duplicar código de componente dentro da story.
+- Importar o componente real usando alias `@/`.
+- Escrever stories em TypeScript com `Meta` e `StoryObj`.
+- Manter stories focadas em apresentação (sem chamadas de API reais).
+- Simular estados via `args` (ex.: loading, erro, vazio, sucesso).
+- Textos e rótulos da UI em pt-BR, seguindo o padrão do projeto.
+- Preservar tokens e classes do design system (`index.css`), sem hardcode de hex.
+
+### Template Recomendado
+
+```tsx
+import type { Meta, StoryObj } from "@storybook/react-vite";
+import ComponentName from "@/components/path/ComponentName";
+
+const meta = {
+  title: "Categoria/ComponentName",
+  component: ComponentName,
+} satisfies Meta<typeof ComponentName>;
+
+export default meta;
+type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {
+  args: {
+    // props de exemplo
+  },
+};
+```
+
+### Checklist de Revisão
+
+- Existe story para o componente alterado?
+- A story está em `src/stories/` no domínio correto?
+- O componente foi importado via alias `@/`?
+- Foram cobertos os estados principais de UI?
+- A aparência respeita os tokens STW em light/dark?
+
+---
+
 ## Comandos
 
 ```bash
-cd frontend && npm run dev    # dev server (Vite HMR)
-cd frontend && npm test       # testes com Jest
-cd frontend && npm run build  # build de produção
+cd frontend && npm run dev              # Vite + Storybook em paralelo
+cd frontend && npm run storybook        # Storybook isolado (porta 6006)
+cd frontend && npm run build-storybook  # build estático do Storybook
+cd frontend && npm run build            # build de produção
 ```

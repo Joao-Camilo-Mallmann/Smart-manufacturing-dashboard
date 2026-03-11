@@ -123,3 +123,25 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 - Pode ocorrer indisponibilidade temporária ou reinício da instância a qualquer momento.
 - Como o backend usa SQLite local, reinícios/redeploy podem causar perda de dados persistidos no ambiente free.
 
+---
+
+## 10. Acessibilidade (WCAG 2.1 AA)
+
+Implementamos acessibilidade de ponta a ponta no dashboard, seguindo WCAG 2.1 AA.
+
+Principais decisões aplicadas:
+
+- **Navegação por teclado**: skip link para ir direto ao conteúdo e `:focus-visible` global para foco sempre visível.
+- **Semântica de página**: uso de `header`, `main`, `footer`, `id="main-content"` e `lang="pt-BR"`.
+- **Atualizações dinâmicas anunciadas**:
+  - `StatusBadge`: `role="status"` + `aria-live="polite"`
+  - `ConnectionIndicator`: `role="status"` + `aria-live="assertive"`
+  - `AlertsPanel`: `aria-live="polite"` + `aria-relevant="additions"`
+- **Elementos visuais com leitura semântica**:
+  - Barras (`MetricCard` e `EfficiencyPanel`) com `role="progressbar"` e atributos `aria-value*`
+  - Gráfico (`MetricsChart`) com `role="img"` e `aria-label` descritivo
+  - Lista de alertas em `<ul>/<li>` e ícones decorativos com `aria-hidden="true"`
+- **Conforto visual**: suporte a `prefers-reduced-motion` para reduzir animações.
+- **Suporte para leitor de tela**: utilitário `.sr-only` disponível globalmente.
+
+Resultado: o dashboard ficou navegável por teclado, legível por leitor de tela e com melhor acessibilidade para usuários com sensibilidade a movimento.

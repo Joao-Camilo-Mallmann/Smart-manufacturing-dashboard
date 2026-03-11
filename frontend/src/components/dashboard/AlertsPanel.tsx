@@ -83,6 +83,7 @@ export default function AlertsPanel({ alerts }: Props) {
     <div
       id="alerts-panel"
       className="card-stw animate-fade-in p-5 sm:p-6 flex flex-col"
+      aria-label="Painel de alertas recentes"
     >
       {/* Header */}
       <div className="flex items-center justify-between mb-5">
@@ -100,7 +101,11 @@ export default function AlertsPanel({ alerts }: Props) {
       </div>
 
       {/* Lista de alertas */}
-      <div className="flex-1 overflow-y-auto space-y-2.5 max-h-80 pr-1">
+      <div
+        className="flex-1 overflow-y-auto max-h-80 pr-1"
+        aria-live="polite"
+        aria-relevant="additions"
+      >
         {alerts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10">
             <CheckCircle size={36} className="text-state-running mb-3" />
@@ -109,39 +114,44 @@ export default function AlertsPanel({ alerts }: Props) {
             </p>
           </div>
         ) : (
-          alerts.map((alert) => {
-            const config = alertConfig[alert.level];
-            return (
-              <div
-                key={alert.id}
-                className={`animate-slide-up flex items-start gap-3 p-3.5 rounded-2xl transition-all duration-200 border-l-3 ${config.bgClass} ${config.borderClass} ${
-                  alert.acknowledged ? "opacity-50" : ""
-                }`}
-              >
-                <div className={`mt-0.5 shrink-0 ${config.textClass}`}>
-                  {config.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2 mb-0.5">
-                    <span
-                      className={`text-[0.65rem] font-bold uppercase tracking-wider ${config.textClass}`}
-                    >
-                      {alert.level}
-                    </span>
-                    <span className="text-[0.65rem] text-content-muted">
-                      {formatTimestamp(alert.timestamp)}
-                    </span>
+          <ul className="space-y-2.5 list-none m-0 p-0">
+            {alerts.map((alert) => {
+              const config = alertConfig[alert.level];
+              return (
+                <li
+                  key={alert.id}
+                  className={`animate-slide-up flex items-start gap-3 p-3.5 rounded-2xl transition-all duration-200 border-l-3 ${config.bgClass} ${config.borderClass} ${
+                    alert.acknowledged ? "opacity-50" : ""
+                  }`}
+                >
+                  <div
+                    className={`mt-0.5 shrink-0 ${config.textClass}`}
+                    aria-hidden="true"
+                  >
+                    {config.icon}
                   </div>
-                  <p className="text-sm leading-snug text-content font-medium">
-                    {alert.message}
-                  </p>
-                  <p className="text-xs mt-1 text-content-muted">
-                    {alert.component} • {timeAgo(alert.timestamp)}
-                  </p>
-                </div>
-              </div>
-            );
-          })
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span
+                        className={`text-[0.65rem] font-bold uppercase tracking-wider ${config.textClass}`}
+                      >
+                        {alert.level}
+                      </span>
+                      <span className="text-[0.65rem] text-content-muted">
+                        {formatTimestamp(alert.timestamp)}
+                      </span>
+                    </div>
+                    <p className="text-sm leading-snug text-content font-medium">
+                      {alert.message}
+                    </p>
+                    <p className="text-xs mt-1 text-content-muted">
+                      {alert.component} • {timeAgo(alert.timestamp)}
+                    </p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         )}
       </div>
     </div>
