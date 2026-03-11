@@ -33,7 +33,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 4. Por que Chart.js e não D3 ou Recharts?
+## 2. Por que Chart.js e não D3 ou Recharts?
 
 **Escolha: Chart.js + react-chartjs-2**
 
@@ -51,7 +51,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 5. Por que simulação Random Walk?
+## 3. Por que simulação Random Walk?
 
 **Escolha: Variação incremental com limites físicos**
 
@@ -66,14 +66,13 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 6. Escalabilidade — O que mudaria em produção?
+## 4. Escalabilidade — O que mudaria em produção?
 
 | Aspecto        | MVP (atual)        | Produção                   |
 | -------------- | ------------------ | -------------------------- |
 | Comunicação    | Short Polling (3s) | WebSocket (Socket.io)      |
 | Banco de dados | SQLite (local)     | PostgreSQL / TimescaleDB   |
 | Autenticação   | Nenhuma            | JWT + RBAC                 |
-| Mensageria     | Direto no processo | Redis pub/sub ou RabbitMQ  |
 | Deploy         | `npm run dev`      | Docker + Kubernetes        |
 | Monitoramento  | Logs console       | Prometheus + Grafana       |
 | Cache          | Nenhum             | Redis para hot data        |
@@ -81,7 +80,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 7. Tailwind CSS — Por que Tailwind Puro?
+## 5. Tailwind CSS — Por que Tailwind Puro?
 
 **Escolha: Utility classes sem biblioteca de componentes**
 
@@ -93,7 +92,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 8. Arquitetura de Componentes React
+## 6. Arquitetura de Componentes React
 
 **Padrão adotado: Componentes presentacionais + hook de estado**
 
@@ -109,7 +108,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 9. Deploy no Render (gratuito e centralizado)
+## 7. Deploy no Render (gratuito e centralizado)
 
 **Escolha: Render no plano free para frontend + backend**
 
@@ -125,7 +124,7 @@ O hook encapsula toda a lógica de comunicação, então a mudança não afeta n
 
 ---
 
-## 10. Acessibilidade (WCAG 2.1 AA)
+## 8. Acessibilidade (WCAG 2.1 AA)
 
 Implementamos acessibilidade de ponta a ponta no dashboard, seguindo WCAG 2.1 AA.
 
@@ -143,5 +142,6 @@ Principais decisões aplicadas:
   - Lista de alertas em `<ul>/<li>` e ícones decorativos com `aria-hidden="true"`
 - **Conforto visual**: suporte a `prefers-reduced-motion` para reduzir animações.
 - **Suporte para leitor de tela**: utilitário `.sr-only` disponível globalmente.
+- Para este MVP, não foi implementado I18N, mas a estrutura de arquivos e componentes suporta adição futura com facilidade.
 
 Resultado: o dashboard ficou navegável por teclado, legível por leitor de tela e com melhor acessibilidade para usuários com sensibilidade a movimento.
