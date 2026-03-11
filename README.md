@@ -17,6 +17,8 @@
 - 🔌 **Backend**: https://smart-dashboard-backend.onrender.com/
 - 💚 **Health check**: https://smart-dashboard-backend.onrender.com/api/health
 
+> ℹ️ O backend está hospedado no plano gratuito do Render. Após períodos de inatividade, o serviço pode entrar em sleep e levar alguns segundos para voltar (cold start).
+
 ---
 
 ## 📚 Sumário

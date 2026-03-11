@@ -37,6 +37,7 @@ const DEFAULT_TRENDS: MetricTrends = {
 
 function App() {
   const { status, history, alerts, isConnected, isLoading } = useMachineData();
+  const isProdEnv = import.meta.env.PROD;
 
   if (isLoading) {
     return (
@@ -49,6 +50,12 @@ function App() {
           <p className="text-sm text-content-muted mt-1">
             Conectando ao servidor de monitoramento
           </p>
+          {isProdEnv && (
+            <p className="text-xs text-content-muted mt-3 max-w-md mx-auto">
+              Ambiente de produção em plano gratuito no Render: o backend pode
+              levar alguns segundos para iniciar (cold start).
+            </p>
+          )}
         </div>
       </div>
     );
