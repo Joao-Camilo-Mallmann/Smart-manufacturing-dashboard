@@ -13,6 +13,7 @@ import type { MachineMetrics, MetricTrends, OEEMetrics } from "@/types";
 import { MachineState, Trend } from "@/types";
 import { formatUptime } from "@/utils/formatters";
 import { Clock, Gauge, Thermometer, Zap } from "lucide-react";
+import StatusBadge from "./components/common/StatusBadge";
 
 const DEFAULT_METRICS: MachineMetrics = {
   temperature: 0,
@@ -69,10 +70,20 @@ function App() {
   return (
     <div className="min-h-screen bg-surface-primary">
       {/* Header */}
-      <HeaderBar machineState={machineState} isConnected={isConnected} />
+      <HeaderBar isConnected={isConnected} />
 
       {/* Conteúdo principal */}
       <main className="max-w-screen-2xl mx-auto px-6 lg:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-1 h-6 rounded-full bg-stw-primary" />
+            <span className="text-sm font-semibold text-content uppercase tracking-widest">
+              Status da Máquina
+            </span>
+          </div>
+          <StatusBadge state={machineState} />
+        </div>
+
         {/* Metric Cards — Grid responsivo */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           <MetricCard

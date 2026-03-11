@@ -4,17 +4,14 @@
 // ============================================================
 
 import logoSvg from "@/assets/logo.svg";
-import type { MachineState } from "@/types";
 import ConnectionIndicator from "@/components/common/ConnectionIndicator";
-import StatusBadge from "@/components/common/StatusBadge";
 import ThemeToggle from "@/components/common/ThemeToggle";
 
 interface Props {
-  machineState: MachineState;
   isConnected: boolean;
 }
 
-export default function HeaderBar({ machineState, isConnected }: Props) {
+export default function HeaderBar({ isConnected }: Props) {
   return (
     <header
       id="header-bar"
@@ -39,9 +36,8 @@ export default function HeaderBar({ machineState, isConnected }: Props) {
           </div>
         </div>
 
-        {/* Status + Controles */}
+        {/* Controles */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <StatusBadge state={machineState} />
           <ConnectionIndicator isConnected={isConnected} />
           <ThemeToggle />
         </div>

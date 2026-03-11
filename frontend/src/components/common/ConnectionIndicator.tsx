@@ -30,7 +30,7 @@ export default function ConnectionIndicator({ isConnected }: Props) {
         />
         {/* Solid dot */}
         <span
-          className={`relative inline-flex h-3 w-3 rounded-full ${
+          className={`relative inline-flex h-3 w-3 mx-1 rounded-full ${
             isConnected ? "bg-state-running" : "bg-state-error"
           }`}
         />
