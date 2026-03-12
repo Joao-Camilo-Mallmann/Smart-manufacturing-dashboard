@@ -35,8 +35,8 @@ frontend/src/
 ├── types/                     # Interfaces TypeScript (espelho do backend)
 ├── __tests__/                 # ★ Testes organizados por tipo
 │   └── unit/
-│       ├── formatters.test.ts # Testes unitários de formatação (Vitest)
-│       └── calculations.test.ts # Testes unitários de cálculos (Vitest)
+│       ├── formatters.test.ts # Testes unitários de formatação (Jest)
+│       └── calculations.test.ts # Testes unitários de cálculos (Jest)
 └── utils/
     ├── calculations.ts        # Funções de cálculo
     └── formatters.ts          # Formatação de valores
@@ -224,14 +224,14 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 ```
 frontend/src/__tests__/
 └── unit/
-    ├── formatters.test.ts     # Testes unitários de formatação (Vitest)
-    └── calculations.test.ts   # Testes unitários de cálculos (Vitest)
+    ├── formatters.test.ts     # Testes unitários de formatação (Jest)
+    └── calculations.test.ts   # Testes unitários de cálculos (Jest)
 ```
 
 ### Configuração
 
-- **Framework**: Vitest (projeto `unit` em `vite.config.ts`)
-- **Ambiente**: Node.js (sem browser — funções puras)
+- **Framework**: Jest + ts-jest (config em `jest.config.js`)
+- **Ambiente**: jsdom (suporte a React Testing Library)
 - **Match pattern**: `src/__tests__/**/*.test.ts`
 - **Comando**: `cd frontend && npm test`
 
@@ -239,7 +239,7 @@ frontend/src/__tests__/
 
 1. **Unitários** (utils/, cálculos puros) → `__tests__/unit/`
 2. Sempre usar `@/` alias nos imports
-3. Importar `describe`, `it`, `expect` de `vitest`
+3. Jest injeta `describe`, `it`, `expect` como globais — **não importar** manualmente
 4. Testes de funções puras não precisam de setup/teardown
 5. Cobrir edge cases: `NaN`, `0`, strings inválidas, valores limites
 

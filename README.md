@@ -341,7 +341,7 @@ Request → routes/ → Controller → Service → { Core (regras) + Repository 
 
 ## ✅ Testes
 
-O projeto usa **Jest + Supertest** no backend e **Vitest** no frontend. Os testes ficam organizados em pastas `__tests__/` com subdivisão por tipo.
+O projeto usa **Jest + Supertest** no backend e **Jest + React Testing Library** no frontend. Os testes ficam organizados em pastas `__tests__/` com subdivisão por tipo.
 
 ### Estrutura de Testes
 
@@ -368,7 +368,7 @@ npm test
 # Backend apenas (Jest + Supertest)
 cd backend && npm test
 
-# Frontend apenas (Vitest)
+# Frontend apenas (Jest)
 cd frontend && npm test
 ```
 
@@ -377,7 +377,7 @@ cd frontend && npm test
 | Camada    | Framework        | Tipo     | Testes | Descrição                                            |
 | --------- | ---------------- | -------- | ------ | ---------------------------------------------------- |
 | Backend   | Jest + Supertest | E2E      | 8      | Endpoints REST: health, metrics, alerts, acknowledge |
-| Frontend  | Vitest           | Unitário | 25     | Funções puras de formatação e cálculo                |
+| Frontend  | Jest + RTL       | Unitário | 25     | Funções puras de formatação e cálculo                |
 | **Total** |                  |          | **33** |                                                      |
 
 ---
