@@ -2,11 +2,14 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Funcional-00A86B?style=for-the-badge" alt="status" />
-  <img src="https://img.shields.io/badge/Frontend-React%2018%20%2B%20TypeScript-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="frontend" />
+  <img src="https://img.shields.io/badge/TypeScript-5.x-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="typescript" />
+  <img src="https://img.shields.io/badge/Frontend-React%2019%20%2B%20Vite-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="frontend" />
   <img src="https://img.shields.io/badge/Backend-Node.js%20%2B%20Express-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="backend" />
   <img src="https://img.shields.io/badge/Database-SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white" alt="database" />
   <img src="https://img.shields.io/badge/UI-Tailwind%20CSS%20v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="ui" />
   <img src="https://img.shields.io/badge/Charts-Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white" alt="charts" />
+  <img src="https://img.shields.io/badge/Testes-Jest-C21325?style=for-the-badge&logo=jest&logoColor=white" alt="jest" />
+  <img src="https://img.shields.io/badge/Storybook-v8-FF4785?style=for-the-badge&logo=storybook&logoColor=white" alt="storybook" />
 </p>
 
 <div align="center">
@@ -36,7 +39,8 @@
 9. [Componentes React](#-componentes-react)
 10. [Decisões de Arquitetura](#-decisões-de-arquitetura)
 11. [Testes](#-testes)
-12. [Documentação Complementar](#-documentação-complementar)
+12. [Galeria de Capturas](#%EF%B8%8F-galeria-de-capturas)
+13. [Documentação Complementar](#-documentação-complementar)
 
 ---
 
@@ -111,18 +115,20 @@ cd frontend && npm run dev
 
 ## 🧰 Stack Tecnológica
 
-| Camada      | Tecnologia                             | Versão      |
-| ----------- | -------------------------------------- | ----------- |
-| Frontend    | React + TypeScript                     | 19.x / ~5.9 |
-| Estilização | Tailwind CSS                           | 4.x         |
-| Gráficos    | Chart.js + react-chartjs-2             | 4.x / 5.x   |
-| Ícones      | Lucide React                           | latest      |
-| HTTP Client | Axios                                  | latest      |
-| Backend     | Node.js + Express + TypeScript         | —           |
-| Banco       | SQLite (better-sqlite3, driver nativo) | —           |
-| Runner      | tsx (dev)                              | latest      |
-| Testes      | Jest + React Testing Library           | —           |
-| Monorepo    | Scripts `concurrently`                 | ^8.2        |
+| Camada      | Tecnologia                        | Versão      |
+| ----------- | --------------------------------- | ----------- |
+| Frontend    | ⚛️ React + TypeScript             | 19.x / ~5.9 |
+| Build       | ⚡ Vite                           | 6.x         |
+| Estilização | 🎨 Tailwind CSS                   | 4.x         |
+| Gráficos    | 📊 Chart.js + react-chartjs-2     | 4.x / 5.x   |
+| Ícones      | 🔷 Lucide React                   | latest      |
+| HTTP Client | 🔗 Axios                          | latest      |
+| Backend     | 🟢 Node.js + Express + TypeScript | —           |
+| Banco       | 🗄️ SQLite (better-sqlite3)        | —           |
+| Runner      | 🏃 tsx (dev)                      | latest      |
+| Testes      | 🧪 Jest + React Testing Library   | —           |
+| Storybook   | 📖 Storybook                      | 8.x         |
+| Monorepo    | 🔀 Scripts `concurrently`         | ^8.2        |
 
 ---
 
@@ -379,6 +385,30 @@ cd frontend && npm test
 | Backend   | Jest + Supertest | E2E      | 8      | Endpoints REST: health, metrics, alerts, acknowledge |
 | Frontend  | Jest + RTL       | Unitário | 25     | Funções puras de formatação e cálculo                |
 | **Total** |                  |          | **33** |                                                      |
+
+---
+
+## 🖼️ Galeria de Capturas
+
+Aqui estão as evidências do projeto funcionando em diferentes estados:
+
+### Dashboard (Formato 16:9)
+
+| Tema Claro                               | Tema Escuro                                  |
+| :--------------------------------------- | :------------------------------------------- |
+| ![Light Mode](docs/img/desktop_16x9.png) | ![Dark Mode](docs/img/desktop_dark_16x9.png) |
+
+### Dashboard — Visão Geral
+
+![Dashboard Preview](docs/img/SiteMode.jpeg)
+
+### Testes — Cobertura Completa
+
+![Testes Passando](docs/img/terminal_teste.png)
+
+### Storybook & Documentação
+
+![Storybook Preview](docs/img/storybook_desktop.png)
 
 ---
 
