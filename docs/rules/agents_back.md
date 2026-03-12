@@ -32,6 +32,10 @@ backend/src/
 │   ├── simulator.ts           # Motor de simulação (random walk + persist + prune)
 │   ├── metrics-service.ts     # Monta MetricResponse (estado + trends + OEE)
 │   └── alerts-service.ts      # Consulta e acknowledge de alertas
+├── __tests__/                 # ★ Testes organizados por tipo
+│   └── e2e/
+│       └── api.test.ts        # Testes E2E da API REST (Jest + Supertest)
+├── app.ts                     # Configuração Express (sem side-effects, testável)
 ├── data/                      # Arquivo SQLite gerado em runtime (gitignored)
 └── index.ts                   # Bootstrapping: DB → Express + routes + error handler → Simulador
 ```
@@ -250,6 +254,34 @@ Encapsula operações de alertas:
 - `TRANSITION_PROBABILITIES` — probabilidades por estado
 - `THRESHOLDS` — limites operacionais (temperatura, RPM, cooldown, max alerts)
 - `SIMULATOR_CONFIG` — intervalo, RPM teórico, temperatura ambiente (vem do `.env`)
+
+---
+
+## Testes
+
+### Estrutura
+
+```
+backend/src/__tests__/
+└── e2e/
+    └── api.test.ts          # Testes E2E da API REST (Jest + Supertest)
+```
+
+### Padrão de Testabilidade
+
+- **`app.ts`** exporta o Express app configurado **sem side-effects** (sem `listen()`, sem `initDatabase()`, sem `startSimulator()`)
+- **`index.ts`** importa o app de `./app` e faz o bootstrap (DB + listen + simulador)
+- Testes importam `app` de `@/app` e usam `supertest` para testar endpoints
+- `beforeAll()`: chama `initDatabase()` + insere dados de seed via repository
+- `afterAll()`: chama `closeDatabase()` para liberar o banco
+
+### Regras para Novos Testes
+
+1. **E2E** (endpoints HTTP) → `__tests__/e2e/`
+2. **Unitários** (core/, services/) → `__tests__/unit/` (quando necessário)
+3. Sempre usar `@/` alias nos imports
+4. Nunca chamar `startSimulator()` em testes — inserir dados via repository
+5. Sempre limpar o banco no `afterAll()`
 
 ---
 

@@ -33,7 +33,12 @@ frontend/src/
 │   └── axios.ts
 ├── services/                  # Camada de fetch/API
 ├── types/                     # Interfaces TypeScript (espelho do backend)
+├── __tests__/                 # ★ Testes organizados por tipo
+│   └── unit/
+│       ├── formatters.test.ts # Testes unitários de formatação (Vitest)
+│       └── calculations.test.ts # Testes unitários de cálculos (Vitest)
 └── utils/
+    ├── calculations.ts        # Funções de cálculo
     └── formatters.ts          # Formatação de valores
 ```
 
@@ -209,6 +214,34 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 - Durações curtas (150-400ms)
 - Respeitar `prefers-reduced-motion`
 - Não animar áreas de leitura crítica de dados
+
+---
+
+## Testes
+
+### Estrutura
+
+```
+frontend/src/__tests__/
+└── unit/
+    ├── formatters.test.ts     # Testes unitários de formatação (Vitest)
+    └── calculations.test.ts   # Testes unitários de cálculos (Vitest)
+```
+
+### Configuração
+
+- **Framework**: Vitest (projeto `unit` em `vite.config.ts`)
+- **Ambiente**: Node.js (sem browser — funções puras)
+- **Match pattern**: `src/__tests__/**/*.test.ts`
+- **Comando**: `cd frontend && npm test`
+
+### Regras para Novos Testes
+
+1. **Unitários** (utils/, cálculos puros) → `__tests__/unit/`
+2. Sempre usar `@/` alias nos imports
+3. Importar `describe`, `it`, `expect` de `vitest`
+4. Testes de funções puras não precisam de setup/teardown
+5. Cobrir edge cases: `NaN`, `0`, strings inválidas, valores limites
 
 ---
 
