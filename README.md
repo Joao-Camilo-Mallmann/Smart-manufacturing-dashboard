@@ -13,7 +13,6 @@
   <img src="docs/img/SiteMode.jpeg" alt="Dashboard Preview" style="width: 100%; max-width: 900px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
 </div>
 
-
 ## 🌐 Deploy em Produção
 
 - 🖥️ **Frontend**: https://smart-dashboard-frontend.onrender.com/
@@ -70,15 +69,18 @@ Sistema de monitoramento industrial focado em uma máquina específica da linha 
 
 ### Instalação
 
-```bash
+````bash
 # 1. Clonar o repositório
 git clone https://github.com/seu-usuario/FULLSTACK_CHALLENGER.git
 cd FULLSTACK_CHALLENGER
 
 # 2. Instalar dependências (backend + frontend)
-cd backend && npm install
-cd ../frontend && npm install
-cd ..
+Para instalar tudo de uma vez com o script raiz:
+```bash
+npm run install:all
+````
+
+```
 
 # 3. Instalar orquestrador (raiz)
 npm install
@@ -131,6 +133,10 @@ projeto/
 ├── backend/
 │   ├── src/
 │   │   ├── index.ts                # Bootstrapping: DB → Express → Simulador
+│   │   ├── app.ts                  # Configuração Express (sem side-effects)
+│   │   ├── __tests__/
+│   │   │   └── e2e/
+│   │   │       └── api.test.ts      # ★ Testes E2E da API REST
 │   │   ├── config/
 │   │   │   └── types.ts            # ★ Interfaces, enums, DTOs (única fonte de verdade)
 │   │   ├── core/                   # ★ Lógica pura — NUNCA importa infra
@@ -183,6 +189,10 @@ projeto/
 │   │   │   └── api.ts
 │   │   ├── types/                  # Interfaces TypeScript (espelho back)
 │   │   │   └── index.ts
+│   │   ├── __tests__/
+│   │   │   └── unit/
+│   │   │       ├── formatters.test.ts   # ★ Testes de formatação
+│   │   │       └── calculations.test.ts # ★ Testes de cálculos
 │   │   └── utils/
 │   │       ├── calculations.ts     # Funções de cálculo
 │   │       └── formatters.ts       # Formatação (RPM, Temp, Uptime, %)
@@ -331,16 +341,44 @@ Request → routes/ → Controller → Service → { Core (regras) + Repository 
 
 ## ✅ Testes
 
+O projeto usa **Jest + Supertest** no backend e **Vitest** no frontend. Os testes ficam organizados em pastas `__tests__/` com subdivisão por tipo.
+
+### Estrutura de Testes
+
+```text
+backend/src/__tests__/
+└── e2e/
+    └── api.test.ts          # Testes E2E da API REST (8 testes)
+                              # Health, métricas, histórico, alertas, acknowledge
+
+frontend/src/__tests__/
+└── unit/
+    ├── formatters.test.ts   # Testes unitários de formatação (9 testes)
+    │                         # formatUptime, formatTimestamp, timeAgo, formatMetric
+    └── calculations.test.ts # Testes unitários de cálculos (16 testes)
+                              # getValueColor, getOEEColor, getProgressPercent, getTrendLabel
+```
+
+### Comandos
+
 ```bash
-# Rodar todos os testes
+# Rodar todos os testes (backend + frontend)
 npm test
 
-# Backend apenas
+# Backend apenas (Jest + Supertest)
 cd backend && npm test
 
-# Frontend apenas
+# Frontend apenas (Vitest)
 cd frontend && npm test
 ```
+
+### Cobertura
+
+| Camada    | Framework        | Tipo     | Testes | Descrição                                            |
+| --------- | ---------------- | -------- | ------ | ---------------------------------------------------- |
+| Backend   | Jest + Supertest | E2E      | 8      | Endpoints REST: health, metrics, alerts, acknowledge |
+| Frontend  | Vitest           | Unitário | 25     | Funções puras de formatação e cálculo                |
+| **Total** |                  |          | **33** |                                                      |
 
 ---
 

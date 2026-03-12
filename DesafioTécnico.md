@@ -160,7 +160,7 @@ interface MetricHistory {
 - [x] Modo Dark/Light funcional
 - [x] Histórico persistente (LocalStorage ou IndexedDB)
 - [x] Documentação com Storybook
-- [ ] Testes E2E
+- [x] Testes E2E
 
 ### Técnicas Avançadas
 
