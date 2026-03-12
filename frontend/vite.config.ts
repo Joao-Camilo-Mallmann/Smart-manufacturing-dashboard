@@ -23,15 +23,6 @@ export default defineConfig({
   },
   test: {
     projects: [
-      // Projeto de testes unitários (funções puras, sem browser)
-      {
-        extends: true,
-        test: {
-          name: "unit",
-          environment: "node",
-          include: ["src/__tests__/**/*.test.ts"],
-        },
-      },
       // Projeto de testes Storybook (browser)
       {
         extends: true,

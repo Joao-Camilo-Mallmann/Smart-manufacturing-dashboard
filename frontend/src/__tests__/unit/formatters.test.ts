@@ -4,7 +4,6 @@ import {
   formatUptime,
   timeAgo,
 } from "@/utils/formatters";
-import { describe, expect, it } from "vitest";
 
 describe("formatUptime", () => {
   it("formata horas decimais corretamente", () => {

@@ -177,7 +177,7 @@ interface MetricHistory {
 
 - [x] **README.md** completo com instruções de instalação e execução
 - [x] **Código organizado** podem ser feitos comentários para explicar trecho do código e porque foi pensado desta forma. (Ponto positivo se fizer)
-- [-] **Documentação** das decisões técnicas
+- [x] **Documentação** das decisões técnicas
 
 ### 2. Demonstração
 

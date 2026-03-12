@@ -6,7 +6,6 @@ import {
   getTrendLabel,
   getValueColor,
 } from "@/utils/calculations";
-import { describe, expect, it } from "vitest";
 
 describe("getValueColor", () => {
   it("retorna erro acima do critical", () => {
