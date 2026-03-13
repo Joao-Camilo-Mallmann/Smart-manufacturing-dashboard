@@ -39,6 +39,9 @@ const DEFAULT_TRENDS: MetricTrends = {
 function App() {
   const { status, history, alerts, isConnected, isLoading } = useMachineData();
   const isProdEnv = import.meta.env.PROD;
+  const backendHealthUrl = import.meta.env.VITE_API_URL
+    ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/health`
+    : "";
 
   if (isLoading) {
     return (
@@ -52,10 +55,32 @@ function App() {
             Conectando ao servidor de monitoramento
           </p>
           {isProdEnv && (
-            <p className="text-xs text-content-muted mt-3 max-w-md mx-auto">
-              Ambiente de produção em plano gratuito no Render: o backend pode
-              levar alguns segundos para iniciar (cold start).
-            </p>
+            <div className="mt-3 max-w-md mx-auto space-y-2">
+              <p className="text-xs text-content-muted">
+                Ambiente de produção em plano gratuito no Render: o backend pode
+                levar alguns segundos para iniciar (cold start).
+              </p>
+              <p className="text-xs text-state-error font-semibold">
+                Para funcionar na primeira carga, acesse o backend no navegador
+                para acordar o servico
+                {backendHealthUrl ? (
+                  <>
+                    :{" "}
+                    <a
+                      href={backendHealthUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="underline"
+                    >
+                      {backendHealthUrl}
+                    </a>
+                    .
+                  </>
+                ) : (
+                  " (endpoint /api/health)."
+                )}
+              </p>
+            </div>
           )}
         </div>
       </div>
