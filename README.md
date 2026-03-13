@@ -18,11 +18,20 @@
 
 ## 🌐 Deploy em Produção
 
-- 🖥️ **Frontend**: https://smart-dashboard-frontend.onrender.com/
-- 🔌 **Backend**: https://smart-dashboard-backend.onrender.com/
-- 💚 **Health check**: https://smart-dashboard-backend.onrender.com/api/health
+| Serviço             | URL                                                     |
+| ------------------- | ------------------------------------------------------- |
+| 🖥️ **Frontend**     | https://smart-dashboard-frontend.onrender.com/          |
+| 🔌 **Backend**      | https://smart-dashboard-backend.onrender.com/           |
+| 💚 **Health check** | https://smart-dashboard-backend.onrender.com/api/health |
 
-> ℹ️ O backend está hospedado no plano gratuito do Render. Após períodos de inatividade, o serviço pode entrar em sleep e levar alguns segundos para voltar (cold start).
+> ℹ️ O backend roda no plano gratuito do Render.
+> Após inatividade, ele pode entrar em sleep e levar alguns segundos para responder (cold start).
+
+> 🔴 **Importante (primeiro acesso):**
+>
+> 1. Abra `https://smart-dashboard-backend.onrender.com/api/health` no navegador.
+> 2. Aguarde a resposta do health check.
+> 3. Em seguida, abra o frontend.
 
 ---
 
