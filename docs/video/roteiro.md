@@ -1,3 +1,5 @@
+Eaii blz,  João Malalmaann esse video é apresentar o projeto de dashboard de monitoramento de máquina industrial. Vou mostrar como rodar o projeto, as principais funcionalidades e a documentação visual.
+
 Como rodar o projeto:
 
 Instale dependências:
