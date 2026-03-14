@@ -160,9 +160,35 @@ export const THRESHOLDS = {
 import dotenv from "dotenv";
 dotenv.config();
 
+/**
+ * Lê número do ambiente com fallback seguro para evitar NaN em runtime.
+ */
+function getEnvNumber(
+  key: string,
+  fallback: number,
+  validator?: (value: number) => boolean,
+): number {
+  const rawValue = process.env[key];
+  const parsedValue = Number(rawValue);
+
+  if (!Number.isFinite(parsedValue)) {
+    return fallback;
+  }
+
+  if (validator && !validator(parsedValue)) {
+    return fallback;
+  }
+
+  return parsedValue;
+}
+
 /** Constantes do simulador */
 export const SIMULATOR_CONFIG = {
-  intervalMs: Number(process.env.SIMULATOR_INTERVAL_MS),
-  rpmTheoretical: Number(process.env.SIMULATOR_RPM_THEORETICAL),
-  ambientTemperature: Number(process.env.SIMULATOR_AMBIENT_TEMP),
+  intervalMs: getEnvNumber("SIMULATOR_INTERVAL_MS", 3000, (value) => value > 0),
+  rpmTheoretical: getEnvNumber(
+    "SIMULATOR_RPM_THEORETICAL",
+    1500,
+    (value) => value > 0,
+  ),
+  ambientTemperature: getEnvNumber("SIMULATOR_AMBIENT_TEMP", 25),
 } as const;

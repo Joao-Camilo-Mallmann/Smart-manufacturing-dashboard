@@ -182,8 +182,8 @@ interface MetricHistory {
 ### 2. Demonstração
 
 - [-] **Vídeo** (máx. 3 minutos) mostrando funcionalidades principais
-- [-] **OU Screenshots** de alta qualidade da aplicação funcionando
-- [-] **Deverá** ser anexado no próprio Github
+- [X] **OU Screenshots** de alta qualidade da aplicação funcionando
+- [X] **Deverá** ser anexado no próprio Github
 
 ### 3. Dados de Teste
 
