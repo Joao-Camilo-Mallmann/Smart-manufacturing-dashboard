@@ -3,12 +3,10 @@ Eaii blz,  João Malalmaann esse video é apresentar o projeto de dashboard de m
 Como rodar o projeto:
 
 Instale dependências:
-npm install na raiz.
-Rode backend e frontend:
-npm run dev (ambos juntos)
-ou
-cd backend && npm run dev (backend)
-cd frontend && npm run dev (frontend)
+-npm run install:all 
+
+- npm run dev (ambos juntos)
+
 Acesse:
 Frontend: http://localhost:5173
 Backend: http://localhost:3001/api/health
@@ -17,15 +15,11 @@ Projeto hospedado (deploy):
 ✔️ Teste online sem instalar nada:
 Frontend: https://smart-dashboard-frontend.onrender.com/
 Backend: https://smart-dashboard-backend.onrender.com/api/health
-
 ❗ Se o backend estiver lento, abra o health check antes do dashboard para garantir dados.
 
 Cara do sistema:
 
 • Dashboard limpo e intuitivo
-• Cards de métricas: temperatura, RPM, tempo, eficiência
-• Gráfico de histórico (temperatura/RPM)
-• Painel de eficiência (OEE)
 • Lista de alertas por severidade
 • Dark mode e responsivo
 

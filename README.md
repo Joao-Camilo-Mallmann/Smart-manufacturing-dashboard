@@ -93,12 +93,6 @@ Para instalar tudo de uma vez com o script raiz:
 npm run install:all
 ````
 
-```
-
-# 3. Instalar orquestrador (raiz)
-npm install
-```
-
 ### Execução
 
 ```bash
