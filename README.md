@@ -40,16 +40,33 @@
 1. [Visão Geral](#-visão-geral)
 2. [Quick Start](#-quick-start)
 3. [Deploy em Produção](#-deploy-em-produção)
-4. [Stack Tecnológica](#-stack-tecnológica)
-5. [Estrutura do Projeto](#-estrutura-do-projeto)
-6. [Funcionalidades](#-funcionalidades)
-7. [Regras de Negócio](#-regras-de-negócio)
-8. [API REST](#-api-rest)
-9. [Componentes React](#-componentes-react)
-10. [Decisões de Arquitetura](#-decisões-de-arquitetura)
-11. [Testes](#-testes)
-12. [Galeria de Capturas](#%EF%B8%8F-galeria-de-capturas)
-13. [Documentação Complementar](#-documentação-complementar)
+4. [Vídeo de Demonstração](#-vídeo-de-demonstração)
+5. [Stack Tecnológica](#-stack-tecnológica)
+6. [Estrutura do Projeto](#-estrutura-do-projeto)
+7. [Funcionalidades](#-funcionalidades)
+8. [Regras de Negócio](#-regras-de-negócio)
+9. [API REST](#-api-rest)
+10. [Componentes React](#-componentes-react)
+11. [Decisões de Arquitetura](#-decisões-de-arquitetura)
+12. [Testes](#-testes)
+13. [Galeria de Capturas](#%EF%B8%8F-galeria-de-capturas)
+14. [Documentação Complementar](#-documentação-complementar)
+
+---
+
+## 🎥 Vídeo de Demonstração
+
+Uma demonstração completa do dashboard em execução está disponível no YouTube. O vídeo mostra a interface em tempo real, os principais painéis, o fluxo de monitoramento da máquina e a experiência geral da aplicação.
+
+- ▶️ Assistir no YouTube: https://youtu.be/uGl4Fsp3198
+
+<div align="center">
+  <a href="https://youtu.be/uGl4Fsp3198" target="_blank" rel="noopener noreferrer">
+    <img src="https://img.youtube.com/vi/uGl4Fsp3198/hqdefault.jpg" alt="Vídeo de demonstração do Dashboard de Monitoramento Industrial" style="width: 100%; max-width: 720px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+  </a>
+</div>
+
+> Clique na imagem para abrir o vídeo da apresentação no YouTube.
 
 ---
 
