@@ -87,7 +87,7 @@
   /* Destaca alertas críticos em ambientes escuros (TV/chão de fábrica) */
   --color-alert-critical-surface: color-mix(
     in srgb,
-    var(--color-alert-critical) 22%,
+    var(--color-alert-critical) 34%,
     transparent
   );
 }
@@ -191,6 +191,13 @@ body {
 /* Superfície crítica dedicada para o card de alertas */
 .alert-critical-surface {
   background-color: var(--color-alert-critical-surface);
+}
+
+.dark .alert-critical-surface {
+  box-shadow:
+    inset 0 0 0 1px
+      color-mix(in srgb, var(--color-alert-critical) 45%, transparent),
+    0 0 14px color-mix(in srgb, var(--color-alert-critical) 18%, transparent);
 }
 
 /* ============================================================
