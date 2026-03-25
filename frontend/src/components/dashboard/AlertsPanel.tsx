@@ -23,7 +23,7 @@ interface AlertConfig {
 const alertConfig: Record<AlertLevel, AlertConfig> = {
   CRITICAL: {
     icon: <AlertTriangle size={16} />,
-    bgClass: "bg-alert-critical/8",
+    bgClass: "alert-critical-surface",
     borderClass: "border-l-alert-critical",
     textClass: "text-alert-critical",
   },
@@ -57,6 +57,7 @@ function formatTimestamp(ts: string): string {
 
 export default function AlertsPanel({ alerts }: Props) {
   const lastCriticalIdRef = useRef<number | null>(null);
+  const visibleAlerts = alerts.slice(0, 5);
 
   useEffect(() => {
     const highestCriticalId = alerts
@@ -101,11 +102,7 @@ export default function AlertsPanel({ alerts }: Props) {
       </div>
 
       {/* Lista de alertas */}
-      <div
-        className="flex-1 overflow-y-auto max-h-80 pr-1"
-        aria-live="polite"
-        aria-relevant="additions"
-      >
+      <div className="flex-1 pr-1" aria-live="polite" aria-relevant="additions">
         {alerts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-10">
             <CheckCircle size={36} className="text-state-running mb-3" />
@@ -115,7 +112,7 @@ export default function AlertsPanel({ alerts }: Props) {
           </div>
         ) : (
           <ul className="space-y-2.5 list-none m-0 p-0">
-            {alerts.map((alert) => {
+            {visibleAlerts.map((alert) => {
               const config = alertConfig[alert.level];
               return (
                 <li
@@ -152,6 +149,13 @@ export default function AlertsPanel({ alerts }: Props) {
               );
             })}
           </ul>
+        )}
+
+        {alerts.length > visibleAlerts.length && (
+          <p className="text-xs text-content-muted mt-3 font-medium">
+            Mostrando os 5 alertas mais recentes para manter a visualização da
+            TV limpa.
+          </p>
         )}
       </div>
     </div>

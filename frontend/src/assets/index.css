@@ -26,6 +26,11 @@
   --color-alert-info: #3b82f6;
   --color-alert-warning: #f59e0b;
   --color-alert-critical: #dc2626;
+  --color-alert-critical-surface: color-mix(
+    in srgb,
+    var(--color-alert-critical) 8%,
+    transparent
+  );
 
   /* ── Superfícies (light mode padrão — estilo STW) ── */
   --color-surface: #ffffff;
@@ -78,6 +83,13 @@
   /* Sombras mais fortes no modo escuro para separar background marinho */
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
   --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.5);
+
+  /* Destaca alertas críticos em ambientes escuros (TV/chão de fábrica) */
+  --color-alert-critical-surface: color-mix(
+    in srgb,
+    var(--color-alert-critical) 22%,
+    transparent
+  );
 }
 
 /* ============================================================
@@ -174,6 +186,11 @@ body {
 }
 .dark .label-stw {
   color: var(--color-stw-primary);
+}
+
+/* Superfície crítica dedicada para o card de alertas */
+.alert-critical-surface {
+  background-color: var(--color-alert-critical-surface);
 }
 
 /* ============================================================

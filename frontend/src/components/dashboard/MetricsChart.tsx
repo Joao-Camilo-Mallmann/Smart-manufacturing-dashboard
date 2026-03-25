@@ -346,7 +346,7 @@ export default function MetricsChart({ history }: Props) {
 
       {/* Gráfico */}
       <div
-        className="h-80 sm:h-96"
+        className="h-72 sm:h-80 xl:h-64"
         role="img"
         aria-label={`Gráfico de histórico com ${history.length} pontos de temperatura e RPM${timeRange ? `, período ${timeRange}` : ""}`}
       >
