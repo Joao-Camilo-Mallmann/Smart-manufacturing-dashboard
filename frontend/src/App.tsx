@@ -93,7 +93,7 @@ function App() {
   const trends = status?.trends ?? DEFAULT_TRENDS;
 
   return (
-    <div className="min-h-screen bg-surface-primary xl:h-screen xl:overflow-hidden xl:flex xl:flex-col">
+    <div className="min-h-screen bg-surface-primary">
       {/* Skip link — acessibilidade por teclado */}
       <a href="#main-content" className="skip-link">
         Pular para o conteúdo principal
@@ -105,7 +105,7 @@ function App() {
       {/* Conteúdo principal */}
       <main
         id="main-content"
-        className="max-w-screen-2xl w-full mx-auto px-6 lg:px-10 py-6 sm:py-8 xl:py-4 space-y-6 sm:space-y-8 xl:space-y-4 xl:flex-1 xl:overflow-hidden"
+        className="max-w-screen-2xl w-full mx-auto px-6 lg:px-10 py-6 sm:py-8 space-y-6 sm:space-y-8"
         aria-label="Painel de monitoramento industrial"
       >
         <div className="flex items-center justify-between">
@@ -163,14 +163,14 @@ function App() {
         <MetricsChart history={history} />
 
         {/* Alertas + Eficiência */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5 xl:min-h-0">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
           <AlertsPanel alerts={alerts} />
           <EfficiencyPanel oee={oee} />
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="text-center py-6 xl:py-3 text-xs text-content-muted font-medium tracking-wide">
+      <footer className="text-center py-6 text-xs text-content-muted font-medium tracking-wide">
         Dashboard de Monitoramento Industrial — Atualização a cada 3 segundos
       </footer>
     </div>
