@@ -23,7 +23,7 @@ export default function HeaderBar({ isConnected }: Props) {
           <img
             src={logoSvg}
             alt="Logo da Funciona Na Minha Máquina S/A"
-            className="h-7 sm:h-8 w-auto brightness-0 invert drop-shadow-md"
+            className="h-10 sm:h-12 w-auto brightness-0 invert contrast-125 drop-shadow-lg"
           />
           <div className="hidden sm:block h-8 w-px bg-white/20" />
           <div>
