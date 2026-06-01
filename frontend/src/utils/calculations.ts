@@ -15,7 +15,7 @@ export function getValueColor(
 ): string {
   if (critical && value > critical) return "text-state-error";
   if (warning && value > warning) return "text-state-maintenance";
-  return "text-stw-primary";
+  return "text-fnmm-primary";
 }
 
 /**

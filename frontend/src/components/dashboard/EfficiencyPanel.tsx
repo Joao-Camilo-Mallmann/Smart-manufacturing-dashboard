@@ -1,5 +1,5 @@
 // ============================================================
-// EfficiencyPanel.tsx — Painel OEE (estilo STW)
+// EfficiencyPanel.tsx — Painel OEE (estilo Funciona Na Minha Máquina S/A)
 // Card super arredondado com barras de eficiência
 // ============================================================
 
@@ -58,10 +58,10 @@ export default function EfficiencyPanel({ oee }: Props) {
   const overallColor = getOEEColor(oee.overall);
 
   return (
-    <div id="efficiency-panel" className="card-stw animate-fade-in p-5 sm:p-6">
+    <div id="efficiency-panel" className="card-fnmm animate-fade-in p-5 sm:p-6">
       {/* Header */}
       <div className="flex items-center gap-2.5 mb-6">
-        <div className="p-2 rounded-xl bg-stw-primary/8 text-stw-primary">
+        <div className="p-2 rounded-xl bg-fnmm-primary/8 text-fnmm-primary">
           <Gauge size={18} />
         </div>
         <h2 className="font-bold text-base text-content tracking-tight">
@@ -77,7 +77,7 @@ export default function EfficiencyPanel({ oee }: Props) {
           border: `2px solid ${overallColor}26`,
         }}
       >
-        <p className="label-stw mb-2">OEE Geral</p>
+        <p className="label-fnmm mb-2">OEE Geral</p>
         <p
           className="text-5xl font-extrabold tracking-tight"
           style={{ color: overallColor }}

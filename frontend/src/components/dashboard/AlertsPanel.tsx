@@ -1,5 +1,5 @@
 // ============================================================
-// AlertsPanel.tsx — Painel de alertas recentes (estilo STW)
+// AlertsPanel.tsx — Painel de alertas recentes (estilo Funciona Na Minha Máquina S/A)
 // Card com cantos super arredondados e hierarquia visual limpa
 // ============================================================
 
@@ -83,7 +83,7 @@ export default function AlertsPanel({ alerts }: Props) {
   return (
     <div
       id="alerts-panel"
-      className="card-stw animate-fade-in p-5 sm:p-6 flex flex-col"
+      className="card-fnmm animate-fade-in p-5 sm:p-6 flex flex-col"
       aria-label="Painel de alertas recentes"
     >
       {/* Header */}

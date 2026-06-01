@@ -1,5 +1,5 @@
 // ============================================================
-// ThemeToggle.tsx — Botão Dark/Light (estilo STW)
+// ThemeToggle.tsx — Botão Dark/Light (estilo Funciona Na Minha Máquina S/A)
 // Persiste preferência no localStorage.
 // ============================================================
 

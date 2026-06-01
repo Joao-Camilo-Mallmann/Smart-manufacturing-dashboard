@@ -10,7 +10,7 @@
 
 ## Regras por Camada
 
-- **Frontend**: [agents_front.md](./docs/rules/agents_front.md) — Design system STW, componentes, convenções React
+- **Frontend**: [agents_front.md](./docs/rules/agents_front.md) — Design system Funciona Na Minha Máquina S/A, componentes, convenções React
 - **Backend**: [agents_back.md](./docs/rules/agents_back.md) — Arquitetura em camadas, schema SQLite, regras de negócio
 
 ## Regras Gerais

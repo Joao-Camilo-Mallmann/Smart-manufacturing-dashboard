@@ -1,5 +1,5 @@
 // ============================================================
-// App.tsx — Dashboard Industrial (estilo STW)
+// App.tsx — Dashboard Industrial (estilo Funciona Na Minha Máquina S/A)
 // Layout clean, espaçoso, com tipografia Montserrat
 // ============================================================
 
@@ -47,7 +47,7 @@ function App() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-surface-primary">
         <div className="text-center">
-          <div className="animate-spin w-14 h-14 border-4 border-stw-primary border-t-transparent rounded-full mx-auto mb-5" />
+          <div className="animate-spin w-14 h-14 border-4 border-fnmm-primary border-t-transparent rounded-full mx-auto mb-5" />
           <p className="text-lg font-bold text-content tracking-tight">
             Carregando dashboard...
           </p>
@@ -110,7 +110,7 @@ function App() {
       >
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-1 h-6 rounded-full bg-stw-primary" />
+            <div className="w-1 h-6 rounded-full bg-fnmm-primary" />
             <span className="text-sm font-semibold text-content uppercase tracking-widest">
               Status da Máquina
             </span>

@@ -1,5 +1,5 @@
 // ============================================================
-// MetricCard.tsx — Card de métrica estilo STW
+// MetricCard.tsx — Card de métrica estilo Funciona Na Minha Máquina S/A
 // Cantos super arredondados, borda azulada, hierarquia limpa
 // ============================================================
 
@@ -46,7 +46,7 @@ function getBarColor(
 ): string {
   if (critical && value > critical) return "bg-state-error";
   if (warning && value > warning) return "bg-state-maintenance";
-  return "bg-stw-primary";
+  return "bg-fnmm-primary";
 }
 
 export default function MetricCard({
@@ -72,14 +72,14 @@ export default function MetricCard({
     : undefined;
 
   return (
-    <div id={id} className="card-stw animate-fade-in p-5 sm:p-6">
-      {/* Label estilo STW */}
+    <div id={id} className="card-fnmm animate-fade-in p-5 sm:p-6">
+      {/* Label estilo Funciona Na Minha Máquina S/A */}
       <div className="flex items-center justify-between mb-4">
         <div className="flex items-center gap-2.5">
-          <div className="p-2 rounded-xl bg-stw-primary/8 text-stw-primary">
+          <div className="p-2 rounded-xl bg-fnmm-primary/8 text-fnmm-primary">
             {icon}
           </div>
-          <span className="label-stw">{title}</span>
+          <span className="label-fnmm">{title}</span>
         </div>
         <div className="p-1 rounded-full bg-surface-hover">
           {getTrendIcon(trend)}

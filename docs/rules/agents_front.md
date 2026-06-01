@@ -14,7 +14,7 @@ frontend/src/
 ├── main.tsx                   # Ponto de entrada
 ├── assets/
 │   ├── index.css              # ⭐ Design system tokens (@theme + .dark)
-│   └── logo.svg               # Logo STW
+│   └── logo.png               # Logo Funciona Na Minha Máquina S/A
 ├── components/
 │   ├── common/                # Componentes reutilizáveis (sem lógica de API)
 │   │   ├── ConnectionIndicator.tsx
@@ -68,16 +68,16 @@ Componentes são **"burros"** — recebem dados via props e apenas exibem. Toda 
 
 **Todas as cores do projeto vivem em `index.css`.** Nunca hardcodar hex em componentes, exceto valores dinâmicos de Chart.js.
 
-#### Paleta STW
+#### Paleta Funciona Na Minha Máquina S/A
 
 | Token                   | Hex       | Uso                                         |
 | ----------------------- | --------- | ------------------------------------------- |
-| `--color-stw-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras, links |
-| `--color-stw-dark`      | `#00334E` | Navy profundo — headings (light mode)       |
-| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias           |
-| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas dark   |
-| `--color-stw-light`     | `#0085C8` | Azul claro — hovers, destaques              |
-| `--color-stw-navy`      | `#001A2E` | Navy profundo — fundo dark mode             |
+| `--color-fnmm-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras, links |
+| `--color-fnmm-dark`      | `#00334E` | Navy profundo — headings (light mode)       |
+| `--color-fnmm-secondary` | `#005A87` | Mid-blue — interações secundárias           |
+| `--color-fnmm-corporate` | `#004C74` | Corporate — gradiente header, bordas dark   |
+| `--color-fnmm-light`     | `#0085C8` | Azul claro — hovers, destaques              |
+| `--color-fnmm-navy`      | `#001A2E` | Navy profundo — fundo dark mode             |
 
 #### Tokens Semânticos (Light Mode)
 
@@ -95,13 +95,13 @@ Componentes são **"burros"** — recebem dados via props e apenas exibem. Toda 
 
 | Token               | Valor Dark                             |
 | ------------------- | -------------------------------------- |
-| `surface-primary`   | `var(--color-stw-navy)` (#001A2E)      |
+| `surface-primary`   | `var(--color-fnmm-navy)` (#001A2E)      |
 | `surface`           | `#00263E`                              |
-| `surface-hover`     | `var(--color-stw-dark)` (#00334E)      |
+| `surface-hover`     | `var(--color-fnmm-dark)` (#00334E)      |
 | `content`           | `#FFFFFF`                              |
 | `content-secondary` | `#BBD2E8`                              |
 | `content-muted`     | `#8AAAC9`                              |
-| `border-card`       | `var(--color-stw-corporate)` (#004C74) |
+| `border-card`       | `var(--color-fnmm-corporate)` (#004C74) |
 
 #### Cores de Estado
 
@@ -120,9 +120,9 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 
 | Classe                | Propósito                                                 |
 | --------------------- | --------------------------------------------------------- |
-| `.card-stw`           | Card completo (borda, sombra, raio, hover com translateY) |
-| `.label-stw`          | Label uppercase com tracking e tamanho padronizado        |
-| `.bg-gradient-header` | Gradiente STW para o header (adapta light/dark)           |
+| `.card-fnmm`           | Card completo (borda, sombra, raio, hover com translateY) |
+| `.label-fnmm`          | Label uppercase com tracking e tamanho padronizado        |
+| `.bg-gradient-header` | Gradiente FNMM para o header (adapta light/dark)           |
 
 ---
 
@@ -130,7 +130,7 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 
 | Componente            | Responsabilidade                                              |
 | --------------------- | ------------------------------------------------------------- |
-| `HeaderBar`           | Logo STW, título, toggle dark/light, indicador de conexão     |
+| `HeaderBar`           | Logo Funciona Na Minha Máquina S/A, título, toggle dark/light, indicador de conexão     |
 | `StatusBadge`         | Estado (RUNNING/STOPPED/MAINTENANCE/ERROR) com cor e animação |
 | `ConnectionIndicator` | Bolinha verde/vermelha + banner de conexão                    |
 | `MetricCard`          | Card com valor, tendência (↑↓→), cor por threshold            |
@@ -158,7 +158,7 @@ Definidas em `index.css`. SEMPRE preferir estas classes ao invés de recriar o e
 ### Estilização
 
 - Usar classes utilitárias Tailwind no JSX
-- Classes CSS customizadas vão em `index.css` com prefixo STW
+- Classes CSS customizadas vão em `index.css` com prefixo Funciona Na Minha Máquina S/A
 - `dark:` prefix do Tailwind NÃO é usado — usamos `.dark {}` no CSS
 - Inline styles APENAS para valores dinâmicos (cores Chart.js, larguras %)
 
@@ -300,7 +300,7 @@ export const Default: Story = {
 - A story está em `src/stories/` no domínio correto?
 - O componente foi importado via alias `@/`?
 - Foram cobertos os estados principais de UI?
-- A aparência respeita os tokens STW em light/dark?
+- A aparência respeita os tokens Funciona Na Minha Máquina S/A em light/dark?
 
 ---
 

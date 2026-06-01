@@ -1,9 +1,9 @@
 // ============================================================
-// HeaderBar.tsx — Barra de cabeçalho do dashboard (estilo STW)
-// Header com gradiente navy, logo STW e controles
+// HeaderBar.tsx — Barra de cabeçalho do dashboard (estilo Funciona Na Minha Máquina S/A)
+// Header com gradiente navy, logo Funciona Na Minha Máquina S/A e controles
 // ============================================================
 
-import logoSvg from "@/assets/logo.svg";
+import logoSvg from "@/assets/logo.png";
 import ConnectionIndicator from "@/components/common/ConnectionIndicator";
 import ThemeToggle from "@/components/common/ThemeToggle";
 
@@ -22,7 +22,7 @@ export default function HeaderBar({ isConnected }: Props) {
         <div className="flex items-center gap-4">
           <img
             src={logoSvg}
-            alt="STW Logo"
+            alt="Logo da Funciona Na Minha Máquina S/A"
             className="h-7 sm:h-8 w-auto brightness-0 invert drop-shadow-md"
           />
           <div className="hidden sm:block h-8 w-px bg-white/20" />

@@ -194,7 +194,7 @@ projeto/
 │   │   ├── main.tsx                # Ponto de entrada do React
 │   │   ├── assets/
 │   │   │   ├── index.css           # ★ Design system tokens (@theme + .dark)
-│   │   │   └── logo.svg            # Logo STW
+│   │   │   └── logo.png            # Logo Funciona Na Minha Máquina S/A
 │   │   ├── components/
 │   │   │   ├── common/             # Componentes reutilizáveis (sem lógica de API)
 │   │   │   │   ├── ConnectionIndicator.tsx
@@ -443,18 +443,18 @@ Aqui estão as evidências do projeto funcionando em diferentes estados:
 
 ---
 
-## 🎨 Paleta de Cores (STW)
+## 🎨 Paleta de Cores (FNMM)
 
-### Cores Primárias STW
+### Cores Primárias FNMM
 
 | Token                   | Hex       | Uso                                  |
 | ----------------------- | --------- | ------------------------------------ |
-| `--color-stw-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras |
-| `--color-stw-dark`      | `#00334E` | Navy — headings (light mode)         |
-| `--color-stw-secondary` | `#005A87` | Mid-blue — interações secundárias    |
-| `--color-stw-corporate` | `#004C74` | Corporate — gradiente header, bordas |
-| `--color-stw-light`     | `#0085C8` | Azul claro — hovers, destaques       |
-| `--color-stw-navy`      | `#001A2E` | Navy profundo — fundo dark mode      |
+| `--color-fnmm-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras |
+| `--color-fnmm-dark`      | `#00334E` | Navy — headings (light mode)         |
+| `--color-fnmm-secondary` | `#005A87` | Mid-blue — interações secundárias    |
+| `--color-fnmm-corporate` | `#004C74` | Corporate — gradiente header, bordas |
+| `--color-fnmm-light`     | `#0085C8` | Azul claro — hovers, destaques       |
+| `--color-fnmm-navy`      | `#001A2E` | Navy profundo — fundo dark mode      |
 
 ### Cores de Estado
 

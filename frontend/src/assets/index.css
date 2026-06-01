@@ -2,19 +2,19 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Design System — Dashboard Industrial STW
-   Inspirado no visual https://stw.com.br/solucao/aigle/
+   Design System — Dashboard Industrial Funciona Na Minha Máquina S/A
+   Inspirado no visual https://funcionanaminhamaquina.com.br/solucao/aigle/
    Tailwind CSS v4: configuração via @theme
    ============================================================ */
 
 @theme {
-  /* ── Cores STW (extraídas do site stw.com.br) ── */
-  --color-stw-primary: #00aeef;
-  --color-stw-dark: #00334e;
-  --color-stw-secondary: #005a87;
-  --color-stw-corporate: #004c74;
-  --color-stw-light: #0085c8;
-  --color-stw-navy: #001a2e;
+  /* ── Cores Funciona Na Minha Máquina S/A (extraídas do site funcionanaminhamaquina.com.br) ── */
+  --color-fnmm-primary: #00aeef;
+  --color-fnmm-dark: #00334e;
+  --color-fnmm-secondary: #005a87;
+  --color-fnmm-corporate: #004c74;
+  --color-fnmm-light: #0085c8;
+  --color-fnmm-navy: #001a2e;
 
   /* ── Cores de estado da máquina ── */
   --color-state-running: #22c55e;
@@ -32,7 +32,7 @@
     transparent
   );
 
-  /* ── Superfícies (light mode padrão — estilo STW) ── */
+  /* ── Superfícies (light mode padrão — estilo Funciona Na Minha Máquina S/A) ── */
   --color-surface: #ffffff;
   --color-surface-primary: #f0f4f8;
   --color-surface-hover: #e2e8f0;
@@ -52,7 +52,7 @@
     0 1px 3px rgba(0, 51, 78, 0.05), 0 1px 2px rgba(0, 51, 78, 0.03);
   --shadow-card-hover: 0 8px 24px rgba(0, 51, 78, 0.1);
 
-  /* ── Raios de borda (estilo STW = super arredondado) ── */
+  /* ── Raios de borda (estilo Funciona Na Minha Máquina S/A = super arredondado) ── */
   --radius-card: 1.5rem;
   --radius-badge: 9999px;
 
@@ -65,10 +65,10 @@
 
 /* ── Dark mode: sobrescreve tokens semânticos ── */
 .dark {
-  /* Fundo principal e base dos cards STW Premium */
-  --color-surface-primary: var(--color-stw-navy); /* Fundo da página */
+  /* Fundo principal e base dos cards Funciona Na Minha Máquina S/A Premium */
+  --color-surface-primary: var(--color-fnmm-navy); /* Fundo da página */
   --color-surface: #00263e; /* Fundo dos cards (um tom acima do navy) */
-  --color-surface-hover: var(--color-stw-dark); /* Fundo no hover */
+  --color-surface-hover: var(--color-fnmm-dark); /* Fundo no hover */
   --color-surface-secondary: #001020; /* Fundo mais profundo */
 
   /* Textos nítidos em azul pálido/gelo */
@@ -77,8 +77,8 @@
   --color-content-muted: #8aaac9; /* Azul para texto secundário e labels */
 
   /* Bordas em azul corporativo sutil */
-  --color-border-default: var(--color-stw-corporate);
-  --color-border-card: var(--color-stw-corporate);
+  --color-border-default: var(--color-fnmm-corporate);
+  --color-border-card: var(--color-fnmm-corporate);
 
   /* Sombras mais fortes no modo escuro para separar background marinho */
   --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -119,7 +119,7 @@
 }
 
 /* ============================================================
-   Estilos base — Tipografia STW (Montserrat / Inter)
+   Estilos base — Tipografia Funciona Na Minha Máquina S/A (Montserrat / Inter)
    ============================================================ */
 
 body {
@@ -147,7 +147,7 @@ body {
 }
 
 /* ============================================================
-   Header gradient — estilo STW
+   Header gradient — estilo Funciona Na Minha Máquina S/A
    ============================================================ */
 .bg-gradient-header {
   background: linear-gradient(135deg, #00334e 0%, #004c74 50%, #005a87 100%);
@@ -157,10 +157,10 @@ body {
 }
 
 /* ============================================================
-   Card com borda estilo STW (cantos super arredondados + borda azulada)
+   Card com borda estilo Funciona Na Minha Máquina S/A (cantos super arredondados + borda azulada)
    ============================================================ */
 
-.card-stw {
+.card-fnmm {
   background: var(--color-surface);
   border: 1px solid var(--color-border-card);
   border-radius: var(--radius-card);
@@ -168,24 +168,24 @@ body {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.card-stw:hover {
+.card-fnmm:hover {
   box-shadow: var(--shadow-card-hover);
   transform: translateY(-2px);
 }
 
 /* ============================================================
-   Label estilo STW (uppercase tracking)
+   Label estilo Funciona Na Minha Máquina S/A (uppercase tracking)
    ============================================================ */
 
-.label-stw {
+.label-fnmm {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 0.7rem;
   font-weight: 600;
-  color: var(--color-stw-dark);
+  color: var(--color-fnmm-dark);
 }
-.dark .label-stw {
-  color: var(--color-stw-primary);
+.dark .label-fnmm {
+  color: var(--color-fnmm-primary);
 }
 
 /* Superfície crítica dedicada para o card de alertas */
@@ -215,16 +215,16 @@ body {
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-stw-primary);
+  background: var(--color-fnmm-primary);
 }
 
 /* ============================================================
    Acessibilidade
    ============================================================ */
 
-/* Foco visível global — anel azul STW em qualquer elemento interativo */
+/* Foco visível global — anel azul Funciona Na Minha Máquina S/A em qualquer elemento interativo */
 :focus-visible {
-  outline: 2px solid var(--color-stw-primary);
+  outline: 2px solid var(--color-fnmm-primary);
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -250,7 +250,7 @@ body {
   transform: translateX(-50%);
   z-index: 100;
   padding: 0.75rem 1.5rem;
-  background: var(--color-stw-primary);
+  background: var(--color-fnmm-primary);
   color: #ffffff;
   font-weight: 700;
   font-size: 0.875rem;

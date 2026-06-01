@@ -17,11 +17,11 @@ describe("getValueColor", () => {
   });
 
   it("retorna primário para valores normais", () => {
-    expect(getValueColor(50, 80, 85)).toBe("text-stw-primary");
+    expect(getValueColor(50, 80, 85)).toBe("text-fnmm-primary");
   });
 
   it("retorna primário sem thresholds definidos", () => {
-    expect(getValueColor(50)).toBe("text-stw-primary");
+    expect(getValueColor(50)).toBe("text-fnmm-primary");
   });
 });
 

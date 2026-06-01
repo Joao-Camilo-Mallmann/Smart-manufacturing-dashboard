@@ -15,7 +15,7 @@ Construir um **dashboard industrial Full Stack** para monitoramento em tempo rea
 - **Sistema de alertas por severidade**: INFO, WARNING, CRITICAL com priorização visual
 - **Eficiência (OEE)**: cálculo e exibição de Overall Equipment Effectiveness, Availability, Performance e Quality
 - **Interface responsiva**: desktop, tablet e mobile com modo escuro/claro
-- **Identidade visual STW**: design system extraído da marca ([stw.com.br](https://stw.com.br/))
+- **Identidade visual Funciona Na Minha Máquina S/A**: design system extraído da marca ([funcionanaminhamaquina.com.br](https://funcionanaminhamaquina.com.br/))
 - **Confiabilidade visual**: detecção de perda de conexão com estado de dados congelados e banner de alerta
 
 ---
@@ -76,7 +76,7 @@ projeto/
 │   │   ├── main.tsx                 # Ponto de entrada do React
 │   │   ├── assets/
 │   │   │   ├── index.css            # ★ Design system tokens (@theme + .dark)
-│   │   │   └── logo.svg            # Logo STW
+│   │   │   └── logo.png            # Logo Funciona Na Minha Máquina S/A
 │   │   ├── components/
 │   │   │   ├── common/              # Componentes reutilizáveis (sem lógica de API)
 │   │   │   │   ├── ConnectionIndicator.tsx   # Bolinha verde/vermelha + banner
@@ -357,20 +357,20 @@ Ordem de inicialização:
 
 ---
 
-## 7. Design System (Identidade STW)
+## 7. Design System (Identidade Funciona Na Minha Máquina S/A)
 
 ### 7.1 Paleta de Cores Completa
 
-#### Cores STW (extraídas da marca)
+#### Cores Funciona Na Minha Máquina S/A (extraídas da marca)
 
 | Token           | Hex       | Uso Detalhado                                                         |
 | --------------- | --------- | --------------------------------------------------------------------- |
-| `stw-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras de progresso, links, gráfico RPM |
-| `stw-dark`      | `#00334E` | Navy profundo — cabeçalhos em light mode, ênfase em texto claro       |
-| `stw-secondary` | `#005A87` | Mid-blue — elementos interativos secundários                          |
-| `stw-corporate` | `#004C74` | Corporate blue — ponto médio do gradiente header, bordas dark mode    |
-| `stw-light`     | `#0085C8` | Azul claro — hover states, destaques, links secundários               |
-| `stw-navy`      | `#001A2E` | Navy mais profundo — fundo principal em dark mode                     |
+| `fnmm-primary`   | `#00AEEF` | Accent blue — ícones, badges, barras de progresso, links, gráfico RPM |
+| `fnmm-dark`      | `#00334E` | Navy profundo — cabeçalhos em light mode, ênfase em texto claro       |
+| `fnmm-secondary` | `#005A87` | Mid-blue — elementos interativos secundários                          |
+| `fnmm-corporate` | `#004C74` | Corporate blue — ponto médio do gradiente header, bordas dark mode    |
+| `fnmm-light`     | `#0085C8` | Azul claro — hover states, destaques, links secundários               |
+| `fnmm-navy`      | `#001A2E` | Navy mais profundo — fundo principal em dark mode                     |
 
 #### Gradiente de Marca
 
@@ -412,15 +412,15 @@ Todos definidos em `index.css` (bloco `@theme` para light; `.dark {}` para dark)
 
 | Token CSS                   | Light Mode              | Dark Mode                      | Propósito                        |
 | --------------------------- | ----------------------- | ------------------------------ | -------------------------------- |
-| `--color-surface-primary`   | `#F6F6F6` (fundo suave) | `#001A2E` (STW Navy)           | Fundo geral da página            |
+| `--color-surface-primary`   | `#F6F6F6` (fundo suave) | `#001A2E` (FNMM Navy)           | Fundo geral da página            |
 | `--color-surface`           | `#FFFFFF` (branco)      | `#00263E` (navy + 1 tom)       | Fundo dos cards                  |
-| `--color-surface-hover`     | `#F1F1F1` (cinza claro) | `#00334E` (STW Dark)           | Estados de hover                 |
+| `--color-surface-hover`     | `#F1F1F1` (cinza claro) | `#00334E` (FNMM Dark)           | Estados de hover                 |
 | `--color-surface-secondary` | `#E8E8E8`               | `#001020` (navy profundíssimo) | Fundos secundários               |
 | `--color-content`           | `#1a202c` (chumbo)      | `#FFFFFF` (branco puro)        | Texto principal — alto contraste |
 | `--color-content-secondary` | `#4a5568`               | `#BBD2E8` (azul pálido)        | Subtítulos e descrições          |
 | `--color-content-muted`     | `#718096`               | `#8AAAC9` (azul suave)         | Labels, hints, texto terciário   |
-| `--color-border-default`    | `#E2E8F0`               | `#004C74` (STW Corporate)      | Bordas gerais                    |
-| `--color-border-card`       | `#D9D9D9`               | `#004C74` (STW Corporate)      | Bordas dos cards                 |
+| `--color-border-default`    | `#E2E8F0`               | `#004C74` (FNMM Corporate)      | Bordas gerais                    |
+| `--color-border-card`       | `#D9D9D9`               | `#004C74` (FNMM Corporate)      | Bordas dos cards                 |
 | `--shadow-card`             | Sombra leve             | `0 4px 12px rgba(0,0,0,0.4)`   | Sombra dos cards                 |
 | `--shadow-card-hover`       | Sombra média            | `0 12px 32px rgba(0,0,0,0.5)`  | Sombra no hover                  |
 
@@ -429,16 +429,16 @@ Todos definidos em `index.css` (bloco `@theme` para light; `.dark {}` para dark)
 | Elemento         | Fonte                                             | Tamanho  | Peso    | Extras                               |
 | ---------------- | ------------------------------------------------- | -------- | ------- | ------------------------------------ |
 | Corpo            | Montserrat (fallback: Inter, Segoe UI, system-ui) | 1rem     | 400     | `antialiased`                        |
-| Labels STW       | Montserrat                                        | 0.7rem   | 600     | `uppercase`, `letter-spacing: 0.1em` |
+| Labels Funciona Na Minha Máquina S/A       | Montserrat                                        | 0.7rem   | 600     | `uppercase`, `letter-spacing: 0.1em` |
 | Headings         | Montserrat                                        | varies   | 700-800 | `tracking-tight`                     |
 | Valores métricos | Montserrat                                        | 2.25rem+ | 800     | `tracking-tighter`                   |
 | Subtítulos       | Inter                                             | 0.875rem | 500     | —                                    |
 
-**Classe `.label-stw`**: aplica automaticamente uppercase, tracking, tamanho e peso para labels de categorias (TEMPERATURA, RPM, EFICIÊNCIA, etc.)
+**Classe `.label-fnmm`**: aplica automaticamente uppercase, tracking, tamanho e peso para labels de categorias (TEMPERATURA, RPM, EFICIÊNCIA, etc.)
 
 ### 7.4 Padrões de Card
 
-Classe CSS: `.card-stw` (aplicar em todo painel do dashboard)
+Classe CSS: `.card-fnmm` (aplicar em todo painel do dashboard)
 
 | Propriedade      | Valor                                   |
 | ---------------- | --------------------------------------- |
@@ -456,7 +456,7 @@ Classe CSS: `.card-stw` (aplicar em todo painel do dashboard)
 | ----------- | ---------------------------------------------------------------------------------------------------------- |
 | Posição     | Sticky, `top: 0`, largura total                                                                            |
 | Background  | Classe `.bg-gradient-header` (adapta automaticamente light/dark)                                           |
-| Layout      | Esquerda: logo SVG da STW + título "Dashboard de Monitoramento" + subtítulo "LINHA DE PRODUÇÃO INDUSTRIAL" |
+| Layout      | Esquerda: logo SVG da FNMM + título "Dashboard de Monitoramento" + subtítulo "LINHA DE PRODUÇÃO INDUSTRIAL" |
 | Direita     | StatusBadge (estado da máquina) + ConnectionIndicator + ThemeToggle                                        |
 | Texto       | Branco em ambos os modos (sobre gradiente)                                                                 |
 
@@ -525,7 +525,7 @@ Classe CSS: `.card-stw` (aplicar em todo painel do dashboard)
 ```
 Desktop (≥1024px):
 ┌──────────────────────────────────────────────────┐
-│ HeaderBar (sticky + gradient STW)                │
+│ HeaderBar (sticky + gradient FNMM)                │
 ├────────┬────────┬────────┬───────────────────────┤
 │ Temp   │ RPM    │ Uptime │ Eficiência            │
 │ (card) │ (card) │ (card) │ (card)                │
@@ -577,12 +577,12 @@ Mobile (<768px):
 
 | Componente            | Localização  | Responsabilidade                                                                                     | Props Principais                                                |
 | --------------------- | ------------ | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
-| `HeaderBar`           | `layout/`    | Logo STW, título, subtítulo, StatusBadge, ConnectionIndicator, ThemeToggle                           | `status`, `isConnected`                                         |
+| `HeaderBar`           | `layout/`    | Logo Funciona Na Minha Máquina S/A, título, subtítulo, StatusBadge, ConnectionIndicator, ThemeToggle                           | `status`, `isConnected`                                         |
 | `StatusBadge`         | `common/`    | Mostra estado (RUNNING/STOPPED/MAINTENANCE/ERROR) com cor, ícone e animação                          | `state`                                                         |
 | `ConnectionIndicator` | `common/`    | Bolinha verde/vermelha + banner de desconexão                                                        | `isConnected`                                                   |
 | `ThemeToggle`         | `common/`    | Botão sol/lua com persistência em localStorage                                                       | — (auto-gerencia)                                               |
 | `MetricCard`          | `dashboard/` | Card com: ícone, label, valor atual, unidade, tendência (↑↓→), barra de progresso, cor por threshold | `title`, `value`, `unit`, `trend`, `max`, `warning`, `critical` |
-| `MetricsChart`        | `dashboard/` | Gráfico Chart.js com 2 linhas: Temperatura (vermelho) e RPM (azul STW). Eixos Y duais.               | `history` (array de pontos)                                     |
+| `MetricsChart`        | `dashboard/` | Gráfico Chart.js com 2 linhas: Temperatura (vermelho) e RPM (azul Funciona Na Minha Máquina S/A). Eixos Y duais.               | `history` (array de pontos)                                     |
 | `AlertsPanel`         | `dashboard/` | Lista de alertas ordenados por severidade > timestamp, com ícone, cor, mensagem e hora               | `alerts` (array)                                                |
 | `EfficiencyPanel`     | `dashboard/` | Valor OEE geral grande colorido + barras individuais de Availability, Performance, Quality           | `oee` (objeto com 4 valores)                                    |
 
@@ -604,7 +604,7 @@ Mobile (<768px):
 - Props tipadas com `interface Props { ... }`
 - Export padrão: `export default function ComponentName({ props }: Props)`
 - Estilização: classes Tailwind no JSX, sem CSS-in-JS
-- Classes CSS customizadas vão em `index.css` com nomes STW (`.card-stw`, `.label-stw`, `.bg-gradient-header`)
+- Classes CSS customizadas vão em `index.css` com nomes Funciona Na Minha Máquina S/A (`.card-fnmm`, `.label-fnmm`, `.bg-gradient-header`)
 - Inline styles **apenas** para valores dinâmicos (cores Chart.js, larguras percentuais)
 - Dark mode via `.dark {}` no CSS, **não** via `dark:` prefix do Tailwind
 
@@ -679,7 +679,7 @@ Mobile (<768px):
 ### Fase 3 — Frontend: Branding e Componentes
 
 - Estruturar layout conforme wireframe
-- Configurar design system STW no Tailwind (`@theme`)
+- Configurar design system FNMM no Tailwind (`@theme`)
 - Montar componentes reutilizáveis: MetricCard, StatusBadge, AlertsPanel
 - Integrar gráfico Chart.js e painel OEE
 - Configurar tema dark/light
@@ -762,7 +762,7 @@ Mobile (<768px):
 | 11  | Testes básicos configurados e executáveis                | ☐      |
 | 12  | README/documentação com instruções claras                | ☐      |
 | 13  | Modo dark/light funcional com persistência               | ☐      |
-| 14  | Identidade visual STW aplicada (paleta + gradientes)     | ☐      |
+| 14  | Identidade visual Funciona Na Minha Máquina S/A aplicada (paleta + gradientes)     | ☐      |
 | 15  | Código executável sem erros bloqueantes                  | ☐      |
 
 ---

@@ -1,5 +1,5 @@
 // ============================================================
-// MetricsChart.tsx — Gráfico histórico Chart.js (estilo STW)
+// MetricsChart.tsx — Gráfico histórico Chart.js (estilo Funciona Na Minha Máquina S/A)
 // Card premium com gradientes, crosshair e tooltip avançado
 // Eixo X com timestamps reais (HH:mm:ss) — JS nativo
 // ============================================================
@@ -319,11 +319,11 @@ export default function MetricsChart({ history }: Props) {
   }, [history]);
 
   return (
-    <div id="metrics-chart" className="card-stw animate-fade-in p-5 sm:p-7">
+    <div id="metrics-chart" className="card-fnmm animate-fade-in p-5 sm:p-7">
       {/* Header do card */}
       <div className="flex items-center justify-between mb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-stw-primary/10 text-stw-primary">
+          <div className="p-2.5 rounded-xl bg-fnmm-primary/10 text-fnmm-primary">
             <BarChart3 size={20} />
           </div>
           <div>
@@ -338,7 +338,7 @@ export default function MetricsChart({ history }: Props) {
           </div>
         </div>
         {/* Badge de pontos */}
-        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-stw-primary/8 text-stw-primary">
+        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-fnmm-primary/8 text-fnmm-primary">
           <Activity size={13} />
           <span className="text-xs font-semibold">{history.length} pontos</span>
         </div>
