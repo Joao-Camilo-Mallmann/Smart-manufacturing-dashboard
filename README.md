@@ -422,6 +422,12 @@ Aqui estão as evidências do projeto funcionando em diferentes estados:
 
 ![Dashboard Preview](docs/img/SiteMode.jpeg)
 
+### Dashboard — Layout Responsivo (Mobile)
+
+<div align="center">
+  <img src="docs/img/dashboard_mobile.png" alt="Dashboard Mobile" style="width: 100%; max-width: 320px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);" />
+</div>
+
 ### Testes — Cobertura Completa
 
 ![Testes Passando](docs/img/terminal_teste.png)
